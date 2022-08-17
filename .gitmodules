@@ -1,0 +1,3 @@
+[submodule "ddf--gapminder--population"]
+	path = ddf--gapminder--population
+	url = git@github.com:open-numbers/ddf--gapminder--population.git
