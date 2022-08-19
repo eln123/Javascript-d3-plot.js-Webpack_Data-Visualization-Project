@@ -20,13 +20,3 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-
-.container {
-  width: 250px;
-  height: 200px;
-  border: 1px blue
-}
-
-.bar {
-  fill: blue
-}

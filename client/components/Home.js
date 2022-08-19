@@ -18,17 +18,20 @@ export default class Home extends React.Component {
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/CO2_emissions_per_ton";
     const urlPopulation =
       "https://raw.githubusercontent.com/open-numbers/ddf--gapminder--population/master/ddf--datapoints--population--by--country--year.csv";
-    const fileStr = converter(url, (results) => {
+
+    const fileStr = converter(urlPopulation, (results) => {
       this.setState({ data: results.data });
-      dThreeFunction();
+      let d3data = this.state.data.filter((obj, index) => index < 10);
+      console.log(d3data);
+      dThreeFunction(d3data);
     });
   }
   render() {
     return (
       <div>
-        <svg fill="black" width="500px" height="500px">
-          <circle cx="50" cy="50" r="50" fill="black"></circle>
-        </svg>
+        <svg fill="black" width="500px" height="500px"></svg>
+
+        <div>_________________________________</div>
         <table>
           <thead>
             <tr>
