@@ -58,44 +58,44 @@ export const dThreeFunction = (data) => {
 
 export const dThreeFunction2 = (data) => {
   //set canvas margins
-let leftMargin=70
-let topMargin=30
-//format the year 
-let parseTime = d3.timeParse("%Y");
+  let leftMargin = 70;
+  let topMargin = 30;
+  //format the year
+  let parseTime = d3.timeParse("%Y");
 
-data.forEach(function (d) {
+  data.forEach(function (d) {
     d.year = parseTime(d.year);
-});
+  });
 
-//scale xAxis 
-let xExtent = d3.extent(data, d => d.year);
-var xScale = d3.scaleTime().domain(xExtent).range([leftMargin, 900])
+  //scale xAxis
+  let xExtent = d3.extent(data, (d) => d.year);
+  var xScale = d3.scaleTime().domain(xExtent).range([leftMargin, 900]);
 
-//scale yAxis
-var yMax=d3.max(data,d=>d.population)
-var yScale = d3.scaleLinear().domain([0, 150000]).range([600, 0])
+  //scale yAxis
+  var yMax = d3.max(data, (d) => d.population);
+  var yScale = d3.scaleLinear().domain([0, 1500000]).range([600, 0]);
 
-//we will draw xAxis and yAxis next
- 
-const xAxis = d3.axisBottom()
-    .scale(xScale)
+  //we will draw xAxis and yAxis next
 
-d3.select(".svg2")
+  const xAxis = d3.axisBottom().scale(xScale);
+  // console.log(d3.groups(data, (d) => d.country));
+  d3.select(".svg2")
+
     .append("g")
     .attr("class", "axis")
     .attr("transform", "translate(0,620)")
     .call(xAxis)
     .append("text")
-    .attr("x", (900+70)/2) //middle of the xAxis
+    .attr("x", (900 + 70) / 2) //middle of the xAxis
     .attr("y", "50") // a little bit below xAxis
-    .text("Year")
+    .text("Year");
 
-//yAxis and yAxis label
-const yAxis = d3.axisLeft()
-    .scale(yScale)
-    .ticks(10)
+  //yAxis and yAxis label
+  const yAxis = d3.axisLeft().scale(yScale).ticks(10);
 
-d3.select('.svg2')
+  const byCountry = d3.groups(data, (d) => d.country);
+  console.log(byCountry);
+  d3.select(".svg2")
     .append("g")
     .attr("class", "axis")
     .attr("transform", `translate(${leftMargin},20)`) //use variable in translate
@@ -105,39 +105,46 @@ d3.select('.svg2')
     .attr("x", "-150")
     // .attr("y", "-55")
     // .attr("text-anchor", "end")
-    .text("POPULATION")
+    .text("POPULATION");
 
+  var color = d3
+    .scaleOrdinal()
+    .domain(data[0].population)
+    .range(colorbrewer.Set2[6]);
 
-var color = d3.scaleOrdinal().domain(data[0].population).range(colorbrewer.Set2[6])
-
-//select path - three types: curveBasis,curveStep, curveCardinal
-d3.select(".svg2")
+  //select path - three types: curveBasis,curveStep, curveCardinal
+  d3.select(".svg2")
+    .selectAll(".line")
+    .data(byCountry)
+    .enter()
     .append("g")
     .attr("class", "line")
     .append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(d=> xScale(d.year) )
-        .y(d=>  yScale(d.population) )
-        )
+    .datum((data) => data[1])
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr(
+      "d",
+      d3
+        .line()
+        .x((d) => xScale(d.year))
+        .y((d) => yScale(d.population))
+    )
 
     .attr("fill", "none")
-    .attr("stroke", d => color(d.year))
-    .attr("stroke-width", 2)
+    .attr("stroke", (d) => color(d.year))
+    .attr("stroke-width", 2);
 
-
-//append circle 
-d3.select(".svg2")
+  //append circle
+  d3.select(".svg2")
     .selectAll("circle")
     .append("g")
     .data(data)
     .enter()
     .append("circle")
     .attr("r", 6)
-    .attr("cx", d => xScale(d.year))
-    .attr("cy", d => yScale(d.population))
-    .style("fill", d => color(d.country))
-}
+    .attr("cx", (d) => xScale(d.year))
+    .attr("cy", (d) => yScale(d.population))
+    .style("fill", (d) => color(d.country));
+};
