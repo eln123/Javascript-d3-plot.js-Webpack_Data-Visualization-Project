@@ -1,7 +1,7 @@
 import React from "react";
 import { converter } from "../../csvConverter";
 import { dThreeFunction } from "./dThree";
-
+import { dThreeFunction2 } from "./dThree";
 /**
  * COMPONENT
  */
@@ -25,12 +25,19 @@ export default class Home extends React.Component {
       console.log(d3data);
       dThreeFunction(d3data);
     });
+
+    const fileStr2 = converter(urlPopulation, (results) => {
+      this.setState({ data: results.data });
+      let d3data = this.state.data.filter((obj, index) => index < 100);
+      console.log(d3data);
+      dThreeFunction2(d3data);
+    });
   }
   render() {
     return (
       <div>
-        <svg fill="black" width="500px" height="500px"></svg>
-
+        <svg className="svg1" fill="black" width="500px" height="500px"></svg>
+        <svg className="svg2" width="1200" height="750" ></svg>
         <div>_________________________________</div>
         <table>
           <thead>
@@ -42,7 +49,7 @@ export default class Home extends React.Component {
           </thead>
           <tbody>
             {this.state.data
-              .filter((obj, index) => index < 50)
+              .filter((obj, index) => index < 20)
               .map((obj, index) => (
                 <tr key={index}>
                   <td>{obj.country}</td>
