@@ -19,16 +19,19 @@ export default class Home extends React.Component {
     const urlPopulation =
       "https://raw.githubusercontent.com/open-numbers/ddf--gapminder--population/master/ddf--datapoints--population--by--country--year.csv";
 
-    const fileStr = converter(urlPopulation, (results) => {
-      this.setState({ data: results.data });
-      let d3data = this.state.data.filter((obj, index) => index < 10);
-      console.log(d3data);
-      dThreeFunction(d3data);
-    });
-
     const fileStr2 = converter(urlPopulation, (results) => {
       this.setState({ data: results.data });
-      let d3data = this.state.data.filter((obj, index) => index < 100);
+
+      let d3data = this.state.data
+        // .map((callback) => {
+        //   // console.log(+callback.year);
+        //   // console.log(callback);
+        //   if (+callback.year < 2020) {
+        //     return callback;
+        //   }
+        // })
+
+        .filter((obj, index) => index < 30000);
       console.log(d3data);
       dThreeFunction2(d3data);
     });
@@ -37,7 +40,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <svg className="svg1" fill="black" width="500px" height="500px"></svg>
-        <svg className="svg2" width="1200" height="750" ></svg>
+        <svg className="svg2" width="1200" height="1500"></svg>
         <div>_________________________________</div>
         <table>
           <thead>
