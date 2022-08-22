@@ -20,3 +20,7 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.svg2 {
+  background-image: url('https://etc.usf.edu/presentations/backgrounds/grid/grid_04/1304m.gif');
+}
