@@ -55,10 +55,10 @@ export const dThreeFunction = (data) => {
 //   // .style("width", "100px")
 //   // .attr("height", "100px");
 // };
-
+// ---------------------------------------------------------------------------------------------------------------------
 export const dThreeFunction2 = (data) => {
   //set canvas margins
-  let leftMargin = 70;
+  let leftMargin = 150;
   let topMargin = 30;
   //format the year
   let parseTime = d3.timeParse("%Y");
@@ -69,11 +69,11 @@ export const dThreeFunction2 = (data) => {
 
   //scale xAxis
   let xExtent = d3.extent(data, (d) => d.year);
-  var xScale = d3.scaleTime().domain(xExtent).range([leftMargin, 900]);
+  var xScale = d3.scaleTime().domain(xExtent).range([leftMargin, 1500]);
 
   //scale yAxis
   var yMax = d3.max(data, (d) => d.population);
-  var yScale = d3.scaleLinear().domain([0, 1500000]).range([600, 0]);
+  var yScale = d3.scaleLinear().domain([0, 55000000]).range([800, 0]);
 
   //we will draw xAxis and yAxis next
 
@@ -83,13 +83,14 @@ export const dThreeFunction2 = (data) => {
 
     .append("g")
     .attr("class", "axis")
-    .attr("transform", "translate(0,620)")
+    .attr("transform", "translate(0,820)")
     .call(xAxis)
     .append("text")
-    .attr("x", (900 + 70) / 2) //middle of the xAxis
-    .attr("y", "50") // a little bit below xAxis
-    .text("Year");
-
+    .attr("x", "700") //middle of the xAxis
+    .attr("y", "100") // a little bit below xAxis -- Year
+    .text("Year")
+    .style("font-size", "34px");
+  // .attr("font-size", "100px");
   //yAxis and yAxis label
   const yAxis = d3.axisLeft().scale(yScale).ticks(10);
 
@@ -102,11 +103,11 @@ export const dThreeFunction2 = (data) => {
     .call(yAxis)
     .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("x", "-150")
-    // .attr("y", "-55")
+    .attr("x", "-250")
+    .attr("y", "-115")
     // .attr("text-anchor", "end")
-    .text("POPULATION");
-
+    .text("POPULATION")
+    .style("font-size", "34px");
   var color = d3
     .scaleOrdinal()
     .domain(data[0].population)
@@ -134,7 +135,7 @@ export const dThreeFunction2 = (data) => {
 
     .attr("fill", "none")
     .attr("stroke", (d) => color(d.year))
-    .attr("stroke-width", 2);
+    .attr("stroke-width", 2); //length of line
 
   //append circle
   d3.select(".svg2")
@@ -143,7 +144,7 @@ export const dThreeFunction2 = (data) => {
     .data(data)
     .enter()
     .append("circle")
-    .attr("r", 6)
+    .attr("r", 3) // circle size
     .attr("cx", (d) => xScale(d.year))
     .attr("cy", (d) => yScale(d.population))
     .style("fill", (d) => color(d.country));
