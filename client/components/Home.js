@@ -26,12 +26,13 @@ export default class Home extends React.Component {
         // .map((callback) => {
         //   // console.log(+callback.year);
         //   // console.log(callback);
-        //   if (+callback.year < 2020) {
-        //     return callback;
-        //   }
+        //   return callback.year < 2022;
         // })
-
-        .filter((obj, index) => index < 30000);
+        // .filter((obj, index) => obj.country !== "ind")
+        // .filter((obj, index) => obj.country !== "chn")
+        // .filter((obj, index) => obj.country === "civ")
+        .filter((obj, index) => obj.year < 2023)
+        .filter((obj, index) => index < 1730);
       console.log(d3data);
       dThreeFunction2(d3data);
     });
@@ -40,7 +41,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <svg className="svg1" fill="black" width="500px" height="500px"></svg>
-        <svg className="svg2" width="1200" height="1500"></svg>
+        <svg className="svg2" width="2200" height="1500"></svg>
         <div>_________________________________</div>
         <table>
           <thead>
