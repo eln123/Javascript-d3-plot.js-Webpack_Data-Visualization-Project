@@ -2,6 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import SearchBar from './SearchBar'
+import { converter } from '../../csvConverter'
+
+const dataJson = converter(
+  "https://raw.githubusercontent.com/open-numbers/ddf--gapminder--population/master/ddf--datapoints--population--by--country--year.csv")
+// console.log('((()()()()()', dataJson)
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
@@ -22,6 +28,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
+      <SearchBar placeholder='Enter a Country' data={dataJson}/>
     </nav>
     <hr />
   </div>
