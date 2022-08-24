@@ -11,8 +11,11 @@ export default class Home extends React.Component {
     super();
     this.state = {
       data: [],
+      countries: [],
     };
+    this.handleChange = this.handleChange.bind(this);
   }
+  handleChange() {}
   componentDidMount() {
     const urlC02Emissions =
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/CO2_emissions_per_ton";
@@ -21,28 +24,27 @@ export default class Home extends React.Component {
 
     const fileStr2 = converter(urlPopulation, (results) => {
       this.setState({ data: results.data });
+      console.log(this.state);
 
-      let d3data = this.state.data
-        // .map((callback) => {
-        //   // console.log(+callback.year);
-        //   // console.log(callback);
-        //   if (+callback.year < 2020) {
-        //     return callback;
-        //   }
-        // })
-
-        .filter((obj, index) => index < 30000);
-      console.log(d3data);
-      dThreeFunction2(d3data);
+      let d3data = this.state.data.filter((obj, index) => index < 30000);
+      console.log(this.state.data[0].country);
+      dThreeFunction2(d3data, this.state.countries);
     });
   }
   render() {
+    if (this.state.data.length) {
+      let country = this.state.data[0].country;
+    }
     return (
       <div>
-        <svg className="svg1" fill="black" width="500px" height="500px"></svg>
-        <svg className="svg2" width="1200" height="1500"></svg>
+        <div id="container">
+          {/* <svg className="svg1" fill="black" width="500px" height="500px"></svg>
+        <svg className="svg2" width="1200" height="1500"></svg> */}
+        </div>
         <div>_________________________________</div>
-        <table>
+        <input id="check" type="checkbox"></input>
+        {/* <p>{this.state.data ? this.state.data[0].country : "no"}</p> */}
+        {/* <table>
           <thead>
             <tr>
               <th>country</th>
@@ -61,7 +63,7 @@ export default class Home extends React.Component {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table> */}
       </div>
     );
   }

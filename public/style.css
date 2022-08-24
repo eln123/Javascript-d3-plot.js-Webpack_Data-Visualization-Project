@@ -24,3 +24,8 @@ form div {
 .svg2 {
   background-image: url('https://etc.usf.edu/presentations/backgrounds/grid/grid_04/1304m.gif');
 }
+
+#container {
+  padding: 10% 20%;
+  
+}
