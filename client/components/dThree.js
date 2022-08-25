@@ -1,4 +1,3 @@
-
 export const dThreeFunction = (data) => {
   const xScale = d3
     .scaleBand()
@@ -58,17 +57,19 @@ export const dThreeFunction = (data) => {
 // };
 // ---------------------------------------------------------------------------------------------------------------------
 export const dThreeFunction2 = (data, countries) => {
+  d3.select(".svg2").selectAll("*").remove();
+  console.log("line 61", data, countries);
   //set canvas margins
   let leftMargin = 150;
   let topMargin = 30;
   //format the year
   let parseTime = d3.timeParse("%Y");
-
-  data
-    .forEach(function (d) {
-      d.year = parseTime(d.year);
-    })
-    .filter((obj) => countries.includes(obj.country));
+  console.log("dthree", data);
+  data.forEach(function (d) {
+    d.year = parseTime(d.year);
+  });
+  console.log("second data", data);
+  data = data.filter((obj) => countries.includes(obj.country));
   function squareNum(x) {
     return x * 2;
   }
@@ -116,10 +117,14 @@ export const dThreeFunction2 = (data, countries) => {
     // .attr("text-anchor", "end")
     .text("POPULATION")
     .style("font-size", "34px");
-  var color = d3
-    .scaleOrdinal()
-    .domain(data[0].population)
-    .range(colorbrewer.Set2[6]);
+  let data1;
+  if (data[0]) {
+    data1 = data[0].population;
+    console.log(data[0].population);
+  } else {
+    data1 = [];
+  }
+  var color = d3.scaleOrdinal().domain(data1).range(colorbrewer.Set2[6]);
 
   //select path - three types: curveBasis,curveStep, curveCardinal
   d3.select(".svg2")
@@ -294,4 +299,3 @@ export const dThreeFunction2 = (data, countries) => {
 
 //         })
 // })
-
