@@ -1,10 +1,10 @@
-
 import React from "react";
 import { converter } from "../../csvConverter";
 import { dThreeFunction } from "./dThree";
 import { dThreeFunction2 } from "./dThree";
 import { test } from "./byCountryD3";
 import { useRef, useEffect } from "react";
+import { ContactSupportOutlined } from "@material-ui/icons";
 /**
  * COMPONENT
  */
@@ -17,6 +17,7 @@ export default class Home extends React.Component {
       countries: [],
     };
     this.test = this.test.bind(this);
+    this.selectCountry = this.selectCountry.bind(this);
   }
   componentDidMount() {
     const urlC02Emissions =
@@ -29,14 +30,15 @@ export default class Home extends React.Component {
     const fileStr2 = converter(urlPopulation, (results) => {
       this.setState({ data: results.data });
 
-      let d3data = this.state.data
-        // .filter((obj, index) => obj.country !== "ind")
-        // .filter((obj, index) => obj.country !== "chn")
-        // .filter((obj, index) => obj.country === "civ")
-        .filter((obj, index) => obj.year < 2023)
-        .filter((obj, index) => index < 17300);
-      // console.log(d3data);
-      dThreeFunction2(d3data, this.state.countries);
+      // let d3data = this.state.data
+      //   // .filter((obj, index) => obj.country !== "ind")
+      //   // .filter((obj, index) => obj.country !== "chn")
+      //   // .filter((obj, index) => obj.country === "civ")
+      //   .filter((obj, index) => obj.year < 2023)
+      //   .filter((obj, index) => index < 17300);
+      // // console.log(d3data);
+      // console.log(this.state);
+      // dThreeFunction2(d3data, this.state.countries);
     });
     // const fileStr3 = converter(testurl, (results) => {
     //   this.setState({ data: results.data });
@@ -48,12 +50,48 @@ export default class Home extends React.Component {
     //   console.log(this.state.data);
     // }
   }
+  componentDidUpdate() {
+    let d3data = this.state.data
+      // .filter((obj, index) => obj.country !== "ind")
+      // .filter((obj, index) => obj.country !== "chn")
+      // .filter((obj, index) => obj.country === "civ")
+      .filter((obj, index) => obj.year < 2023);
+    // .filter((obj, index) => index < 17300);
+    dThreeFunction2(d3data, this.state.countries);
+  }
   test(country) {
     this.setState({
       ...this.state,
       countries: [...this.state.countries, country],
     });
     console.log(this.state);
+  }
+  selectCountry(evt) {
+    // let country = this.target.event;
+    console.log("evt target name", evt.target.name);
+    console.log("evt target value", evt.target.checked);
+    console.log("this state1", this.state);
+    if (evt.target.checked === true) {
+      const newState = {
+        ...this.state,
+        countries: [...this.state.countries, evt.target.name],
+      };
+      this.setState({
+        ...this.state,
+        countries: [...this.state.countries, evt.target.name],
+      });
+    } else {
+      const newState = {
+        ...this.state,
+        countries: this.state.countries.filter(
+          (country) => country !== evt.target.name
+        ),
+      };
+      this.setState(newState);
+    }
+    // console.log("ASDFASFDSAFASDFASD", event);
+    // console.log("event target", event.target);
+    // console.log("this state2", newState);
   }
   render() {
     // console.log(this.state.data);
@@ -87,7 +125,11 @@ export default class Home extends React.Component {
             <label for="myCheckBox">
               {byCountry.map((country, index) => (
                 <div key={index}>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    name={country[0]}
+                    onClick={this.selectCountry}
+                  />
                   {country[0]}
                 </div>
               ))}
@@ -97,7 +139,7 @@ export default class Home extends React.Component {
         </div>
         {/* <svg className="my_dataviz" width="2200" height="1500"></svg> */}
         <div>_________________________________</div>
-        <table>
+        {/* <table>
           <thead>
             <tr>
               <th>country</th>
@@ -116,7 +158,7 @@ export default class Home extends React.Component {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table> */}
       </div>
     );
   }
@@ -125,4 +167,3 @@ export default class Home extends React.Component {
 /**
  * CONTAINER
  */
-
