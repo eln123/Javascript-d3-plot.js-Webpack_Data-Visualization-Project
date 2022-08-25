@@ -1,81 +1,26 @@
-export const dThreeFunction = (data) => {
-  const xScale = d3
-    .scaleBand()
-    .domain(data.map((obj) => obj.year))
-    .rangeRound([0, 250])
-    .padding(0.5);
+import { color } from "d3";
 
-  const yScale = d3.scaleLinear().domain([0, 50000]).range([200, 0]);
-
-  const container = d3.select(".svg1");
-
-  const bars = container
-    .selectAll(".bar")
-    .data(data)
-    .enter()
-    .append("rect")
-    .classed("bar", true)
-    .attr("width", xScale.bandwidth())
-    .attr("height", (data) => 200 - yScale(data.population))
-    .attr("x", (data) => xScale(data.year))
-    .attr("y", (data) => yScale(data.population))
-    .style("fill", "blue")
-    .style("position", "static");
-
-  // .style("width", "100px")
-  // .attr("height", "100px");
-};
-
-// const DUMMY_DATA = [
-//   { id: "d1", value: 10, region: "USA" },
-//   { id: "d2", value: 11, region: "India" },
-//   { id: "d3", value: 12, region: "China" },
-//   { id: "d4", value: 6, region: "Germany" },
-// ];
-
-// export const dThreeFunction = (data) => {
-//   const xScale = d3
-//     .scaleBand()
-//     .domain(data.map((obj) => obj.region))
-//     .rangeRound([0, 250]);
-//   const yScale = d3.scaleLinear().domain([0, 15]).range([200, 0]);
-
-//   const container = d3.select("svg").classed("container", true);
-
-//   const bars = container
-//     .selectAll(".bar")
-//     .data(data)
-//     .enter()
-//     .append("rect")
-//     .classed("bar", true)
-//     .attr("width", xScale.bandwidth())
-//     .attr("height", (data) => 200 - yScale(data.value))
-//     .attr("x", (data) => xScale(data.region))
-//     .attr("y", (data) => yScale(data.value));
-//   // .style("width", "100px")
-//   // .attr("height", "100px");
-// };
-// ---------------------------------------------------------------------------------------------------------------------
 export const dThreeFunction2 = (data, countries) => {
   d3.select(".svg2").selectAll("*").remove();
-  console.log("line 61", data, countries);
+  console.log(data);
   //set canvas margins
   let leftMargin = 150;
   let topMargin = 30;
   //format the year
-  let parseTime = d3.timeParse("%Y");
-  console.log("dthree", data);
-  data.forEach(function (d) {
-    d.year = parseTime(d.year);
-  });
-  console.log("second data", data);
+  // let parseTime = d3.timeParse("%Y");
+
+  // data.forEach(function (d) {
+  //   d.year = parseTime(d.year);
+  // });
+
   data = data.filter((obj) => countries.includes(obj.country));
+
   function squareNum(x) {
     return x * 2;
   }
   //scale xAxis
   let xExtent = d3.extent(data, (d) => d.year);
-  var xScale = d3.scaleTime().domain(xExtent).range([leftMargin, 1500]);
+  var xScale = d3.scaleLinear().domain([1950, 2023]).range([leftMargin, 1500]);
 
   //scale yAxis
   var yMax = d3.max(data, (d) => d.population);
@@ -86,7 +31,10 @@ export const dThreeFunction2 = (data, countries) => {
 
   //we will draw xAxis and yAxis next
 
-  const xAxis = d3.axisBottom().scale(xScale);
+  const xAxis = d3
+    .axisBottom()
+    .scale(xScale)
+    .tickFormat((d) => d);
   // console.log(d3.groups(data, (d) => d.country));
   d3.select(".svg2")
 
@@ -104,7 +52,6 @@ export const dThreeFunction2 = (data, countries) => {
   const yAxis = d3.axisLeft().scale(yScale).ticks(10);
 
   const byCountry = d3.groups(data, (d) => d.country);
-  console.log(byCountry);
   d3.select(".svg2")
     .append("g")
     .attr("class", "axis")
@@ -120,7 +67,6 @@ export const dThreeFunction2 = (data, countries) => {
   let data1;
   if (data[0]) {
     data1 = data[0].population;
-    console.log(data[0].population);
   } else {
     data1 = [];
   }
@@ -142,8 +88,8 @@ export const dThreeFunction2 = (data, countries) => {
       "d",
       d3
         .line()
-        .x((d) => xScale(d.year))
-        .y((d) => yScale(d.population))
+        .x((d) => xScale(+d.year))
+        .y((d) => yScale(+d.population))
     )
 
     .attr("fill", "none")
@@ -176,6 +122,39 @@ export const dThreeFunction2 = (data, countries) => {
     .attr("cx", (d) => xScale(d.year))
     .attr("cy", (d) => yScale(d.population))
     .style("fill", (d) => color(d.country));
+
+  /////////////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+
+  // // export const dThreeFunction = (data) => {
+  //   const xScale = d3
+  //     .scaleBand()
+  //     .domain(data.map((obj) => obj.year))
+  //     .rangeRound([0, 250])
+  //     .padding(0.5);
+
+  //   const yScale = d3.scaleLinear().domain([0, 50000]).range([200, 0]);
+
+  //   const container = d3.select(".svg1");
+
+  //   const bars = container
+  //     .selectAll(".bar")
+  //     .data(data)
+  //     .enter()
+  //     .append("rect")
+  //     .classed("bar", true)
+  //     .attr("width", xScale.bandwidth())
+  //     .attr("height", (data) => 200 - yScale(data.population))
+  //     .attr("x", (data) => xScale(data.year))
+  //     .attr("y", (data) => yScale(data.population))
+  //     .style("fill", "blue")
+  //     .style("position", "static");
+
+  //   // .style("width", "100px")
+  //   // .attr("height", "100px");
+  // };
 
   // data.on("mouseover", function (d) {
   //   d3.select(this).attr("fill", "rgb(0," + d + ",0)");

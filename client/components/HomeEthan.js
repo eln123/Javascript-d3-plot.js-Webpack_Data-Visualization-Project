@@ -1,7 +1,6 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { dThreeFunction } from "./dThree";
-import { dThreeFunction2 } from "./dThree";
+import { dThreeFunction3 } from "./dThreeEthan";
 /**
  * COMPONENT
  */
@@ -28,7 +27,7 @@ export default class HomeEthan extends React.Component {
 
       let d3data = this.state.data.filter((obj, index) => index < 30000);
       console.log(this.state.data[0].country);
-      dThreeFunction2(d3data, this.state.countries);
+      dThreeFunction3(d3data, this.state.countries);
     });
   }
   render() {

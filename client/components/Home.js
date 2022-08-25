@@ -16,7 +16,7 @@ export default class Home extends React.Component {
       data: [],
       countries: [],
     };
-    this.test = this.test.bind(this);
+
     this.selectCountry = this.selectCountry.bind(this);
   }
   componentDidMount() {
@@ -28,49 +28,15 @@ export default class Home extends React.Component {
       "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv";
 
     const fileStr2 = converter(urlPopulation, (results) => {
-      this.setState({ data: results.data });
-
-      // let d3data = this.state.data
-      //   // .filter((obj, index) => obj.country !== "ind")
-      //   // .filter((obj, index) => obj.country !== "chn")
-      //   // .filter((obj, index) => obj.country === "civ")
-      //   .filter((obj, index) => obj.year < 2023)
-      //   .filter((obj, index) => index < 17300);
-      // // console.log(d3data);
-      // console.log(this.state);
-      // dThreeFunction2(d3data, this.state.countries);
+      this.setState({ ...this.state, data: results.data });
     });
-    // const fileStr3 = converter(testurl, (results) => {
-    //   this.setState({ data: results.data });
-
-    //   let d3data = this.state.data;
-    //   test(d3data);
-    // });
-    // function eachCountry(x) {
-    //   console.log(this.state.data);
-    // }
   }
   componentDidUpdate() {
-    let d3data = this.state.data
-      // .filter((obj, index) => obj.country !== "ind")
-      // .filter((obj, index) => obj.country !== "chn")
-      // .filter((obj, index) => obj.country === "civ")
-      .filter((obj, index) => obj.year < 2023);
-    // .filter((obj, index) => index < 17300);
+    let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
+
     dThreeFunction2(d3data, this.state.countries);
   }
-  test(country) {
-    this.setState({
-      ...this.state,
-      countries: [...this.state.countries, country],
-    });
-    console.log(this.state);
-  }
   selectCountry(evt) {
-    // let country = this.target.event;
-    console.log("evt target name", evt.target.name);
-    console.log("evt target value", evt.target.checked);
-    console.log("this state1", this.state);
     if (evt.target.checked === true) {
       const newState = {
         ...this.state,
@@ -80,6 +46,9 @@ export default class Home extends React.Component {
         ...this.state,
         countries: [...this.state.countries, evt.target.name],
       });
+      let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
+
+      dThreeFunction2(d3data, this.state.countries);
     } else {
       const newState = {
         ...this.state,
@@ -88,6 +57,9 @@ export default class Home extends React.Component {
         ),
       };
       this.setState(newState);
+      let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
+
+      dThreeFunction2(d3data, this.state.countries);
     }
     // console.log("ASDFASFDSAFASDFASD", event);
     // console.log("event target", event.target);
@@ -116,13 +88,14 @@ export default class Home extends React.Component {
     //     element.removeEventListener("click", handleClick);
     //   };
     // }, []);
+    console.log(this.state);
     return (
       <div>
         <svg className="svg1" fill="black" width="500px" height="500px"></svg>
         <div>
           {/* <input type="checkbox" name="myCheckBox" /> */}
           <fieldset>
-            <label for="myCheckBox">
+            <label htmlFor="myCheckBox">
               {byCountry.map((country, index) => (
                 <div key={index}>
                   <input
