@@ -2,6 +2,7 @@ import * as d3 from "d3";
 
 export const dThreeFunction3 = (data, countries) => {
   // const data = generateData()
+
   data = data.filter(
     (obj, index) =>
       +obj.year < 1960 && obj.country !== "chn" && obj.country !== "ind"
@@ -104,33 +105,32 @@ export const dThreeFunction3 = (data, countries) => {
     .attr("stroke", (d) => color(d.year))
     .attr("stroke-width", 4);
 };
+////////////////////////////////////////////////////////////
+// const DUMMY_DATA = [
+//   { id: "d1", value: 10, region: "USA" },
+//   { id: "d2", value: 11, region: "India" },
+//   { id: "d3", value: 12, region: "China" },
+//   { id: "d4", value: 6, region: "Germany" },
+// ];
+// export const dThreeFunction = (data) => {
+//   const xScale = d3
+//     .scaleBand()
+//     .domain(data.map((obj) => obj.region))
+//     .rangeRound([0, 250]);
+//   const yScale = d3.scaleLinear().domain([0, 15]).range([200, 0]);
 
-const DUMMY_DATA = [
-  { id: "d1", value: 10, region: "USA" },
-  { id: "d2", value: 11, region: "India" },
-  { id: "d3", value: 12, region: "China" },
-  { id: "d4", value: 6, region: "Germany" },
-];
+//   const container = d3.select("svg").classed("container", true);
 
-export const dThreeFunction = (data) => {
-  const xScale = d3
-    .scaleBand()
-    .domain(data.map((obj) => obj.region))
-    .rangeRound([0, 250]);
-  const yScale = d3.scaleLinear().domain([0, 15]).range([200, 0]);
-
-  const container = d3.select("svg").classed("container", true);
-
-  const bars = container
-    .selectAll(".bar")
-    .data(data)
-    .enter()
-    .append("rect")
-    .classed("bar", true)
-    .attr("width", xScale.bandwidth())
-    .attr("height", (data) => 200 - yScale(data.value))
-    .attr("x", (data) => xScale(data.region))
-    .attr("y", (data) => yScale(data.value));
-  // .style("width", "100px")
-  // .attr("height", "100px");
-};
+//   const bars = container
+//     .selectAll(".bar")
+//     .data(data)
+//     .enter()
+//     .append("rect")
+//     .classed("bar", true)
+//     .attr("width", xScale.bandwidth())
+//     .attr("height", (data) => 200 - yScale(data.value))
+//     .attr("x", (data) => xScale(data.region))
+//     .attr("y", (data) => yScale(data.value));
+//   // .style("width", "100px")
+//   // .attr("height", "100px");
+// };
