@@ -20,14 +20,19 @@ export const dThreeFunction2 = (data, countries) => {
   }
   //scale xAxis
   let xExtent = d3.extent(data, (d) => d.year);
-  var xScale = d3.scaleLinear().domain([1950, 2023]).range([leftMargin, 1500]);
+  console.log(xExtent);
+  let years = [1950, 2100];
+  var xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
 
   //scale yAxis
+  let yExtent = [10000, 1500000000];
+  if (data.length) {
+    yExtent = d3.extent(data, (d) => +d.population);
+  }
+  d3.extent(data, (d) => +d.population);
+
   var yMax = d3.max(data, (d) => d.population);
-  var yScale = d3
-    .scaleLinear()
-    .domain([0, squareNum(2) * 55000000])
-    .range([800, 0]);
+  var yScale = d3.scaleLog().domain(yExtent).range([800, 0]);
 
   //we will draw xAxis and yAxis next
 
@@ -49,7 +54,17 @@ export const dThreeFunction2 = (data, countries) => {
     .style("font-size", "34px");
   // .attr("font-size", "100px");
   //yAxis and yAxis label
+
   const yAxis = d3.axisLeft().scale(yScale).ticks(10);
+
+  // .tickFormat((d) => {
+  //   if (d > 1000000000) {
+  //     d = `${d / 100000000}B`;
+  //     return d;
+  //   } else {
+  //     return d;
+  //   }
+  // });
 
   const byCountry = d3.groups(data, (d) => d.country);
   d3.select(".svg2")
@@ -106,7 +121,6 @@ export const dThreeFunction2 = (data, countries) => {
   // .on("mouseover", function (d) {
   //   d3.select(this).attr("fill", "rgb(0," + d + ",0)");
   // })
-
   // .on("mouseout", function (d) {
   //   d3.select(this).attr("fill", "black");
   // });
