@@ -1,3 +1,4 @@
+
 export const dThreeFunction = (data) => {
   const xScale = d3
     .scaleBand()
@@ -293,3 +294,4 @@ export const dThreeFunction2 = (data, countries) => {
 
 //         })
 // })
+
