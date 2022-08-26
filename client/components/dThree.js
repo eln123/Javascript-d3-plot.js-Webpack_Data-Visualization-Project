@@ -22,7 +22,7 @@ export const dThreeFunction2 = (data, countries) => {
   let xExtent = d3.extent(data, (d) => d.year);
   console.log(xExtent);
   let years = [1950, 2100];
-  var xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
+  const xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
 
   //scale yAxis
   let yExtent = [10000, 1500000000];
@@ -31,8 +31,8 @@ export const dThreeFunction2 = (data, countries) => {
   }
   d3.extent(data, (d) => +d.population);
 
-  var yMax = d3.max(data, (d) => d.population);
-  var yScale = d3.scaleLog().domain(yExtent).range([800, 0]);
+  const yMax = d3.max(data, (d) => d.population);
+  const yScale = d3.scaleLog().domain(yExtent).range([800, 0]);
 
   //we will draw xAxis and yAxis next
 
@@ -70,7 +70,7 @@ export const dThreeFunction2 = (data, countries) => {
   d3.select(".svg2")
     .append("g")
     .attr("class", "axis")
-    .attr("transform", `translate(${leftMargin},20)`) //use variable in translate
+    .attr("transform", `translate(${leftMargin},20)`) //use constiable in translate
     .call(yAxis)
     .append("text")
     .attr("transform", "rotate(-90)")
@@ -85,7 +85,7 @@ export const dThreeFunction2 = (data, countries) => {
   } else {
     data1 = [];
   }
-  var color = d3.scaleOrdinal().domain(data1).range(colorbrewer.Set2[6]);
+  const color = d3.scaleOrdinal().domain(data1).range(colorbrewer.Set2[6]);
 
   //select path - three types: curveBasis,curveStep, curveCardinal
   d3.select(".svg2")
