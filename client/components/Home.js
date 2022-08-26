@@ -91,24 +91,26 @@ export default class Home extends React.Component {
     console.log(this.state);
     return (
       <div>
-        <svg className="svg1" fill="black" width="500px" height="500px"></svg>
+        {/* <svg className="svg1" fill="black" width="500px" height="500px"></svg> */}
         <div>
           {/* <input type="checkbox" name="myCheckBox" /> */}
-          <fieldset>
-            <label htmlFor="myCheckBox">
-              {byCountry.map((country, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={country[0]}
-                    onClick={this.selectCountry}
-                  />
-                  {country[0]}
-                </div>
-              ))}
-            </label>
-          </fieldset>
-          <svg className="svg2" width="2200" height="1500"></svg>
+          <div className="checkBoxes">
+            <fieldset>
+              <label htmlFor="checkBox">
+                {byCountry.map((country, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={country[0]}
+                      onClick={this.selectCountry}
+                    />
+                    {country[0]}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
+          </div>
+          <svg className="svg2" width="1525" height="950"></svg>
         </div>
         {/* <svg className="my_dataviz" width="2200" height="1500"></svg> */}
         <div>_________________________________</div>
