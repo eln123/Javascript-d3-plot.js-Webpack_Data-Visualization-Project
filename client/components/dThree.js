@@ -21,7 +21,7 @@ export const dThreeFunction2 = (data, countries) => {
   //scale xAxis
   let xExtent = d3.extent(data, (d) => d.year);
   console.log(xExtent);
-  let years = [1950, 2100];
+  let years = [1950, 2022];
   var xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
 
   //scale yAxis
