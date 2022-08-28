@@ -1,5 +1,7 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -45,3 +47,47 @@ form div {
 .confine {
   display: flex;
 }
+
+
+/***********************
+Chart2 (svg2)  Css Here
+************************/
+.axis path {
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.axis line {
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.axis text {
+  fill: black;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.legend text {
+  fill: black;
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+/************
+App.js Css Here
+************/
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+/************
+Navi.js Css Here
+************/
+.navbar_container {
+  color: blue;
+}
+
+
+

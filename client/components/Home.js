@@ -111,7 +111,7 @@ export default class Home extends React.Component {
               </label>
             </fieldset>
           </div>
-          
+
         </div>
         {/* <svg className="my_dataviz" width="2200" height="1500"></svg> */}
         <div>_________________________________</div>
