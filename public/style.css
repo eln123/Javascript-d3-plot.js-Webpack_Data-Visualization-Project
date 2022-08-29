@@ -15,17 +15,49 @@ nav a {
   margin: 1em;
 }
 
-
 form div {
   margin: 1em;
   display: inline-block;
 }
 
 .svg2 {
-  background-image: url('https://etc.usf.edu/presentations/backgrounds/grid/grid_04/1304m.gif');
+  background-image: url("https://etc.usf.edu/presentations/backgrounds/grid/grid_04/1304m.gif");
 }
 
 #container {
   padding: 10% 20%;
-  
+}
+.checkBoxes {
+  float: right;
+  width: 160px;
+  height: 900px;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+  font-size: 20px;
+  background-image: url("https://fvmstatic.s3.amazonaws.com/maps/m/WRLD-EPS-01-0007.png");
+  background-size: contain;
+}
+.checkbox {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 0.2rem;
+  background: #313639;
+  color: #f9f9f9;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  font-size: 0.7rem;
+}
+
+.confine {
+  display: flex;
 }

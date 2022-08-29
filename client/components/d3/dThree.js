@@ -20,7 +20,11 @@ export const dThreeFunction2 = (data, countries) => {
   }
   //scale xAxis
   let xExtent = d3.extent(data, (d) => d.year);
-  let years = [1950, 2100];
+
+  console.log(xExtent);
+
+  let years = [1950, 2022];
+
   var xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
 
   //scale yAxis
@@ -30,8 +34,8 @@ export const dThreeFunction2 = (data, countries) => {
   }
   d3.extent(data, (d) => +d.population);
 
-  var yMax = d3.max(data, (d) => d.population);
-  var yScale = d3.scaleLog().domain(yExtent).range([800, 0]);
+  const yMax = d3.max(data, (d) => d.population);
+  const yScale = d3.scaleLog().domain(yExtent).range([800, 0]);
 
   //we will draw xAxis and yAxis next
 
@@ -69,7 +73,7 @@ export const dThreeFunction2 = (data, countries) => {
   d3.select(".svg2")
     .append("g")
     .attr("class", "axis")
-    .attr("transform", `translate(${leftMargin},20)`) //use variable in translate
+    .attr("transform", `translate(${leftMargin},20)`) //use constiable in translate
     .call(yAxis)
     .append("text")
     .attr("transform", "rotate(-90)")
@@ -84,8 +88,8 @@ export const dThreeFunction2 = (data, countries) => {
   } else {
     data1 = [];
   }
-  console.log(byCountry);
-  var color = d3.scaleOrdinal().domain(data1).range(colorbrewer.Set2[6]);
+
+  const color = d3.scaleOrdinal().domain(data1).range(colorbrewer.Set2[6]);
 
   //select path - three types: curveBasis,curveStep, curveCardinal
   d3.select(".svg2")
@@ -151,7 +155,25 @@ export const dThreeFunction2 = (data, countries) => {
     .attr("r", 3) // circle size
     .attr("cx", (d) => xScale(d.year))
     .attr("cy", (d) => yScale(d.population))
-    .style("fill", (d) => color(d.country));
+    .style("fill", (d) => color(d.country))
+    .on("mouseover", function (d, i) {
+      d3.select(this).transition().duration("100").attr("r", 9);
+      div.transition().duration(100).style("opacity", 1);
+      div
+        .html(i.population + "<br/>" + i.country)
+        .style("left", d.pageX + 10 + "px")
+        .style("top", d.pageY - 15 + "px");
+    })
+    .on("mouseout", function (d, i) {
+      d3.select(this).transition().duration("200").attr("r", 3);
+      div.transition().duration("200").style("opacity", 0);
+    });
+
+  let div = d3
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
   /////////////////////////////////////////////////////////////////////////////////////
   //

@@ -29,7 +29,7 @@ export const drawChart = (data) => {
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // x axis ( has a date format through scaleTime() )
-  var x = d3
+  const x = d3
     .scaleLinear()
     .domain(d3.extent(["1948", "2017"])) // (.domain([xMin, xMax]))
     .range([0, width]);
