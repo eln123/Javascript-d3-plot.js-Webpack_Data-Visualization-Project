@@ -134,7 +134,8 @@ Navi.js Css Here -MIDDLE
 *************************/
 #navi .middle {
   flex: 40%;
-  background-color: rgb(231, 39, 25);
+  /* background-color: rgb(231, 39, 25); */
+  background-color: #021e39;
   display: flex;
   justify-content: center;
   align-items: center;
