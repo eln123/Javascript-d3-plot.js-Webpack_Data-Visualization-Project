@@ -1,5 +1,5 @@
 import React from "react";
-import { drawChart } from "./dThreeTimeSeries";
+import { drawChart } from "./d3/dThreeTimeSeries";
 import { converter } from "../../csvConverter";
 
 export default class TimeSeries extends React.Component {

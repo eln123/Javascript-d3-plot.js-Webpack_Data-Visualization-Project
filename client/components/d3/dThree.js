@@ -2,7 +2,7 @@ import { color } from "d3";
 
 export const dThreeFunction2 = (data, countries) => {
   d3.select(".svg2").selectAll("*").remove();
-  console.log(data);
+
   //set canvas margins
   let leftMargin = 150;
   let topMargin = 30;
@@ -20,11 +20,12 @@ export const dThreeFunction2 = (data, countries) => {
   }
   //scale xAxis
   let xExtent = d3.extent(data, (d) => d.year);
+
   console.log(xExtent);
 
   let years = [1950, 2022];
-  var xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
 
+  var xScale = d3.scaleLinear().domain(years).range([leftMargin, 1500]);
 
   //scale yAxis
   let yExtent = [10000, 1500000000];
@@ -87,6 +88,7 @@ export const dThreeFunction2 = (data, countries) => {
   } else {
     data1 = [];
   }
+
   const color = d3.scaleOrdinal().domain(data1).range(colorbrewer.Set2[6]);
 
   //select path - three types: curveBasis,curveStep, curveCardinal
@@ -108,18 +110,34 @@ export const dThreeFunction2 = (data, countries) => {
         .x((d) => xScale(+d.year))
         .y((d) => yScale(+d.population))
     )
+    .append("tspan")
+    .attr("transform", "translate(" + (100 + 3) + "," + 100 + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "end")
+    .style("fill", "red")
+    .text("Country");
+  // .append("text")
+  // .attr("text-anchor", "middle")
+  // .text((d) => {
+  //   console.log(byCountry);
+  //   console.log(d.country);
+  //   return `${d.country}`;
+  // })
+  // .style("font-size", 24)
 
-    .attr("fill", "none")
-    .attr("stroke", (d) => color(d.year))
-    .attr("stroke-width", 2) //length of line
-    .on("click", function (event, d) {
-      // is the element currently visible ?
-      currentOpacity = d3.selectAll("." + d.country).style("opacity");
-      // Change the opacity: from 0 to 1 or from 1 to 0
-      d3.selectAll("." + d.country)
-        .transition()
-        .style("opacity", currentOpacity == 1 ? 0 : 1);
-    });
+  // BLACK COLOR AREA CLICK
+  // .attr("fill", "none")
+  // .attr("stroke", (d) => color(d.year))
+  // .attr("stroke-width", 2) //length of line
+  // .on("click", function (event, d) {
+  //   // is the element currently visible ?
+  //   currentOpacity = d3.selectAll("." + d.country).style("opacity");
+  //   // Change the opacity: from 0 to 1 or from 1 to 0
+  //   d3.selectAll("." + d.country)
+  //     .transition()
+  //     .style("opacity", currentOpacity == 1 ? 0 : 1);
+  // });
+
   // .on("mouseover", function (d) {
   //   d3.select(this).attr("fill", "rgb(0," + d + ",0)");
   // })
