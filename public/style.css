@@ -1,9 +1,16 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 a {
   text-decoration: none;
+  color: white;
 }
 
 label {
@@ -32,7 +39,7 @@ form div {
   width: 160px;
   height: 900px;
   overflow-y: scroll;
-  scrollbar-color: rebeccapurple green;
+  scrollbar-color: rebeccapurp green;
   scrollbar-width: thin;
   font-size: 20px;
   background-image: url("https://fvmstatic.s3.amazonaws.com/maps/m/WRLD-EPS-01-0007.png");
@@ -61,3 +68,272 @@ div.tooltip {
 .confine {
   display: flex;
 }
+
+/***********************
+Chart2 (svg2)  Css Here
+************************/
+.axis path {
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.axis line {
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.axis text {
+  fill: black;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.legend text {
+  fill: black;
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+/************
+App.js Css Here
+************/
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+/************
+Navi.js Css Here
+************/
+.navbar_container {
+  color: blue;
+}
+#navi {
+  background-color: #021e39;
+  width: 100%;
+  height: 80px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+}
+
+/*************************
+Navi.js Css Here - LEFTSIDE
+*************************/
+#navi .leftside {
+  flex: 30%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+#navi .leftside .links {
+  max-height: 80px;
+}
+#navi .leftside a {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  margin-left: 15px;
+}
+
+#home-icon {
+  height: 65px;
+  width: 85px;
+  margin: 10px;
+}
+
+#navi .leftside .button {
+  display: none;
+}
+
+/*************************
+Navi.js Css Here -MIDDLE
+*************************/
+#navi .middle {
+  flex: 40%;
+  /* background-color: rgb(231, 39, 25); */
+  background-color: #021e39;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+#navi .middle .links {
+  max-height: 80px;
+}
+
+#navi .middle .links a {
+  text-decoration: none;
+
+  font-size: 25px;
+  margin-left: 15px;
+}
+
+#navi .middle #hidden {
+display: flex;
+
+}
+
+/*************************
+Navi.js Css Here -RIGHT
+*************************/
+#navi .rightside {
+  flex: 30%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 25px;
+}
+
+#navi .rightside input {
+  width: 160px;
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 15px;
+  color: black;
+}
+
+.rightside button {
+  height: 53px;
+  width: 80px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#navi .rightside .media-link {
+  color: aliceblue;
+  padding-right: 25px;
+}
+
+
+/******************************************
+SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
+*******************************************/
+
+@media only screen and (max-width: 1350px) {
+  #navi .leftside a {
+    font-size: 17px;
+  }
+  #navi .middle .links a {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  #navi .leftside a {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  #navi .leftside a {
+    font-size: 15px;
+  }
+
+  .rightside button {
+    height: 50px;
+    width: 50px;
+    border-radius: 6px;
+    font-size: 10px;
+  }
+
+  #navi .rightside input {
+    width: 50px;
+    height: 13px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    padding-left: 15px;
+    color: black;
+  }
+}
+
+
+@media only screen and (max-width: 700px) {
+  #navi .leftside a {
+    font-size: 15px;
+  }
+
+  .rightside button {
+    height: 40px;
+    width: 50px;
+    border-radius: 6px;
+    font-size: 10px;
+  }
+
+  #navi .rightside input {
+    width: 50px;
+    height: 8px;
+    border: none;
+    border-radius: 3px;
+    font-size: 9px;
+    padding-left: 15px;
+    color: black;
+  }
+}
+
+
+@media only screen and (max-width: 1050px) {
+  #navi .middle .links{
+    display: none;
+  }
+
+
+}
+
+
+@media only screen and (max-width: 880px) {
+  #navi .leftside  .charts {
+    display: none;
+  }
+
+  #navi .leftside  .button {
+    display: flex;
+  }
+
+   #navi .middle #hidden {
+    position: absolute;
+    left: 0px;
+    top: 80px;
+    max-height: 320px;
+    width: 20%;
+    background-color: #021e39;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    }
+
+    #navi .middle #hidden a {
+      margin: 5px;
+      font-size: 12px;
+
+    }
+
+    #navi .middle {
+      background-color: #021e39;
+      flex: 0%;
+
+    }
+
+    #navi .rightside {
+      flex: 40%;
+    }
+
+}
+
+/* set chart list display:none */
+@media only screen and (max-width: 1500px) {
+  #navi .middle .chartlist {
+    visibility: hidden;
+  }
+}
+
+
+
+
+
+
+

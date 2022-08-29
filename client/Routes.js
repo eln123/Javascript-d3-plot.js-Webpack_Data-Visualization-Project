@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component} from "react";
 import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Plot from "./components/Plot";
 import HomeEthan from "./components/HomeEthan";
 import TimeSeries from "./components/TimeSeries";
 import { me } from "./store";
+
+
 
 /**
  * COMPONENT
@@ -23,8 +25,11 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            <Route path="/" exact component={Home} />
+            <Route path="/home"  exact component={Home} />
+            <Route path="/homeEthan" exact component={HomeEthan} />
+            <Route path="/timeseries" exact component={TimeSeries} />
+
           </Switch>
         ) : (
           <Switch>
@@ -32,8 +37,8 @@ class Routes extends Component {
             <Route path="/plot" exact component={Plot} />
             <Route path="/homeEthan" exact component={HomeEthan} />
             <Route path="/timeseries" exact component={TimeSeries} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            <Route path="/login"  exact component={Login} />
+            <Route path="/signup" exact component={Signup} />
           </Switch>
         )}
       </div>
