@@ -42,3 +42,6 @@ form div {
   position: relative;
   display: inline-block;
 }
+.confine {
+  display: flex;
+}

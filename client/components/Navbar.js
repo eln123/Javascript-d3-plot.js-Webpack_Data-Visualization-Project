@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import SearchBar from "./SearchBar";
 import { converter } from "../../csvConverter";
 
 const dataJson = converter(
@@ -26,7 +25,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to="/signup"></Link>
         </div>
       )}
-      <SearchBar placeholder="Enter a Country" data={dataJson} />
     </nav>
     <hr />
   </div>
