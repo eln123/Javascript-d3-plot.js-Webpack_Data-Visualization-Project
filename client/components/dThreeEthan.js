@@ -78,7 +78,7 @@ export const dThreeFunction3 = (data, countries) => {
 
   const byCountry = d3.groups(data, (d) => d.country);
 
-  var color = d3
+  const color = d3
     .scaleOrdinal()
     .domain(data[0].population)
     .range(colorbrewer.Set2[6]);

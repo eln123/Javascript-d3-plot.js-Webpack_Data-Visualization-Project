@@ -92,7 +92,8 @@ export default class Home extends React.Component {
     return (
       <div>
         {/* <svg className="svg1" fill="black" width="500px" height="500px"></svg> */}
-        <div>
+        <div className="confine">
+          <svg className="svg2" width="1525" height="950"></svg>
           {/* <input type="checkbox" name="myCheckBox" /> */}
           <div className="checkBoxes">
             <fieldset>
@@ -110,7 +111,7 @@ export default class Home extends React.Component {
               </label>
             </fieldset>
           </div>
-          <svg className="svg2" width="1525" height="950"></svg>
+          
         </div>
         {/* <svg className="my_dataviz" width="2200" height="1500"></svg> */}
         <div>_________________________________</div>

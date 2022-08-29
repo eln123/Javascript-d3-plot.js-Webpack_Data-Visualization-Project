@@ -43,6 +43,7 @@ form div {
   display: inline-block;
 }
 
+
 div.tooltip {
   position: absolute;
   text-align: center;
@@ -53,4 +54,8 @@ div.tooltip {
   border-radius: 8px;
   pointer-events: none;
   font-size: 0.7rem;
+
+.confine {
+  display: flex;
+
 }
