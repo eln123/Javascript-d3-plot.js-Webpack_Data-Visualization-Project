@@ -5,6 +5,9 @@ import { dThreeFunction2 } from "./dThree";
 import { test } from "./byCountryD3";
 import { useRef, useEffect } from "react";
 import { ContactSupportOutlined } from "@material-ui/icons";
+import { countryList } from "./CountryList";
+// import { toDefaultValue } from "sequelize/types/utils";
+
 /**
  * COMPONENT
  */
@@ -18,6 +21,7 @@ export default class Home extends React.Component {
     };
 
     this.selectCountry = this.selectCountry.bind(this);
+    this.selectCountry2 = this.selectCountry2.bind(this);
   }
   componentDidMount() {
     const urlC02Emissions =
@@ -47,7 +51,7 @@ export default class Home extends React.Component {
         countries: [...this.state.countries, evt.target.name],
       });
       let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
-
+      
       dThreeFunction2(d3data, this.state.countries);
     } else {
       const newState = {
@@ -65,6 +69,48 @@ export default class Home extends React.Component {
     // console.log("event target", event.target);
     // console.log("this state2", newState);
   }
+
+  selectCountry2(evt) {
+   const value = document.getElementById('search').value
+
+   const allcountry = this.state.data;
+   const byCountry = d3.groups(allcountry, (d) => d.country)
+
+   //map thru byCountry and return value as country[0] at evt.target.value
+   const singleCountry = byCountry.map((country)=>country[0])
+
+    if (evt.target.value) {
+
+      const newState = {
+        ...this.state,
+        countries: [...this.state.countries, evt.target.value],
+      };
+      this.setState({
+        ...this.state,
+        countries: [...this.state.countries, evt.target.value],
+      });
+      let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
+      
+      dThreeFunction2(d3data, this.state.countries);
+      console.log("111111111111", evt);
+    console.log("event target11111", evt.target.value);
+      
+    } else {
+      const newState = {
+        ...this.state,
+        countries: this.state.countries.filter(
+          (country) => country !== evt.target.value
+        ),
+      };
+      this.setState(newState);
+      let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
+
+      dThreeFunction2(d3data, this.state.countries);
+      console.log("222222222222222", evt);
+    console.log("event target22222", evt.target.value);
+    }
+  }
+
   render() {
     // console.log(this.state.data);
     const allcountry = this.state.data;
@@ -89,6 +135,7 @@ export default class Home extends React.Component {
     //   };
     // }, []);
     console.log(this.state);
+    const countryName = countryList.map(country=>{if(country[0].toLowerCase() == byCountry[0]) return country[1]})
     return (
       <div>
         {/* <svg className="svg1" fill="black" width="500px" height="500px"></svg> */}
@@ -96,7 +143,25 @@ export default class Home extends React.Component {
           <svg className="svg2" width="1525" height="950"></svg>
           {/* <input type="checkbox" name="myCheckBox" /> */}
           <div className="checkBoxes">
-            <fieldset>
+
+            <label htmlFor="searchBox">
+                <input type="text" className="search" id='search' placeholder='Country' onChange={(event) => this.selectCountry2(event)}/>
+            </label>
+          
+            
+            {/* <datalist id="myList">
+
+            {byCountry.map((country, index) => (
+             <option  key={index} value={country[0]} onChange={this.selectCountry2}/>
+              ))}
+
+          </datalist>
+            <input type="text" list="myList" placeholder='Country'></input> */}
+            
+            
+            
+
+            <fieldset>     
               <label htmlFor="checkBox">
                 {byCountry.map((country, index) => (
                   <div key={index}>
@@ -106,6 +171,7 @@ export default class Home extends React.Component {
                       onClick={this.selectCountry}
                     />
                     {country[0]}
+                    {/* {countryName} */}
                   </div>
                 ))}
               </label>
