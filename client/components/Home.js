@@ -161,7 +161,7 @@ export default class Home extends React.Component {
             
             
 
-            <fieldset>
+            <fieldset>     
               <label htmlFor="checkBox">
                 {byCountry.map((country, index) => (
                   <div key={index}>
