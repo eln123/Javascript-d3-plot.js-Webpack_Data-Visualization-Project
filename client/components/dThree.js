@@ -137,7 +137,25 @@ export const dThreeFunction2 = (data, countries) => {
     .attr("r", 3) // circle size
     .attr("cx", (d) => xScale(d.year))
     .attr("cy", (d) => yScale(d.population))
-    .style("fill", (d) => color(d.country));
+    .style("fill", (d) => color(d.country))
+    .on("mouseover", function (d, i) {
+      d3.select(this).transition().duration("100").attr("r", 9);
+      div.transition().duration(100).style("opacity", 1);
+      div
+        .html(i.population + "<br/>" + i.country)
+        .style("left", d.pageX + 10 + "px")
+        .style("top", d.pageY - 15 + "px");
+    })
+    .on("mouseout", function (d, i) {
+      d3.select(this).transition().duration("200").attr("r", 3);
+      div.transition().duration("200").style("opacity", 0);
+    });
+
+  let div = d3
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
   /////////////////////////////////////////////////////////////////////////////////////
   //
