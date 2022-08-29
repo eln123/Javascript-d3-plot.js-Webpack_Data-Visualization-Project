@@ -1,4 +1,4 @@
-import { converter } from "../../csvConverter";
+import { converter } from "../../../csvConverter";
 export const drawChart = (data) => {
   const width = 400;
   const height = 400;

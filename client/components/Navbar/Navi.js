@@ -73,10 +73,10 @@ import GitHubIcon from '@material-ui/icons/GitHub';
               <GitHubIcon/>
             </a>
           </div>
-          <div  className='search'>
+          {/* <div  className='search'>
               <input type="text" placeholder='Search . . .'></input>
               <button>Search</button>
-          </div>
+          </div> */}
 
         </div>
       </div>
