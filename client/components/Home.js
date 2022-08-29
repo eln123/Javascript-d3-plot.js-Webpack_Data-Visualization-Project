@@ -1,8 +1,8 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { dThreeFunction } from "./dThree";
-import { dThreeFunction2 } from "./dThree";
-import { test } from "./byCountryD3";
+import { dThreeFunction } from "./d3/dThree";
+import { dThreeFunction2 } from "./d3/dThree";
+import { test } from "./d3/byCountryD3";
 import { useRef, useEffect } from "react";
 import { ContactSupportOutlined } from "@material-ui/icons";
 /**
@@ -88,7 +88,7 @@ export default class Home extends React.Component {
     //     element.removeEventListener("click", handleClick);
     //   };
     // }, []);
-    console.log(this.state);
+
     return (
       <div>
         <svg className="svg1" fill="black" width="500px" height="500px"></svg>

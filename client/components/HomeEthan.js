@@ -1,6 +1,6 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { dThreeFunction3 } from "./dThreeEthan";
+import { dThreeFunction3 } from "./d3/dThreeEthan";
 /**
  * COMPONENT
  */

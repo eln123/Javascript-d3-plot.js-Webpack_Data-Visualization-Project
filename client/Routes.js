@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
+import Plot from "./components/Plot";
 import HomeEthan from "./components/HomeEthan";
 import TimeSeries from "./components/TimeSeries";
 import { me } from "./store";
@@ -28,6 +29,7 @@ class Routes extends Component {
         ) : (
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/plot" exact component={Plot} />
             <Route path="/homeEthan" exact component={HomeEthan} />
             <Route path="/timeseries" exact component={TimeSeries} />
             <Route path="/login" component={Login} />
