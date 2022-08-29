@@ -10,7 +10,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
   constructor(){
     super()
     this.state = {
-      showlinks :false,
+      showlinks :true,
     }
   }
 
@@ -28,18 +28,34 @@ import GitHubIcon from '@material-ui/icons/GitHub';
       <div  className='navbar_container'>
       <div id='navi' >
         <div className='leftside'>
-          <div className='links'>
-          <img id="home-icon" src="/home-icon.png" />
-          </div>
-          <a href='/charts'>Charts</a>
+              <div className='links'>
+                  <img id="home-icon" src="/home-icon.png" />
+              </div>
+
+              <div className='charts'>
+                <a href='/charts'>Charts</a>
+              </div>
+
+              <div className='button'>
+                <button onClick={()=>this.setState({showlinks:!this.state.showlinks})}>Open</button>
+              </div>
         </div>
 
-        <div className='middle'>
-          <div className='links'>
+        <div className='middle' >
+          <div className='links' id={this.state.showlinks ? "hidden" : "" } >
               <a href='/feedback'>Feedback</a>
-              <a href='/about'>About</a>
+              <a href='/aboutus'>About us</a>
               <a href='/contact'>Contact</a>
           </div>
+
+          {/* <div id={this.state.showlinks ? "hidden" : "" } class="chartlist">
+              <h1>mmmm</h1>
+              <a href='/chart-first'>Chart 1</a>
+              <a href='/chart-second'>Chart 2</a>
+              <a href='/chart-third'>Chart 3 </a>
+          </div> */}
+
+
         </div>
 
         <div className='rightside'>
