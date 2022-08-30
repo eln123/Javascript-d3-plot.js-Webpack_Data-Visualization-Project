@@ -4,7 +4,6 @@ export const plotFunc = (state) => {
   const filteredData = state.data.filter((obj, index) =>
     state.countries.includes(obj.country)
   );
-
   return {
     marginRight: 40,
     y: {

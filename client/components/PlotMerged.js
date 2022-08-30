@@ -3,7 +3,7 @@ import { converter } from "../../csvConverter";
 import { plotFunc } from "./plot/plotLineChart";
 import { PlotFigure } from "plot-react";
 
-export default class Plot extends React.Component {
+export default class PlotMerged extends React.Component {
   constructor(props) {
     super(props);
     this.state = { data: [], countries: ["chn", "usa"] };
@@ -52,16 +52,33 @@ export default class Plot extends React.Component {
     if (!this.state.data.length) {
       return "hi";
     }
-    console.log("hello", this.state);
     return (
-      <div>
+      <div className="confine">
         <div className="plot" ref={this.myRef}>
           <PlotFigure options={plotFunc(this.state)} />
         </div>
-        <div>
-          {/* <input type="checkbox" name="myCheckBox" /> */}
+        <div className="checkBoxes">
+          <label htmlFor="searchBox">
+            <input
+              type="text"
+              className="search"
+              id="search"
+              placeholder="Country"
+              onChange={(event) => this.selectCountry2(event)}
+            />
+          </label>
+
+          {/* <datalist id="myList">
+
+            {byCountry.map((country, index) => (
+             <option  key={index} value={country[0]} onChange={this.selectCountry2}/>
+              ))}
+
+          </datalist>
+            <input type="text" list="myList" placeholder='Country'></input> */}
+
           <fieldset>
-            <label htmlFor="myCheckBox">
+            <label htmlFor="checkBox">
               {byCountry.map((country, index) => (
                 <div key={index}>
                   <input
@@ -70,6 +87,7 @@ export default class Plot extends React.Component {
                     onClick={this.selectCountry}
                   />
                   {country[0]}
+                  {/* {countryName} */}
                 </div>
               ))}
             </label>

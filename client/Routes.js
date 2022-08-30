@@ -1,14 +1,14 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Plot from "./components/Plot";
+import PlotMerged from "./components/PlotMerged";
 import HomeEthan from "./components/HomeEthan";
+import LinearRegression from "./components/LinearRegression";
 import TimeSeries from "./components/TimeSeries";
 import { me } from "./store";
-
-
 
 /**
  * COMPONENT
@@ -23,24 +23,16 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home"  exact component={Home} />
-            <Route path="/homeEthan" exact component={HomeEthan} />
-            <Route path="/timeseries" exact component={TimeSeries} />
-
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/plot" exact component={Plot} />
-            <Route path="/homeEthan" exact component={HomeEthan} />
-            <Route path="/timeseries" exact component={TimeSeries} />
-            <Route path="/login"  exact component={Login} />
-            <Route path="/signup" exact component={Signup} />
-          </Switch>
-        )}
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/plot" exact component={Plot} />
+          <Route path="/linearRegression" exact component={LinearRegression} />
+          <Route path="/plotMerged" exact component={PlotMerged} />
+          <Route path="/homeEthan" exact component={HomeEthan} />
+          <Route path="/timeseries" exact component={TimeSeries} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+        </Switch>
       </div>
     );
   }
