@@ -9,6 +9,9 @@ import HomeEthan from "./components/HomeEthan";
 import LinearRegression from "./components/LinearRegression";
 import TimeSeries from "./components/TimeSeries";
 import { me } from "./store";
+import FeedbackPage from "./components/FeedbackPage";
+import Aboutus from "./components/Aboutus";
+import Contactus from "./components/ContactUs";
 
 /**
  * COMPONENT
@@ -23,6 +26,7 @@ class Routes extends Component {
 
     return (
       <div>
+
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/plot" exact component={Plot} />
@@ -32,7 +36,15 @@ class Routes extends Component {
           <Route path="/timeseries" exact component={TimeSeries} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/feedback" exact component={FeedbackPage} />
+            <Route path="/aboutus" exact component={Aboutus} />
+            <Route path="/contact" exact component={Contactus} />
         </Switch>
+
+        
+       
+        )}
+
       </div>
     );
   }
