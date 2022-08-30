@@ -9,9 +9,11 @@ import HomeEthan from "./components/HomeEthan";
 import LinearRegression from "./components/LinearRegression";
 import TimeSeries from "./components/TimeSeries";
 import { me } from "./store";
+
 import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
 import Contactus from "./components/ContactUs";
+
 
 /**
  * COMPONENT
@@ -26,6 +28,7 @@ class Routes extends Component {
 
     return (
       <div>
+
 
         <Switch>
           <Route path="/" exact component={Home} />
@@ -42,7 +45,7 @@ class Routes extends Component {
         </Switch>
 
         
-       
+   
         )}
 
       </div>
