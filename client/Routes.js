@@ -7,6 +7,9 @@ import Plot from "./components/Plot";
 import HomeEthan from "./components/HomeEthan";
 import TimeSeries from "./components/TimeSeries";
 import { me } from "./store";
+import FeedbackPage from "./components/FeedbackPage";
+import Aboutus from "./components/Aboutus";
+import Contactus from "./components/ContactUs";
 
 
 
@@ -29,6 +32,9 @@ class Routes extends Component {
             <Route path="/home"  exact component={Home} />
             <Route path="/homeEthan" exact component={HomeEthan} />
             <Route path="/timeseries" exact component={TimeSeries} />
+            <Route path="/feedback" exact component={FeedbackPage} />
+            <Route path="/aboutus" exact component={Aboutus} />
+            <Route path="/contact" exact component={Contactus} />
 
           </Switch>
         ) : (
@@ -39,6 +45,9 @@ class Routes extends Component {
             <Route path="/timeseries" exact component={TimeSeries} />
             <Route path="/login"  exact component={Login} />
             <Route path="/signup" exact component={Signup} />
+            <Route path="/feedback" exact component={FeedbackPage} />
+            <Route path="/aboutus" exact component={Aboutus} />
+            <Route path="/contact" exact component={Contactus} />
           </Switch>
         )}
       </div>
