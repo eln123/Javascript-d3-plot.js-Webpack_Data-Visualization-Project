@@ -60,14 +60,14 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 
         <div className='rightside'>
           <div  className='media-link'>
-            <a href='/instagram'>
+            <a href='https://twitter.com/CeedNpm'>
+              <TwitterIcon/>
+            </a>
+            <a href='https://www.instagram.com/data_visuals_by_npm_ceed/'>
             <InstagramIcon/>
             </a>
-            <a href='/facebook'>
+            <a href='https://www.facebook.com/profile.php?id=100084793496578'>
               <FacebookIcon/>
-            </a>
-            <a>
-              <TwitterIcon/>
             </a>
             <a href="https://github.com/2206-capstone-npm-CEED/Dashboard_data_visualization">
               <GitHubIcon/>
