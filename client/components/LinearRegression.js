@@ -72,7 +72,6 @@ export default class LinearRegression extends React.Component {
           )}
         </div>
         <div>
-          {/* <input type="checkbox" name="myCheckBox" /> */}
           <fieldset>
             <label htmlFor="myCheckBox">
               {countriesCombined.map((country, index) => (
