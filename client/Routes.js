@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Home from "./components/Home";
 import Plot from "./components/Plot";
+import Bubble from "./components/Bubble";
 
 import LinearRegression from "./components/LinearRegression";
 
@@ -17,6 +18,7 @@ export default class Routes extends Component {
       <div>
         <Switch>
           <Route path="/plot" exact component={Plot} />
+          <Route path="/bubble" exact component={Bubble} />
           <Route path="/linearRegression" exact component={LinearRegression} />
           <Route path="/feedback" exact component={FeedbackPage} />
           <Route path="/aboutus" exact component={Aboutus} />

@@ -12,7 +12,7 @@ export default class LinearRegression extends React.Component {
 
   componentDidMount() {
     const urlLifeExpectancyPerCountry =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancyPerCountry";
+      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByCountry";
 
     const fileStr2 = converter(urlLifeExpectancyPerCountry, (results) => {
       let newDataArr = [];
