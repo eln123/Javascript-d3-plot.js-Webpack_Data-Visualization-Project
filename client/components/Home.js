@@ -32,7 +32,25 @@ export default class Home extends React.Component {
       "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv";
 
     const fileStr2 = converter(urlPopulation, (results) => {
-      this.setState({ ...this.state, data: results.data });
+      console.log(results);
+      let NewcountryList = countryList.map((list) => {
+        list[0] = list[0].toLowerCase();
+        return list;
+      });
+      console.log(NewcountryList);
+      const data = results.data.map((obj) => {
+        // let lower = countryList[0].toLowerCase();
+        for (let i = 0; i < NewcountryList.length; i++) {
+          let list = NewcountryList[i];
+          // console.log(NewcountryList);
+          if (list[0] === obj.country) {
+            obj.country = list[1];
+          }
+        }
+        return obj;
+      });
+      console.log(data);
+      this.setState({ ...this.state, data: data });
     });
   }
   componentDidUpdate() {
@@ -133,10 +151,12 @@ export default class Home extends React.Component {
     //   };
     // }, []);
 
-    console.log(this.state);
+    // console.log(this.state);
     const countryName = countryList.map((country) => {
-      if (country[0].toLowerCase() == byCountry[0]) return country[1];
+      // console.log(country);
+      return country[1];
     });
+    // console.log(countryName);
 
     return (
       <div>
@@ -174,7 +194,6 @@ export default class Home extends React.Component {
                       onClick={this.selectCountry}
                     />
                     {country[0]}
-                    {/* {countryName} */}
                   </div>
                 ))}
               </label>
