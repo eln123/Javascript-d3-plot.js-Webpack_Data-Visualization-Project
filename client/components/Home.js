@@ -2,11 +2,10 @@ import React from "react";
 import { converter } from "../../csvConverter";
 import { dThreeFunction } from "./d3/dThree";
 import { dThreeFunction2 } from "./d3/dThree";
-import { test } from "./d3/byCountryD3";
+
 import { useRef, useEffect } from "react";
 import { ContactSupportOutlined } from "@material-ui/icons";
 import { countryList } from "./CountryList";
-// import { toDefaultValue } from "sequelize/types/utils";
 
 /**
  * COMPONENT
@@ -37,19 +36,18 @@ export default class Home extends React.Component {
         list[0] = list[0].toLowerCase();
         return list;
       });
-      console.log(NewcountryList);
+
       const data = results.data.map((obj) => {
-        // let lower = countryList[0].toLowerCase();
         for (let i = 0; i < NewcountryList.length; i++) {
           let list = NewcountryList[i];
-          // console.log(NewcountryList);
+
           if (list[0] === obj.country) {
             obj.country = list[1];
           }
         }
         return obj;
       });
-      console.log(data);
+
       this.setState({ ...this.state, data: data });
     });
   }
@@ -83,34 +81,23 @@ export default class Home extends React.Component {
 
       dThreeFunction2(d3data, this.state.countries);
     }
-    // console.log("ASDFASFDSAFASDFASD", event);
-    // console.log("event target", event.target);
-    // console.log("this state2", newState);
   }
 
   selectCountry2(evt) {
-    const value = document.getElementById("search").value;
-
     const allcountry = this.state.data;
     const byCountry = d3.groups(allcountry, (d) => d.country);
+    const country =
+      evt.target.value.slice(0, 1).toUpperCase() + evt.target.value.slice(1);
 
-    //map thru byCountry and return value as country[0] at evt.target.value
-    const singleCountry = byCountry.map((country) => country[0]);
-
-    if (evt.target.value) {
+    if (country) {
       const newState = {
         ...this.state,
-        countries: [...this.state.countries, evt.target.value],
+        countries: [...this.state.countries, country],
       };
-      this.setState({
-        ...this.state,
-        countries: [...this.state.countries, evt.target.value],
-      });
+      this.setState(newState);
       let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
 
       dThreeFunction2(d3data, this.state.countries);
-      console.log("111111111111", evt);
-      console.log("event target11111", evt.target.value);
     } else {
       const newState = {
         ...this.state,
@@ -122,48 +109,26 @@ export default class Home extends React.Component {
       let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
 
       dThreeFunction2(d3data, this.state.countries);
-      console.log("222222222222222", evt);
-      console.log("event target22222", evt.target.value);
     }
   }
 
   render() {
-    // console.log(this.state.data);
     const allcountry = this.state.data;
     const byCountry = d3.groups(allcountry, (d) => d.country);
-    // console.log(byCountry.map((country) => country[0]));
+
     const showData = this.state.data.filter(
       (obj, index) => obj.country !== byCountry[0]
     );
-    // const ref = useRef(null);
 
-    // useEffect(() => {
-    //   const handleClick = (event) => {
-    //     console.log("Button clicked");
-    //   };
-
-    //   const element = ref.current;
-
-    //   element.addEventListener("click", handleClick);
-
-    //   return () => {
-    //     element.removeEventListener("click", handleClick);
-    //   };
-    // }, []);
-
-    // console.log(this.state);
     const countryName = countryList.map((country) => {
-      // console.log(country);
       return country[1];
     });
-    // console.log(countryName);
 
     return (
       <div>
-        {/* <svg className="svg1" fill="black" width="500px" height="500px"></svg> */}
         <div className="confine">
           <svg className="svg2" width="1525" height="950"></svg>
-          {/* <input type="checkbox" name="myCheckBox" /> */}
+
           <div className="checkBoxes">
             <label htmlFor="searchBox">
               <input
@@ -174,15 +139,6 @@ export default class Home extends React.Component {
                 onChange={(event) => this.selectCountry2(event)}
               />
             </label>
-
-            {/* <datalist id="myList">
-
-            {byCountry.map((country, index) => (
-             <option  key={index} value={country[0]} onChange={this.selectCountry2}/>
-              ))}
-
-          </datalist>
-            <input type="text" list="myList" placeholder='Country'></input> */}
 
             <fieldset>
               <label htmlFor="checkBox">
@@ -200,8 +156,8 @@ export default class Home extends React.Component {
             </fieldset>
           </div>
         </div>
-        {/* <svg className="my_dataviz" width="2200" height="1500"></svg> */}
-        <div>_________________________________</div>
+
+        <div>potential table</div>
         {/* <table>
           <thead>
             <tr>
