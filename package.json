@@ -36,6 +36,7 @@
     "pg": "^8.5.1",
     "plot-react": "^1.0.1",
     "process": "^0.11.10",
+    "react-bootstrap": "^2.5.0",
     "sequelize": "^6.3.5",
     "stream-browserify": "^3.0.0"
   },

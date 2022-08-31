@@ -14,7 +14,6 @@ import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
 import Contactus from "./components/ContactUs";
 
-
 /**
  * COMPONENT
  */
@@ -28,8 +27,6 @@ class Routes extends Component {
 
     return (
       <div>
-
-
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/plot" exact component={Plot} />
@@ -40,14 +37,9 @@ class Routes extends Component {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/feedback" exact component={FeedbackPage} />
-            <Route path="/aboutus" exact component={Aboutus} />
-            <Route path="/contact" exact component={Contactus} />
+          <Route path="/aboutus" exact component={Aboutus} />
+          <Route path="/contact" exact component={Contactus} />
         </Switch>
-
-        
-   
-        )}
-
       </div>
     );
   }

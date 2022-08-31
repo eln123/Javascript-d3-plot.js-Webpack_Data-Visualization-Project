@@ -156,11 +156,21 @@ export const dThreeFunction2 = (data, countries) => {
     .attr("cx", (d) => xScale(d.year))
     .attr("cy", (d) => yScale(d.population))
     .style("fill", (d) => color(d.country))
+    .style("font-size", "20px")
     .on("mouseover", function (d, i) {
-      d3.select(this).transition().duration("100").attr("r", 9);
+      d3.select(this).transition().duration("100").attr("r", 13);
       div.transition().duration(100).style("opacity", 1);
       div
-        .html(i.population + "<br/>" + i.country)
+        .html(
+          "Country: " +
+            i.country +
+            "<br/>" +
+            "Population: " +
+            i.population +
+            "<br/>" +
+            "Year: " +
+            i.year
+        )
         .style("left", d.pageX + 10 + "px")
         .style("top", d.pageY - 15 + "px");
     })
