@@ -4,6 +4,8 @@ body {
   padding: 0;
 }
 
+
+
 button:hover {
   cursor: pointer;
 }
@@ -48,7 +50,9 @@ form div {
 .checkbox {
   position: relative;
   display: inline-block;
+  background: #fee102
 }
+
 
 div.tooltip {
   position: absolute;

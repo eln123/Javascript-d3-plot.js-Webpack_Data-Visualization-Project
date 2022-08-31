@@ -1,9 +1,9 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { plotFuncLinearRegression } from "./plot/plotLinearRegression";
+import { plotFuncArrow } from "./plot/plotArrow";
 import { PlotFigure } from "plot-react";
 
-export default class LinearRegression extends React.Component {
+export default class PlotArrow extends React.Component {
   constructor(props) {
     super(props);
     this.state = { data: [], countries: ["China", "United States"] };
@@ -31,6 +31,7 @@ export default class LinearRegression extends React.Component {
       }
 
       this.setState({ ...this.state, data: newDataArr });
+      console.log(this.state);
     });
   }
 
@@ -61,12 +62,12 @@ export default class LinearRegression extends React.Component {
     if (!this.state.data.length) {
       return "hi";
     }
-    console.log("hello", countriesCombined);
+
     return (
       <div>
-        <div className="plotLinearRegression" ref={this.myRef}>
+        <div className="plotArrow" ref={this.myRef}>
           {this.state ? (
-            <PlotFigure options={plotFuncLinearRegression(this.state)} />
+            <PlotFigure options={plotFuncArrow(this.state)} />
           ) : (
             "hi"
           )}
