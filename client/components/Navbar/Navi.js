@@ -1,5 +1,9 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
+
+
+
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -21,16 +25,23 @@ class Navi extends React.Component {
         <div id="navi">
           <div className="leftside">
             <div className="links">
+
               <Link to="/">
                 <img id="home-icon" src="/home-icon.png" />
               </Link>
             </div>
+
+            
+            </div>
+
+
             <div className="button">
               <button
                 onClick={() =>
                   this.setState({ showlinks: !this.state.showlinks })
                 }
               >
+
                 Menu
               </button>
             </div>
@@ -42,23 +53,11 @@ class Navi extends React.Component {
                 <a href="#">Link 3</a>
               </div>
             </div>
-            {/* <button id="add-row">Chart</button>
-              <select>
-                <option onClick= <Link to="/plot">plot </Link>>
-                  {" "}
-                  <Link to="/plot">plot </Link>{" "}
-                </option>
+      
 
-                <Link to="/plot">
-                  {" "}
-                  <option href="/linearRegression">linear Regression</option>
-                </Link>
-                <Link to="/plot">
-                  {" "}
-                  <option href="/feedback">Yellow</option>
-                </Link>
-                <option value="green">Green</option>
-              </select> */}
+             
+            </div>
+
           </div>
 
           <div className="middle">

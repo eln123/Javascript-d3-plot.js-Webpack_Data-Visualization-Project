@@ -26,7 +26,6 @@ export default class Plot extends React.Component {
         ...this.state,
         countries: [...this.state.countries, evt.target.name],
       });
-      console.log(this.state);
     } else {
       const newState = {
         ...this.state,
@@ -36,11 +35,7 @@ export default class Plot extends React.Component {
       };
 
       this.setState(newState);
-      console.log(this.state);
     }
-    // const chart = plotFunc(this.state);
-
-    // this.myRef.current.append(chart);
   }
   render() {
     const allcountry = this.state.data;
@@ -59,7 +54,6 @@ export default class Plot extends React.Component {
           <PlotFigure options={plotFunc(this.state)} />
         </div>
         <div>
-          {/* <input type="checkbox" name="myCheckBox" /> */}
           <fieldset>
             <label htmlFor="myCheckBox">
               {byCountry.map((country, index) => (
