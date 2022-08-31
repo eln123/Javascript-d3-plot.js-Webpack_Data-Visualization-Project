@@ -145,7 +145,7 @@ export default class Bubble extends React.Component {
     }
 
     return (
-      <div>
+      <div id="backgroundOfBubblePage">
         <div className="bubble"></div>
       </div>
     );
