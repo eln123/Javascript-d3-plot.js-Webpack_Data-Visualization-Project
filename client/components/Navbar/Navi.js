@@ -42,23 +42,6 @@ class Navi extends React.Component {
                 <a href="#">Link 3</a>
               </div>
             </div>
-            {/* <button id="add-row">Chart</button>
-              <select>
-                <option onClick= <Link to="/plot">plot </Link>>
-                  {" "}
-                  <Link to="/plot">plot </Link>{" "}
-                </option>
-
-                <Link to="/plot">
-                  {" "}
-                  <option href="/linearRegression">linear Regression</option>
-                </Link>
-                <Link to="/plot">
-                  {" "}
-                  <option href="/feedback">Yellow</option>
-                </Link>
-                <option value="green">Green</option>
-              </select> */}
           </div>
 
           <div className="middle">
@@ -67,13 +50,6 @@ class Navi extends React.Component {
               <a href="/aboutus">About us</a>
               <a href="/contact">Contact</a>
             </div>
-
-            {/* <div id={this.state.showlinks ? "hidden" : "" } class="chartlist">
-              <h1>mmmm</h1>
-              <a href='/chart-first'>Chart 1</a>
-              <a href='/chart-second'>Chart 2</a>
-              <a href='/chart-third'>Chart 3 </a>
-          </div> */}
           </div>
 
           <div className="rightside">
@@ -91,10 +67,6 @@ class Navi extends React.Component {
                 <GitHubIcon />
               </a>
             </div>
-            {/* <div  className='search'>
-              <input type="text" placeholder='Search . . .'></input>
-              <button>Search</button>
-          </div> */}
           </div>
         </div>
       </div>
