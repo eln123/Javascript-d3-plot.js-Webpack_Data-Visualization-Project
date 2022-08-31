@@ -13,19 +13,11 @@ import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
 import Contactus from "./components/ContactUs";
 
-
 /**
  * COMPONENT
  */
 
-
-
-
 export default class Routes extends Component {
-
-  componentDidMount() {
-    this.props.loadInitialData();
-  }
   render() {
     return (
       <div>
@@ -39,10 +31,8 @@ export default class Routes extends Component {
           <Route path="/contact" exact component={Contactus} />
 
           <Route path="/" exact component={Home} />
-
         </Switch>
       </div>
     );
   }
-
 }
