@@ -5,9 +5,10 @@ export const bubbleFunc = (data) => {
   // var margin = { top: 40, right: 150, bottom: 60, left: 30 },
   //   width = 500 - margin.left - margin.right,
   //   height = 420 - margin.top - margin.bottom;
-  var margin = { top: 40, right: 150, bottom: 60, left: 30 };
-  const width = 1000 - margin.left - margin.right;
+  var margin = { top: 40, right: 300, bottom: 60, left: 100 };
+  const width = 1400 - margin.left - margin.right;
   const height = 1000 - margin.top - margin.bottom;
+  data = data.filter((obj) => obj.population > 0);
   // append the svg object to the body of the page
   var svg = d3
     .select(".bubble")
@@ -22,7 +23,7 @@ export const bubbleFunc = (data) => {
   // ---------------------------//
 
   // Add X axis
-  var x = d3.scaleLinear().domain([0, 45000]).range([0, width]);
+  var x = d3.scaleLinear().domain([0, 75000]).range([0, width]);
   svg
     .append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -34,7 +35,7 @@ export const bubbleFunc = (data) => {
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 50)
-    .text("Gdp per Capita");
+    .text("Income per person");
 
   // Add Y axis
   var y = d3.scaleLinear().domain([35, 90]).range([height, 0]);
@@ -55,7 +56,7 @@ export const bubbleFunc = (data) => {
   // Add a scale for bubble color
   var myColor = d3
     .scaleOrdinal()
-    .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+    .domain(["asia", "europe", "americas", "africa", "oceania"])
     .range(d3.schemeSet1);
 
   // ---------------------------//
@@ -64,30 +65,41 @@ export const bubbleFunc = (data) => {
 
   // -1- Create a tooltip div that is hidden by default:
   var tooltip = d3
-    .select("#bubble")
+    .select(".bubble")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
     .style("background-color", "black")
     .style("border-radius", "5px")
     .style("padding", "10px")
-    .style("color", "white");
+    .style("color", "white")
+    .style("font-size", "20px");
 
-  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-  var showTooltip = function (d) {
+  // -2- Create 3 functions to show / update (when mouse move but stay oTypeError: d3.mouse is not a functionn same circle) / hide the tooltip
+  var showTooltip = function (evt) {
     tooltip.transition().duration(200);
     tooltip
       .style("opacity", 1)
-      .html("Country: " + d.country)
-      .style("left", d3.mouse(this)[0] + 30 + "px")
-      .style("top", d3.mouse(this)[1] + 30 + "px");
+      .html(
+        "Country: " +
+          evt.target.__data__.name +
+          "<br> Life Expectancy: " +
+          evt.target.__data__.lifeExpectancy +
+          "<br> Year: " +
+          evt.target.__data__.time +
+          "<br> Population: " +
+          evt.target.__data__.population
+      )
+      .style("left", d3.pointer(evt)[0] + 30 + "px")
+      .style("top", d3.pointer(evt)[1] + 30 + "px");
   };
-  var moveTooltip = function (d) {
+  var moveTooltip = function (evt) {
+    console.log(evt);
     tooltip
-      .style("left", d3.mouse(this)[0] + 30 + "px")
-      .style("top", d3.mouse(this)[1] + 30 + "px");
+      .style("left", d3.pointer(evt)[0] + 30 + "px")
+      .style("top", d3.pointer(evt)[1] + 30 + "px");
   };
-  var hideTooltip = function (d) {
+  var hideTooltip = function (evt) {
     tooltip.transition().duration(200).style("opacity", 0);
   };
 
@@ -143,88 +155,86 @@ export const bubbleFunc = (data) => {
   //       LEGEND              //
   // ---------------------------//
 
-  // Add legend: circles
-  var valuesToShow = [10000000, 100000000, 1000000000];
-  var xCircle = 390;
-  var xLabel = 440;
-  svg
-    .selectAll("legend")
-    .data(valuesToShow)
-    .enter()
-    .append("circle")
-    .attr("cx", xCircle)
-    .attr("cy", function (d) {
-      return height - 100 - z(d);
-    })
-    .attr("r", function (d) {
-      return z(d);
-    })
-    .style("fill", "none")
-    .attr("stroke", "black");
+  // // Add legend: circles
+  // var valuesToShow = [10000000, 100000000, 1000000000];
+  // var xCircle = 390;
+  // var xLabel = 440;
+  // svg
+  //   .selectAll("legend")
+  //   .data(valuesToShow)
+  //   .enter()
+  //   .append("circle")
+  //   .attr("cx", xCircle)
+  //   .attr("cy", function (d) {
+  //     return height - 100 - z(d);
+  //   })
+  //   .attr("r", function (d) {
+  //     return z(d);
+  //   })
+  //   .style("fill", "none")
+  //   .attr("stroke", "black");
 
-  // Add legend: segments
-  svg
-    .selectAll("legend")
-    .data(valuesToShow)
-    .enter()
-    .append("line")
-    .attr("x1", function (d) {
-      return xCircle + z(d);
-    })
-    .attr("x2", xLabel)
-    .attr("y1", function (d) {
-      return height - 100 - z(d);
-    })
-    .attr("y2", function (d) {
-      return height - 100 - z(d);
-    })
-    .attr("stroke", "black")
-    .style("stroke-dasharray", "2,2");
+  // // Add legend: segments
+  // svg
+  //   .selectAll("legend")
+  //   .data(valuesToShow)
+  //   .enter()
+  //   .append("line")
+  //   .attr("x1", function (d) {
+  //     return xCircle + z(d);
+  //   })
+  //   .attr("x2", xLabel)
+  //   .attr("y1", function (d) {
+  //     return height - 100 - z(d);
+  //   })
+  //   .attr("y2", function (d) {
+  //     return height - 100 - z(d);
+  //   })
+  //   .attr("stroke", "black")
+  //   .style("stroke-dasharray", "2,2");
 
-  // Add legend: labels
-  svg
-    .selectAll("legend")
-    .data(valuesToShow)
-    .enter()
-    .append("text")
-    .attr("x", xLabel)
-    .attr("y", function (d) {
-      return height - 100 - z(d);
-    })
-    .text(function (d) {
-      return `${d.region}`;
-    })
-    .style("font-size", 10)
-    .attr("alignment-baseline", "middle");
+  // // Add legend: labels
+  // svg
+  //   .selectAll("legend")
+  //   .data(valuesToShow)
+  //   .enter()
+  //   .append("text")
+  //   .attr("x", xLabel)
+  //   .attr("y", function (d) {
+  //     return height - 100 - z(d);
+  //   })
+  //   .text(function (d) {
+  //     return `${d.region}`;
+  //   })
+  //   .style("font-size", 10)
+  //   .attr("alignment-baseline", "middle");
 
-  // Legend title
-  svg
-    .append("text")
-    .attr("x", xCircle)
-    .attr("y", height - 100 + 30)
-    .text("Population (M)")
-    .attr("text-anchor", "middle");
+  // // Legend title
+  // svg
+  //   .append("text")
+  //   .attr("x", xCircle)
+  //   .attr("y", height - 900 + 30)
+  //   .text("Population (M)")
+  //   .attr("text-anchor", "middle");
 
   // Add one dot in the legend for each name.
   var size = 20;
-  var allgroups = ["Asia", "Europe", "Americas", "Africa", "Oceania"].forEach(
-    (name) => name.toLowerCase()
-  );
-  svg
-    .selectAll("myrect")
-    .data(data)
-    .enter()
-    .append("circle")
-    .attr("cx", width + 100)
-    .attr("cy", function (d, i) {
-      return 10 + i * (size + 5);
-    }) // 100 is where the first dot appears. 25 is the distance between dots
-    .attr("r", 7)
-    .style("fill", function (d) {
-      return myColor(d.region);
-    })
-    .on("mouseover", highlight)
-    .on("mouseleave", noHighlight);
+
+  // svg
+  //   .selectAll("myrect")
+  //   .data(data)
+  //   .enter()
+  //   .append("circle")
+  //   .attr("cx", width * 1.18)
+  //   .attr("cy", function (d, i) {
+  //     return 10 + i * (size + 5) + 500;
+  //   }) // 100 is where the first dot appears. 25 is the distance between dots
+  //   .attr("r", 7)
+  //   .style("fill", function (d) {
+  //     return myColor(d.region);
+  //   })
+  //   .on("mouseover", highlight)
+  //   .on("mouseleave", noHighlight);
 
   // Add labels beside legend dots
   svg
@@ -232,9 +242,9 @@ export const bubbleFunc = (data) => {
     .data(data)
     .enter()
     .append("text")
-    .attr("x", width + 50)
+    .attr("x", width * 1.2)
     .attr("y", function (d, i) {
-      return i * (size + 5) + size / 2;
+      return i * (size + 5) + size / 2 + 500;
     }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) {
       return myColor(d.region);
@@ -253,28 +263,26 @@ export const bubbleFunc = (data) => {
 
   svg
     .append("text")
-    .attr("x", 600 + size * 0.8)
-    .attr("y", function (d, i) {
-      return -18 + size / 2;
-    })
-    .text("Region");
+    .attr("x", width * 1.2)
+    .attr("y", height * 0.32)
+    .text("Region")
+    .style("font-size", 18);
 
   svg
     .append("text")
-    .attr("x", 365 + size * 0.8)
-    .attr("y", function (d, i) {
-      return -18 + size / 2;
-    })
-    .text("Countries");
+    .attr("x", width * 1.2)
+    .attr("y", height * 0.54)
+    .text("Countries")
+    .style("font-size", 18);
 
   svg
     .selectAll("regionLabels")
     .data(allgroups)
     .enter()
     .append("text")
-    .attr("x", 600 + size * 0.8)
+    .attr("x", width * 1.2)
     .attr("y", function (d, i) {
-      return i * (size + 5) + size / 2;
+      return i * (size + 5) + size / 2 + height * 0.34;
     }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) {
       return myColor(d);
