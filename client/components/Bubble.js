@@ -6,7 +6,7 @@
 
 import React from "react";
 import { converter } from "../../csvConverter";
-import { plotFuncBubble } from "./d3/dThreeBubble";
+import { bubbleFunc } from "./d3/dThreeBubble";
 import { PlotFigure } from "plot-react";
 
 export default class Bubble extends React.Component {
@@ -14,24 +14,50 @@ export default class Bubble extends React.Component {
     super(props);
     this.state = {
       data: [],
+      year: "2023",
+      combined: [],
       lifeExpectancy: [],
       incomePerPerson: [],
       population: [],
+      countryRegionConverter: [],
     };
     this.selectCountry = this.selectCountry.bind(this);
   }
 
   async componentDidMount() {
+    const urlCountryRegionConverter =
+      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Countries_Regions";
     const urlLifeExpectancyByRegion =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByRegion";
+      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByCountry";
     const urlIncomePerPersonByRegion =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/IncomePerPerson_ByRegion";
+      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/IncomePerPerson_ByCountry";
     const urlPopulationByRegion =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Population_ByRegion";
+      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Population_ByCountry";
+
+    console.log(this.state);
 
     ///////////////////
+    await converter(urlCountryRegionConverter, (results) => {
+      const data = results.data;
+
+      this.setState({ ...this.state, countryRegionConverter: results.data });
+    });
     await converter(urlLifeExpectancyByRegion, (results) => {
-      this.setState({ ...this.state, lifeExpectancy: results.data });
+      const data = results.data;
+      let converted = [];
+      for (let i = 0; i < data.length; i++) {
+        let obj = data[i];
+        for (let key in obj) {
+          if (key !== "country") {
+            let pushThis = {};
+            pushThis.time = key;
+            pushThis.name = obj.country;
+            pushThis.lifeExpectancy = obj[key];
+            converted.push(pushThis);
+          }
+        }
+      }
+      this.setState({ ...this.state, lifeExpectancy: converted });
     });
 
     ////////////////////
@@ -45,38 +71,49 @@ export default class Bubble extends React.Component {
 
     await converter(urlPopulationByRegion, (results) => {
       this.setState({ ...this.state });
+
       const lifeExpectancyArr = this.state.lifeExpectancy;
       const incomeArr = this.state.incomePerPerson;
       const populationArr = this.state.population;
       let combinedDataArr = [];
-      for (let i = 0; i < lifeExpectancyArr.length; i++) {
-        let lifeExpectancyObj = lifeExpectancyArr[i];
-        for (let j = 0; j < incomeArr.length; i++) {
-          let incomeObj = incomeArr[j];
-          if (
-            incomeObj.name === lifeExpectancyObj.name &&
-            incomeObj.time === lifeExpectancyObj.time
-          ) {
-            for (let k = 0; k < populationArr.length; i++) {
-              let populationObj = populationArr[j];
-              if (
-                incomeObj.name === populationObj.name &&
-                incomeObj.time === populationObj.time
-              ) {
-                let obj = {};
-                obj.year = populationObj.time;
-                obj.region = populationObj.name;
-                obj.population = populationObj.Population;
-                obj.incomePerPerson = incomeObj["Income per person"];
-                obj.lifeExpectancy = lifeExpectancyObj["Life expectancy "];
-                combinedDataArr.push(obj);
-              }
-            }
+      //
+      const year = this.state.year;
+      const filteredLE = lifeExpectancyArr.filter((obj) => obj.time === year);
+      const filteredIPP = incomeArr.filter((obj) => obj.time === year);
+      const filteredPop = populationArr.filter((obj) => obj.time === year);
+      //
+      const countryRegionConverter = this.state.countryRegionConverter;
+      let combined = filteredLE;
+      for (let i = 0; i < filteredIPP.length; i++) {
+        let obj = filteredIPP[i];
+        for (let j = 0; j < combined.length; j++) {
+          if (combined[j].name === obj.name) {
+            combined[j].incomePerPerson = obj["Income per person"];
           }
         }
       }
-      console.log("combinedDataArr");
+      for (let i = 0; i < filteredPop.length; i++) {
+        let obj = filteredPop[i];
+        for (let j = 0; j < combined.length; j++) {
+          if (combined[j].name === obj.name) {
+            combined[j].population = obj.Population;
+          }
+        }
+      }
+      for (let i = 0; i < countryRegionConverter.length; i++) {
+        let obj = countryRegionConverter[i];
+        for (let j = 0; j < combined.length; j++) {
+          if (combined[j].name === obj.name) {
+            combined[j].region = obj["four_regions"];
+          }
+        }
+      }
+      this.setState({ ...this.state, combined, data: combined });
+      console.log(this.state);
     });
+  }
+  componentDidUpdate() {
+    bubbleFunc(this.state.data);
   }
 
   selectCountry(evt) {
@@ -106,32 +143,10 @@ export default class Bubble extends React.Component {
     if (!this.state.data.length) {
       return "hi";
     }
-    console.log("hello", countriesCombined);
+
     return (
       <div>
-        <div className="plotLinearRegression" ref={this.myRef}>
-          {this.state ? (
-            <PlotFigure options={plotFuncLinearRegression(this.state)} />
-          ) : (
-            "hi"
-          )}
-        </div>
-        <div>
-          <fieldset>
-            <label htmlFor="myCheckBox">
-              {countriesCombined.map((country, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={country[0]}
-                    onClick={this.selectCountry}
-                  />
-                  {country[0]}
-                </div>
-              ))}
-            </label>
-          </fieldset>
-        </div>
+        <div className="bubble"></div>
       </div>
     );
   }

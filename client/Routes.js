@@ -7,6 +7,7 @@ import Plot from "./components/Plot";
 import Bubble from "./components/Bubble";
 
 import LinearRegression from "./components/LinearRegression";
+import PlotArrow from "./components/Arrow";
 
 import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
@@ -20,6 +21,7 @@ export default class Routes extends Component {
           <Route path="/plot" exact component={Plot} />
           <Route path="/bubble" exact component={Bubble} />
           <Route path="/linearRegression" exact component={LinearRegression} />
+          <Route path="/arrow" exact component={PlotArrow} />
           <Route path="/feedback" exact component={FeedbackPage} />
           <Route path="/aboutus" exact component={Aboutus} />
           <Route path="/contact" exact component={Contactus} />
