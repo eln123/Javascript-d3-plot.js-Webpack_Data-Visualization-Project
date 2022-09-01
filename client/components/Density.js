@@ -1,25 +1,20 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { plotFuncArrow } from "./plot/plotArrow";
+import { plotFuncDensity } from "./plot/plotDensity";
 import { PlotFigure } from "plot-react";
 
-export default class PlotArrow extends React.Component {
+export default class PlotDensity extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.state = {
       data: [],
-      years: ["1980", "2020"],
+
       combined: [],
       lifeExpectancy: [],
       incomePerPerson: [],
       population: [],
-      countries: [
-        "China",
-        "United States",
-        "India",
-        "Afghanistan",
-        "Singapore",
-      ],
+      regions: ["americas", "europe", "asia"],
+      years: ["1950", "2020"],
       countryRegionConverter: [],
     };
     this.selectCountry = this.selectCountry.bind(this);
@@ -28,11 +23,11 @@ export default class PlotArrow extends React.Component {
   async componentDidMount() {
     const urlCountryRegionConverter =
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Countries_Regions";
-    const urlLifeExpectancyByRegion =
+    const urlLifeExpectancyByCountry =
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByCountry";
-    const urlIncomePerPersonByRegion =
+    const urlIncomePerPersonByCountry =
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/IncomePerPerson_ByCountry";
-    const urlPopulationByRegion =
+    const urlPopulationByCountry =
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Population_ByCountry";
 
     ///////////////////
@@ -41,9 +36,9 @@ export default class PlotArrow extends React.Component {
 
       this.setState({ ...this.state, countryRegionConverter: results.data });
     });
-    await converter(urlLifeExpectancyByRegion, (results) => {
+    await converter(urlLifeExpectancyByCountry, (results) => {
       const data = results.data;
-      let converted = [];
+      let fixed = [];
       for (let i = 0; i < data.length; i++) {
         let obj = data[i];
         for (let key in obj) {
@@ -52,41 +47,90 @@ export default class PlotArrow extends React.Component {
             pushThis.time = key;
             pushThis.name = obj.country;
             pushThis.lifeExpectancy = obj[key];
-            converted.push(pushThis);
+            fixed.push(pushThis);
           }
         }
       }
-      this.setState({ ...this.state, lifeExpectancy: converted });
+      const countryRegionConverter = this.state.countryRegionConverter;
+      let lifeExpectancyData = fixed.map((obj) => {
+        for (let i = 0; i < countryRegionConverter.length; i++) {
+          let converterObj = countryRegionConverter[i];
+
+          if (converterObj.name === obj.name) {
+            obj.region = converterObj["four_regions"];
+          }
+        }
+        return obj;
+      });
+      this.setState({ ...this.state, lifeExpectancy: lifeExpectancyData });
     });
 
     ////////////////////
-    await converter(urlIncomePerPersonByRegion, (results) => {
-      this.setState({ ...this.state, incomePerPerson: results.data });
+    await converter(urlIncomePerPersonByCountry, (results) => {
+      let data = results.data;
+
+      const countryRegionConverter = this.state.countryRegionConverter;
+      let incomeData = results.data.map((obj) => {
+        for (let i = 0; i < countryRegionConverter.length; i++) {
+          let converterObj = countryRegionConverter[i];
+
+          if (converterObj.name === obj.name) {
+            obj.region = converterObj["four_regions"];
+          }
+        }
+        return obj;
+      });
+
+      this.setState({ ...this.state, incomePerPerson: incomeData });
     });
     //////////////////////
-    await converter(urlPopulationByRegion, (results) => {
-      this.setState({ ...this.state, population: results.data });
+    await converter(urlPopulationByCountry, (results) => {
+      const countryRegionConverter = this.state.countryRegionConverter;
+      let populationData = results.data.map((obj) => {
+        for (let i = 0; i < countryRegionConverter.length; i++) {
+          let converterObj = countryRegionConverter[i];
+
+          if (converterObj.name === obj.name) {
+            obj.region = converterObj["four_regions"];
+          }
+        }
+        return obj;
+      });
+      this.setState({ ...this.state, population: populationData });
     });
 
-    await converter(urlPopulationByRegion, (results) => {
+    await converter(urlPopulationByCountry, (results) => {
       this.setState({ ...this.state });
 
       const lifeExpectancyArr = this.state.lifeExpectancy;
       const incomeArr = this.state.incomePerPerson;
       const populationArr = this.state.population;
+
       let combinedDataArr = [];
       // filters
-      const years = this.state.years;
-      const countries = this.state.countries;
+      const regions = this.state.regions;
+      const minYear = this.state.years[0];
+
+      const maxYear = this.state.years[1];
       //
       const filteredLE = lifeExpectancyArr.filter(
-        (obj) => years.includes(obj.time) && countries.includes(obj.name)
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
       );
+
       const filteredIPP = incomeArr.filter(
-        (obj) => years.includes(obj.time) && countries.includes(obj.name)
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time < +maxYear &&
+          +obj.time > +minYear
       );
       const filteredPop = populationArr.filter(
-        (obj) => years.includes(obj.time) && countries.includes(obj.name)
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time < +maxYear &&
+          +obj.time > +minYear
       );
       //
       const countryRegionConverter = this.state.countryRegionConverter;
@@ -95,7 +139,7 @@ export default class PlotArrow extends React.Component {
       for (let i = 0; i < filteredIPP.length; i++) {
         let obj = filteredIPP[i];
         for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name) {
+          if (combined[j].name === obj.name && combined[j].time === obj.time) {
             combined[j].incomePerPerson = obj["Income per person"];
           }
         }
@@ -104,7 +148,7 @@ export default class PlotArrow extends React.Component {
       for (let i = 0; i < filteredPop.length; i++) {
         let obj = filteredPop[i];
         for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name) {
+          if (combined[j].name === obj.name && combined[j].time === obj.time) {
             combined[j].population = obj.Population;
           }
         }
@@ -112,7 +156,7 @@ export default class PlotArrow extends React.Component {
       for (let i = 0; i < countryRegionConverter.length; i++) {
         let obj = countryRegionConverter[i];
         for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name) {
+          if (combined[j].name === obj.name && combined[j].time === obj.time) {
             combined[j].region = obj["four_regions"];
           }
         }
@@ -150,7 +194,11 @@ export default class PlotArrow extends React.Component {
     return (
       <div>
         <div className="plotArrow" ref={this.myRef}>
-          {data ? <PlotFigure options={plotFuncArrow(this.state)} /> : "hi"}
+          {data ? (
+            <PlotFigure options={plotFuncDensity(this.state.data)} />
+          ) : (
+            "hi"
+          )}
         </div>
       </div>
     );
