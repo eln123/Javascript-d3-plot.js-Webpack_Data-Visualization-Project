@@ -1,10 +1,9 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { plotFuncDensity } from "./plot/plotDensity";
+import { plotFuncFacet } from "./plot/plotFacet";
 import { PlotFigure } from "plot-react";
-import { connect } from "react-redux";
 
-export class PlotDensity extends React.Component {
+export default class PlotFacet extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.state = {
@@ -15,7 +14,7 @@ export class PlotDensity extends React.Component {
       incomePerPerson: [],
       population: [],
       regions: ["americas", "europe", "asia"],
-      years: ["1950", "2020"],
+      years: ["1900", "1930"],
       countryRegionConverter: [],
     };
     this.selectCountry = this.selectCountry.bind(this);
@@ -164,7 +163,6 @@ export class PlotDensity extends React.Component {
       }
 
       this.setState({ ...this.state, combined, data: combined });
-      console.log("this.props.data", this.props.data);
     });
   }
 
@@ -197,7 +195,7 @@ export class PlotDensity extends React.Component {
       <div>
         <div className="plotArrow" ref={this.myRef}>
           {data ? (
-            <PlotFigure options={plotFuncDensity(this.state.data)} />
+            <PlotFigure options={plotFuncFacet(this.state.data)} />
           ) : (
             "hi"
           )}
@@ -206,9 +204,3 @@ export class PlotDensity extends React.Component {
     );
   }
 }
-
-const mapState = (state) => {
-  return { data: state.data };
-};
-
-export default connect(mapState)(PlotDensity);
