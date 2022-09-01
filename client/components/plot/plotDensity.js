@@ -1,7 +1,6 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncDensity = (data) => {
-  console.log(data);
   return {
     width: 1000,
     height: 1000,
