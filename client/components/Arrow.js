@@ -148,7 +148,7 @@ export default class PlotArrow extends React.Component {
     );
 
     return (
-      <div>
+      <div className="plotArrow1">
         <div className="plotArrow" ref={this.myRef}>
           {data ? <PlotFigure options={plotFuncArrow(this.state)} /> : "hi"}
         </div>
