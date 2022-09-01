@@ -63,7 +63,7 @@ export default class LinearRegression extends React.Component {
     }
     console.log("hello", countriesCombined);
     return (
-      <div>
+      <div className="plotLinear">
         <div className="plotLinearRegression" ref={this.myRef}>
           {this.state ? (
             <PlotFigure options={plotFuncLinearRegression(this.state)} />

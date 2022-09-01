@@ -88,11 +88,13 @@ export class PlotArrow extends React.Component {
   render() {
     console.log(this.props.data);
 
+
     if (this.props.data.lifeExpectancy) {
       let combined = this.helper();
       return <PlotFigure options={plotFuncArrow(combined)} />;
     }
     return <div>"hi"</div>;
+
   }
 }
 const mapState = (state) => {
