@@ -9,15 +9,12 @@ import Bubble from "./components/Bubble";
 import LinearRegression from "./components/LinearRegression";
 import PlotArrow from "./components/Arrow";
 import PlotDensity from "./components/Density";
-
+import HomePage from "./components/HomePage";
 import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
 import Contactus from "./components/ContactUs";
 
-
 export default class Routes extends Component {
-
-
   render() {
     return (
       <div>
