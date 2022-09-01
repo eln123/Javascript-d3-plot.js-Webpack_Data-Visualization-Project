@@ -13,6 +13,13 @@ export default class PlotArrow extends React.Component {
       lifeExpectancy: [],
       incomePerPerson: [],
       population: [],
+      countries: [
+        "China",
+        "United States",
+        "India",
+        "Afghanistan",
+        "Singapore",
+      ],
       countryRegionConverter: [],
     };
     this.selectCountry = this.selectCountry.bind(this);
@@ -68,14 +75,18 @@ export default class PlotArrow extends React.Component {
       const incomeArr = this.state.incomePerPerson;
       const populationArr = this.state.population;
       let combinedDataArr = [];
-      //
+      // filters
       const years = this.state.years;
-      const filteredLE = lifeExpectancyArr.filter((obj) =>
-        years.includes(obj.time)
+      const countries = this.state.countries;
+      //
+      const filteredLE = lifeExpectancyArr.filter(
+        (obj) => years.includes(obj.time) && countries.includes(obj.name)
       );
-      const filteredIPP = incomeArr.filter((obj) => years.includes(obj.time));
-      const filteredPop = populationArr.filter((obj) =>
-        years.includes(obj.time)
+      const filteredIPP = incomeArr.filter(
+        (obj) => years.includes(obj.time) && countries.includes(obj.name)
+      );
+      const filteredPop = populationArr.filter(
+        (obj) => years.includes(obj.time) && countries.includes(obj.name)
       );
       //
       const countryRegionConverter = this.state.countryRegionConverter;
@@ -108,7 +119,6 @@ export default class PlotArrow extends React.Component {
       }
 
       this.setState({ ...this.state, combined, data: combined });
-      console.log(this.state);
     });
   }
 
@@ -140,23 +150,7 @@ export default class PlotArrow extends React.Component {
     return (
       <div>
         <div className="plotArrow" ref={this.myRef}>
-          {data ? <PlotFigure options={plotFuncArrow(data)} /> : "hi"}
-        </div>
-        <div>
-          <fieldset>
-            <label htmlFor="myCheckBox">
-              {countriesCombined.map((country, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={country[0]}
-                    onClick={this.selectCountry}
-                  />
-                  {country[0]}
-                </div>
-              ))}
-            </label>
-          </fieldset>
+          {data ? <PlotFigure options={plotFuncArrow(this.state)} /> : "hi"}
         </div>
       </div>
     );
