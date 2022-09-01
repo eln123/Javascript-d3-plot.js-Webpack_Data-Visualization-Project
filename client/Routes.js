@@ -12,20 +12,10 @@ import PlotArrow from "./components/Arrow";
 import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
 import Contactus from "./components/ContactUs";
-
-
-/**
- * COMPONENT
- */
-
-
-
+import HomePage from "./components/HomePage";
 
 export default class Routes extends Component {
 
-  componentDidMount() {
-    this.props.loadInitialData();
-  }
   render() {
     return (
       <div>
@@ -37,7 +27,7 @@ export default class Routes extends Component {
           <Route path="/feedback" exact component={FeedbackPage} />
           <Route path="/aboutus" exact component={Aboutus} />
           <Route path="/contact" exact component={Contactus} />
-
+          <Route path="/home" exact component={HomePage} />
           <Route path="/" exact component={Home} />
 
         </Switch>
