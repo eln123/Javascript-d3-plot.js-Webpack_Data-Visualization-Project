@@ -23,10 +23,11 @@ import { getDataFromGithub } from "./store/dataReducer";
  */
 
 export class Routes extends Component {
-  componetDidMount() {
-    this.props.loadInitialData();
+  async componentDidMount() {
+    await this.props.loadInitialData();
   }
   render() {
+    console.log(this.props);
     return (
       <div>
         <Switch>
@@ -58,7 +59,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData() {
+    loadInitialData: () => {
       dispatch(getDataFromGithub());
     },
   };

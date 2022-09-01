@@ -17,44 +17,39 @@ export const getDataFromGithub = () => async (dispatch) => {
 
   let state = {};
 
-  ///////////////////
-  await converter(urlCountryRegionConverter, (results) => {
-    const data = results.data;
+  let countryRegionConverter = await converter(urlCountryRegionConverter);
 
-    state = { state, countryRegionConverter: results.data };
-  });
-  await converter(urlLifeExpectancyByRegion, (results) => {
-    const data = results.data;
-    let converted = [];
-    for (let i = 0; i < data.length; i++) {
-      let obj = data[i];
-      for (let key in obj) {
-        if (key !== "country") {
-          let pushThis = {};
-          pushThis.time = key;
-          pushThis.name = obj.country;
-          pushThis.lifeExpectancy = obj[key];
-          converted.push(pushThis);
-        }
+  state = { ...state, countryRegionConverter: countryRegionConverter.data };
+  /////////////////
+  let lifeExpectancy = await converter(urlLifeExpectancyByRegion);
+  let data = lifeExpectancy.data;
+  let converted = [];
+  for (let i = 0; i < data.length; i++) {
+    let obj = data[i];
+    for (let key in obj) {
+      if (key !== "country") {
+        let pushThis = {};
+        pushThis.time = key;
+        pushThis.name = obj.country;
+        pushThis.lifeExpectancy = obj[key];
+        converted.push(pushThis);
       }
     }
-    state = { state, lifeExpectancy: converted };
-  });
+  }
+  state = { ...state, lifeExpectancy: converted };
 
   ////////////////////
-  await converter(urlIncomePerPersonByRegion, (results) => {
-    state = { state, incomePerPerson: results.data };
-  });
+  let incomePerPerson = await converter(urlIncomePerPersonByRegion);
+  state = { ...state, incomePerPerson: incomePerPerson.data };
   //////////////////////
-  await converter(urlPopulationByRegion, (results) => {
-    state = { ...state, population: results.data };
-  });
+  let population = await converter(urlPopulationByRegion);
+  state = { ...state, population: population.data };
+  /////////////////////////////
+  /////////////////
 
-  await converter(urlPopulationByRegion, (results) => {
-    state = { ...state };
-    console.log(state);
-    setData("hi", state);
-  });
+  //////////////////
+  ///////////////////
+  dispatch(setData(state));
 };
 
 export default function (state = {}, action) {

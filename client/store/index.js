@@ -4,7 +4,9 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import dataReducer from "./dataReducer";
 
-const reducer = combineReducers({ data: dataReducer });
+const reducer = combineReducers({
+  data: dataReducer,
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

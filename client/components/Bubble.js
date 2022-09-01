@@ -5,11 +5,11 @@
 // circle color = region
 
 import React from "react";
-import { converter } from "../../csvConverter";
 import { bubbleFunc } from "./d3/dThreeBubble";
 import { PlotFigure } from "plot-react";
+import { connect } from "react-redux";
 
-export default class Bubble extends React.Component {
+export class Bubble extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,98 +24,46 @@ export default class Bubble extends React.Component {
     this.selectCountry = this.selectCountry.bind(this);
   }
 
-  async componentDidMount() {
-    const urlCountryRegionConverter =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Countries_Regions";
-    const urlLifeExpectancyByRegion =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByCountry";
-    const urlIncomePerPersonByRegion =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/IncomePerPerson_ByCountry";
-    const urlPopulationByRegion =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Population_ByCountry";
-
-    console.log(this.state);
-
-    ///////////////////
-    await converter(urlCountryRegionConverter, (results) => {
-      const data = results.data;
-
-      this.setState({ ...this.state, countryRegionConverter: results.data });
-    });
-    await converter(urlLifeExpectancyByRegion, (results) => {
-      const data = results.data;
-      let converted = [];
-      for (let i = 0; i < data.length; i++) {
-        let obj = data[i];
-        for (let key in obj) {
-          if (key !== "country") {
-            let pushThis = {};
-            pushThis.time = key;
-            pushThis.name = obj.country;
-            pushThis.lifeExpectancy = obj[key];
-            converted.push(pushThis);
-          }
-        }
-      }
-      this.setState({ ...this.state, lifeExpectancy: converted });
-    });
-
-    ////////////////////
-    await converter(urlIncomePerPersonByRegion, (results) => {
-      this.setState({ ...this.state, incomePerPerson: results.data });
-    });
-    //////////////////////
-    await converter(urlPopulationByRegion, (results) => {
-      this.setState({ ...this.state, population: results.data });
-    });
-
-    await converter(urlPopulationByRegion, (results) => {
-      this.setState({ ...this.state });
-
-      const lifeExpectancyArr = this.state.lifeExpectancy;
-      const incomeArr = this.state.incomePerPerson;
-      const populationArr = this.state.population;
-      let combinedDataArr = [];
-      //
-      const year = this.state.year;
-      const filteredLE = lifeExpectancyArr.filter((obj) => obj.time === year);
-      const filteredIPP = incomeArr.filter((obj) => obj.time === year);
-      const filteredPop = populationArr.filter((obj) => obj.time === year);
-      //
-      const countryRegionConverter = this.state.countryRegionConverter;
-      let combined = filteredLE;
-      for (let i = 0; i < filteredIPP.length; i++) {
-        let obj = filteredIPP[i];
-        for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name) {
-            combined[j].incomePerPerson = obj["Income per person"];
-          }
-        }
-      }
-      for (let i = 0; i < filteredPop.length; i++) {
-        let obj = filteredPop[i];
-        for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name) {
-            combined[j].population = obj.Population;
-          }
-        }
-      }
-      for (let i = 0; i < countryRegionConverter.length; i++) {
-        let obj = countryRegionConverter[i];
-        for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name) {
-            combined[j].region = obj["four_regions"];
-          }
-        }
-      }
-      this.setState({ ...this.state, combined, data: combined });
-      console.log(this.state);
-    });
-  }
   componentDidUpdate() {
-    bubbleFunc(this.state.data);
-  }
+    const lifeExpectancyArr = this.props.data.lifeExpectancy;
+    const incomeArr = this.props.data.incomePerPerson;
+    const populationArr = this.props.data.population;
 
+    const year = this.state.year;
+    const filteredLE = lifeExpectancyArr.filter((obj) => obj.time === year);
+    const filteredIPP = incomeArr.filter((obj) => obj.time === year);
+    const filteredPop = populationArr.filter((obj) => obj.time === year);
+    //
+    const countryRegionConverter = this.props.data.countryRegionConverter;
+
+    let combined = filteredLE;
+    for (let i = 0; i < filteredIPP.length; i++) {
+      let obj = filteredIPP[i];
+      for (let j = 0; j < combined.length; j++) {
+        if (combined[j].name === obj.name) {
+          combined[j].incomePerPerson = obj["Income per person"];
+        }
+      }
+    }
+    for (let i = 0; i < filteredPop.length; i++) {
+      let obj = filteredPop[i];
+      for (let j = 0; j < combined.length; j++) {
+        if (combined[j].name === obj.name) {
+          combined[j].population = obj.Population;
+        }
+      }
+    }
+    for (let i = 0; i < countryRegionConverter.length; i++) {
+      let obj = countryRegionConverter[i];
+      for (let j = 0; j < combined.length; j++) {
+        if (combined[j].name === obj.name) {
+          combined[j].region = obj["four_regions"];
+        }
+      }
+    }
+    console.log(combined);
+    bubbleFunc(combined);
+  }
   selectCountry(evt) {
     if (evt.target.checked === true) {
       this.setState({
@@ -134,16 +82,6 @@ export default class Bubble extends React.Component {
     }
   }
   render() {
-    const data = this.state.data;
-    const countriesCombined = d3.groups(data, (d) => d.country);
-
-    const showData = this.state.data.filter(
-      (obj, index) => obj.country !== countriesCombined[0]
-    );
-    if (!this.state.data.length) {
-      return "hi";
-    }
-
     return (
       <div id="backgroundOfBubblePage">
         <div className="bubble"></div>
@@ -151,3 +89,13 @@ export default class Bubble extends React.Component {
     );
   }
 }
+
+const mapState = (state) => {
+  return {
+    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
+    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
+    data: state.data,
+  };
+};
+
+export default connect(mapState)(Bubble);
