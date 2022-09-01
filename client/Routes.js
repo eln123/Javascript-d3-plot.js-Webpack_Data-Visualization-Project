@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Route, Switch } from "react-router-dom";
 
-import Home from "./components/Home";
+import Population from "./components/Population";
 import Plot from "./components/Plot";
 import Bubble from "./components/Bubble";
 
@@ -29,7 +29,8 @@ export default class Routes extends Component {
           <Route path="/aboutus" exact component={Aboutus} />
           <Route path="/contact" exact component={Contactus} />
           <Route path="/home" exact component={HomePage} />
-          <Route path="/" exact component={Home} />
+          <Route path="/Population" exact component={Population} />
+          <Route path="/" exact component={HomePage} />
         </Switch>
       </div>
     );
