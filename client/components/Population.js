@@ -11,7 +11,7 @@ import { countryList } from "./CountryList";
  * COMPONENT
  */
 
-export default class Home extends React.Component {
+export default class Population extends React.Component {
   constructor() {
     super();
     this.state = {

@@ -39,7 +39,7 @@ class Navi extends React.Component {
               <div className="dropdown-content">
                 <a href="/plot">Plot</a>
                 <a href="/linearRegression">linear Regression</a>
-                <a href="#">Link 3</a>
+                <a href="/Population">Population</a>
               </div>
             </div>
           </div>

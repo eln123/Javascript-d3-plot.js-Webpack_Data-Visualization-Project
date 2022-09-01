@@ -3,14 +3,17 @@ import { connect } from "react-redux";
 
 import { Route, Switch } from "react-router-dom";
 
-import Home from "./components/Home";
+import Population from "./components/Population";
 import Plot from "./components/Plot";
 import Bubble from "./components/Bubble";
 
 import LinearRegression from "./components/LinearRegression";
 import PlotArrow from "./components/Arrow";
 import PlotDensity from "./components/Density";
+
 import PlotFacet from "./components/Facet";
+
+import HomePage from "./components/HomePage";
 
 import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
@@ -27,7 +30,6 @@ export class Routes extends Component {
     await this.props.loadInitialData();
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <Switch>
@@ -41,8 +43,9 @@ export class Routes extends Component {
           <Route path="/feedback" exact component={FeedbackPage} />
           <Route path="/aboutus" exact component={Aboutus} />
           <Route path="/contact" exact component={Contactus} />
-
-          <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={HomePage} />
+          <Route path="/Population" exact component={Population} />
+          <Route path="/" exact component={HomePage} />
         </Switch>
       </div>
     );
