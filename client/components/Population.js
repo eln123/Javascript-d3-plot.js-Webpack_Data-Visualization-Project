@@ -22,7 +22,7 @@ export default class Population extends React.Component {
     this.selectCountry = this.selectCountry.bind(this);
     this.selectCountry2 = this.selectCountry2.bind(this);
   }
-  componentDidMount() {
+  async componentDidMount() {
     const urlC02Emissions =
       "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/CO2_emissions_per_ton";
     const urlPopulation =
@@ -30,27 +30,27 @@ export default class Population extends React.Component {
     const testurl =
       "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv";
 
-    const fileStr2 = converter(urlPopulation, (results) => {
-      console.log(results);
-      let NewcountryList = countryList.map((list) => {
-        list[0] = list[0].toLowerCase();
-        return list;
-      });
+    const results = await converter(urlPopulation);
 
-      const data = results.data.map((obj) => {
-        for (let i = 0; i < NewcountryList.length; i++) {
-          let list = NewcountryList[i];
-
-          if (list[0] === obj.country) {
-            obj.country = list[1];
-          }
-        }
-        return obj;
-      });
-
-      this.setState({ ...this.state, data: data });
+    let NewcountryList = countryList.map((list) => {
+      list[0] = list[0].toLowerCase();
+      return list;
     });
+
+    const data = results.data.map((obj) => {
+      for (let i = 0; i < NewcountryList.length; i++) {
+        let list = NewcountryList[i];
+
+        if (list[0] === obj.country) {
+          obj.country = list[1];
+        }
+      }
+      return obj;
+    });
+
+    this.setState({ ...this.state, data: data });
   }
+
   componentDidUpdate() {
     let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
 
