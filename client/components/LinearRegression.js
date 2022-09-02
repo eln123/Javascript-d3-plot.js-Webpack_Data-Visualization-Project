@@ -131,43 +131,37 @@ export class LinearRegression extends React.Component {
 
       return (
         <div className="confine">
-
           <div className="plotLinearRegression">
-           
-      
-        
-      
+            <PlotFigure options={plotFuncLinearRegression(data)} />
+            <form onSubmit={this.changeMinYear}>
+              <label htmlFor="minYear"> MinYear </label>
+              <input
+                name="minYear"
+                placeholder="minYear"
+                onChange={this.updateMinYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
 
-          <PlotFigure options={plotFuncLinearRegression(data)} />
-          <form onSubmit={this.changeMinYear}>
-            <label htmlFor="minYear"> MinYear </label>
-            <input
-              name="minYear"
-              placeholder="minYear"
-              onChange={this.updateMinYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
-
-          <form onSubmit={this.changeMaxYear}>
-            <label htmlFor="maxYear"> MaxYear </label>
-            <input
-              name="value"
-              placeholder="maxYear"
-              onChange={this.updateMaxYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
-          <form onSubmit={this.changehalf}>
-            <label htmlFor="Split Year"> SplitYear </label>
-            <input
-              name="value"
-              placeholder="Split Year"
-              onChange={this.updateSplitYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
-           <label htmlFor="searchBox">
+            <form onSubmit={this.changeMaxYear}>
+              <label htmlFor="maxYear"> MaxYear </label>
+              <input
+                name="value"
+                placeholder="maxYear"
+                onChange={this.updateMaxYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
+            <form onSubmit={this.changehalf}>
+              <label htmlFor="Split Year"> SplitYear </label>
+              <input
+                name="value"
+                placeholder="Split Year"
+                onChange={this.updateSplitYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
+            <label htmlFor="searchBox">
               <input
                 type="text"
                 className="search"
@@ -176,21 +170,21 @@ export class LinearRegression extends React.Component {
                 onChange={(event) => this.selectCountry2(event)}
               />
             </label>
-          <fieldset className="checkBoxes">
-            <label htmlFor="checkBox">
-              {regionArr.map((region, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={region}
-                    onClick={this.selectRegion}
-                  />
-                  {region}
-                </div>
-              ))}
-            </label>
-          </fieldset>
-
+            <fieldset className="checkBoxes">
+              <label htmlFor="checkBox">
+                {regionArr.map((region, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={region}
+                      onClick={this.selectRegion}
+                    />
+                    {region}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
+          </div>
         </div>
       );
     }
