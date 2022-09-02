@@ -1,37 +1,51 @@
-import React from 'react'
+import React from "react";
 
- class Contactus extends React.Component {
-  constructor(){
-    super()
+class Contactus extends React.Component {
+  constructor() {
+    super();
     this.state = {
-      showlinks :true,
-    }
+      showlinks: true,
+    };
   }
-
-  componentDidUpdate(){
-
-
-
-  }
-
-
-
 
   render() {
     return (
       <div>
-      <div>
-        <h2> Contact </h2>
-        <div>
-            FSA @ interwebs.edu
-        </div>
-        <div>
-            1-800-doesnotwork
-        </div>
+        <section id="contact">
+          <div className="content">
+            <div id="form">
+              <form action="" id="contactForm" method="post">
+                <span>Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  className="name"
+                  placeholder="Enter your name"
+                />
+                <span>Email</span>
+                <input
+                  type="text"
+                  name="email"
+                  className="email"
+                  placeholder="Enter your email"
+                />
+
+                <div className="message" placeholder="Enter your message">
+                  {" "}
+                </div>
+                <input
+                  type="submit"
+                  name="submit"
+                  value="Send e-mail"
+                  className="submit"
+                />
+              </form>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
-    )
+    );
   }
 }
 
-export default Contactus
+export default Contactus;
