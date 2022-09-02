@@ -4,6 +4,8 @@ export const plotFuncArrow = (state) => {
   const width = 1000;
   const minYear = state.years[0];
   const maxYear = state.years[1];
+  console.log("minYear", minYear);
+  console.log("state.data", state.data);
   const dataOne = state.data.filter((obj, index) => index % 2);
   const dataTwo = state.data.filter((obj, index) => !(index % 2));
 
@@ -53,16 +55,16 @@ export const plotFuncArrow = (state) => {
     },
     marks: [
       Plot.arrow(data, {
-        x1: "1980Pop",
-        y1: "1980LE",
-        x2: "2020Pop",
-        y2: "2020LE",
+        x1: `${minYear}Pop`,
+        y1: `${minYear}LE`,
+        x2: `${maxYear}Pop`,
+        y2: `${maxYear}LE`,
         bend: true,
-        stroke: (d) => d["2020LE"] - d["1980LE"],
+        stroke: (d) => d[`${maxYear}LE`] - d[`${minYear}LE`],
       }),
       Plot.text(data, {
-        x: "2020Pop",
-        y: "2020LE",
+        x: `${maxYear}Pop`,
+        y: `${maxYear}LE`,
         // filter: "highlight",
         text: "name",
         fill: "currentColor",
