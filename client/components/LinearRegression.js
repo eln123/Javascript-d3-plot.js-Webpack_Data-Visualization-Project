@@ -7,15 +7,75 @@ import { connect } from "react-redux";
 export class LinearRegression extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { countries: ["China", "United States"], data: [] };
+    this.state = {
+      minYear: "",
+      maxYear: "",
+      splitYear: "",
+      half: "2000",
+      years: ["1980", "2020"],
+      countries: ["China", "United States"],
+    };
 
     this.selectCountry = this.selectCountry.bind(this);
     this.helper = this.helper.bind(this);
+    this.changeMinYear = this.changeMinYear.bind(this);
+    this.changeMaxYear = this.changeMaxYear.bind(this);
+    this.updateMinYear = this.updateMinYear.bind(this);
+    this.updateMaxYear = this.updateMaxYear.bind(this);
+    this.updateSplitYear = this.updateSplitYear.bind(this);
+    this.changeHalf = this.changeHalf.bind(this);
   }
+  updateMinYear(evt) {
+    evt.preventDefault;
+    this.setState({
+      ...this.state,
+      minYear: evt.target.value,
+    });
+  }
+  updateMaxYear(evt) {
+    this.setState({
+      ...this.state,
+      maxYear: evt.target.value,
+    });
+  }
+  updateSplitYear(evt) {
+    this.setState({
+      ...this.state,
+      splitYear: evt.target.value,
+    });
+  }
+  changeMinYear(evt) {
+    evt.preventDefault();
+
+    this.setState({
+      ...this.state,
+      years: [String(this.state.minYear), this.state.years[1]],
+    });
+  }
+  changeMaxYear(evt) {
+    evt.preventDefault();
+    this.setState({
+      ...this.state,
+      years: [this.state.years[0], String(this.state.maxYear)],
+    });
+  }
+  changeHalf(evt) {
+    evt.preventDefault();
+    this.setState({
+      ...this.state,
+      half: this.state.splitYear,
+    });
+  }
+
   helper() {
     let data = this.props.data.lifeExpectancy;
 
-    return { data: data, countries: this.state.countries };
+    return {
+      data: data,
+      countries: this.state.countries,
+      half: this.state.half,
+      years: this.state.years,
+    };
   }
   selectCountry(evt) {
     if (evt.target.checked === true) {
@@ -37,51 +97,63 @@ export class LinearRegression extends React.Component {
   }
   render() {
     if (this.props.data.lifeExpectancy) {
-      let state = this.helper();
-      let data = this.props.data.lifeExpectancy.map((obj) => obj.name);
-      let nameArr = [];
-      for (let i = 0; i < data.length; i++) {
-        let name = data[i];
-        if (!nameArr.includes(name)) {
-          nameArr.push(name);
+      let data = this.helper();
+      let datas = this.props.data.lifeExpectancy
+        .map((obj) => obj.region)
+        .filter((obj) => obj);
+      let regionArr = [];
+      for (let i = 0; i < datas.length; i++) {
+        let region = datas[i];
+        if (!regionArr.includes(region)) {
+          regionArr.push(region);
         }
       }
-      console.log(nameArr);
+
       return (
         <div className="confine">
-          <div className="plotLinearRegression">
-            <PlotFigure options={plotFuncLinearRegression(state)} />
-          </div>
+          <PlotFigure options={plotFuncLinearRegression(data)} />
+          <form onSubmit={this.changeMinYear}>
+            <label htmlFor="minYear"> MinYear </label>
+            <input
+              name="minYear"
+              placeholder="minYear"
+              onChange={this.updateMinYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
+
+          <form onSubmit={this.changeMaxYear}>
+            <label htmlFor="maxYear"> MaxYear </label>
+            <input
+              name="value"
+              placeholder="maxYear"
+              onChange={this.updateMaxYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
+          <form onSubmit={this.changehalf}>
+            <label htmlFor="Split Year"> SplitYear </label>
+            <input
+              name="value"
+              placeholder="Split Year"
+              onChange={this.updateSplitYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
           <fieldset className="checkBoxes">
             <label htmlFor="checkBox">
-              {nameArr.map((country, index) => (
+              {regionArr.map((region, index) => (
                 <div key={index}>
                   <input
                     type="checkbox"
-                    name={country[0]}
-                    onClick={this.selectCountry}
+                    name={region}
+                    onClick={this.selectRegion}
                   />
-                  {country}
+                  {region}
                 </div>
               ))}
             </label>
           </fieldset>
-          {/* <div>
-            <fieldset>
-              <label htmlFor="myCheckBox">
-                {countriesCombined.map((country, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      name={country[0]}
-                      onClick={this.selectCountry}
-                    />
-                    {country[0]}
-                  </div>
-                ))}
-              </label>
-            </fieldset>
-          </div> */}
         </div>
       );
     }
