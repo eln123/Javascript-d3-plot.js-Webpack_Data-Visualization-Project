@@ -115,7 +115,8 @@ export default class Population extends React.Component {
   render() {
     const allcountry = this.state.data;
     const byCountry = d3.groups(allcountry, (d) => d.country);
-
+    console.log(allcountry);
+    console.log(byCountry);
     const showData = this.state.data.filter(
       (obj, index) => obj.country !== byCountry[0]
     );
