@@ -166,8 +166,10 @@ export class PlotDensity extends React.Component {
                 <div key={index}>
                   <input
                     type="checkbox"
+
                     name={region}
                     onClick={this.selectRegion}
+
                   />
                   {region}
                 </div>

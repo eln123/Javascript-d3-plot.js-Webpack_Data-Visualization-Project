@@ -1,7 +1,7 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncArrow = (state) => {
-  const width = 1000;
+  const width = 1200;
   const minYear = state.years[0];
   const maxYear = state.years[1];
   console.log("minYear", minYear);
@@ -33,7 +33,7 @@ export const plotFuncArrow = (state) => {
 
   return {
     width,
-    height: Math.min(600, width),
+    height: Math.min(800, width),
     grid: true,
     inset: 10,
     x: {

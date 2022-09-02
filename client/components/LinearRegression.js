@@ -95,6 +95,26 @@ export class LinearRegression extends React.Component {
       console.log(this.setState(newState));
     }
   }
+  selectCountry2(evt) {
+    const country =
+      evt.target.value.slice(0, 1).toUpperCase() + evt.target.value.slice(1);
+
+    if (country) {
+      const newState = {
+        ...this.state,
+        countries: [...this.state.countries, country],
+      };
+      this.setState(newState);
+    } else {
+      const newState = {
+        ...this.state,
+        countries: this.state.countries.filter(
+          (country) => country !== evt.target.value
+        ),
+      };
+      this.setState(newState);
+    }
+  }
   render() {
     if (this.props.data.lifeExpectancy) {
       let data = this.helper();
@@ -111,6 +131,13 @@ export class LinearRegression extends React.Component {
 
       return (
         <div className="confine">
+
+          <div className="plotLinearRegression">
+           
+      
+        
+      
+
           <PlotFigure options={plotFuncLinearRegression(data)} />
           <form onSubmit={this.changeMinYear}>
             <label htmlFor="minYear"> MinYear </label>
@@ -140,6 +167,15 @@ export class LinearRegression extends React.Component {
             />
             <button type="submit"> Update </button>
           </form>
+           <label htmlFor="searchBox">
+              <input
+                type="text"
+                className="search"
+                id="search"
+                placeholder="Enter Country Name"
+                onChange={(event) => this.selectCountry2(event)}
+              />
+            </label>
           <fieldset className="checkBoxes">
             <label htmlFor="checkBox">
               {regionArr.map((region, index) => (
@@ -154,6 +190,7 @@ export class LinearRegression extends React.Component {
               ))}
             </label>
           </fieldset>
+
         </div>
       );
     }

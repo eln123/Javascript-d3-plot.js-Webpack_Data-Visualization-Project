@@ -1,8 +1,9 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncDensity = (data) => {
-  console.log("line4");
+
   let chart = {
+
     width: 1400,
     height: 800,
     nice: true,
