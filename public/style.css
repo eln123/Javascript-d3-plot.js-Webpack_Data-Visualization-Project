@@ -27,10 +27,10 @@ form div {
   display: inline-block;
 }
 /* #191a1b color of homepage*/
-.svg2 {
-  /* background-color: #ffffff;
-  filter: invert(89%); */
-}
+/* .svg2 {
+  background-color: #ffffff;
+  filter: invert(89%);
+} */
 
 #container {
   padding: 10% 20%;
@@ -530,6 +530,61 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   }
 }
 
+/* %%%%%%%%%%%%%%%% FEEDBACK %%%%%%%%%%%%%%%% */
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+
+#form-div {
+	background-color:rgba(72,72,72,0.4);
+	padding-left:35px;
+	padding-right:35px;
+	padding-top:35px;
+	padding-bottom:50px;
+	width: 450px;
+	float: left;
+	left: 50%;
+	position: absolute;
+  margin-top:30px;
+	margin-left: -260px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+.feedback-input {
+	color:#3c3c3c;
+	font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+	font-size: 18px;
+	border-radius: 0;
+	line-height: 22px;
+	background-color: #fbfbfb;
+	padding: 13px 13px 13px 54px;
+	margin-bottom: 10px;
+	width:100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  border: 3px solid rgba(0,0,0,0);
+}
+#button-blue{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #13476a;
+	color:white;
+	font-size:24px;
+	padding-top:22px;
+	padding-bottom:22px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+
+
 /* ############# ABOUT US ############### */
 
 .topics {
@@ -544,6 +599,7 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   background-color: #ffffff;
   filter: invert(89%);
 } */
+
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -641,3 +697,4 @@ body {
   cursor: pointer;
   width: 15px;
 }
+
