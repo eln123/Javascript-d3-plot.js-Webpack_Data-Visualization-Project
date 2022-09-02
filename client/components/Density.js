@@ -92,7 +92,7 @@ export class PlotDensity extends React.Component {
     if (this.props.data.lifeExpectancy) {
       const data = this.helper();
       return (
-        <div className="plotArrow">
+        <div className="chartComponent">
           <PlotFigure options={plotFuncDensity(data)} />
         </div>
       );
