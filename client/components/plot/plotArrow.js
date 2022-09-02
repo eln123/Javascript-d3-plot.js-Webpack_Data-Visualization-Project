@@ -63,7 +63,7 @@ export const plotFuncArrow = (state) => {
       Plot.text(data, {
         x: "2020Pop",
         y: "2020LE",
-        filter: "highlight",
+        // filter: "highlight",
         text: "name",
         fill: "currentColor",
         stroke: "white",

@@ -3,23 +3,34 @@ import * as Plot from "@observablehq/plot";
 export const plotFuncLinearRegression = (state) => {
   const filteredData = state.data.filter(
     (obj, index) =>
-      state.countries.includes(obj.country) &&
-      obj.year > 1800 &&
-      obj.year <= 2100
+      state.countries.includes(obj.name) &&
+      +obj.time >= 1800 &&
+      +obj.time <= 2100
   );
+  console.log(filteredData);
   //
-  const filteredDataBelow = state.data.filter(
-    (obj, index) =>
-      state.countries.includes(obj.country) &&
-      obj.year >= 1980 &&
-      obj.year <= 2020
-  );
+  const filteredDataBelow = state.data.filter((obj, index) => {
+    return (
+      state.countries.includes(obj.name) &&
+      +obj.time >= 1980 &&
+      +obj.time <= 2020
+    );
+  });
+  // .map((obj) => {
+  //   obj.lifeExpectancy = +obj.lifeExpectancy;
+  //   return obj;
+  // });
   const filteredDataAbove = state.data.filter(
     (obj, index) =>
-      state.countries.includes(obj.country) &&
-      obj.year >= 2000 &&
-      obj.year <= 2020
+      state.countries.includes(obj.name) &&
+      +obj.time >= 2000 &&
+      +obj.time <= 2020
   );
+
+  // .map((obj) => {
+  //   obj.lifeExpectancy = +obj.lifeExpectancy;
+  //   return obj;
+  // });
 
   return {
     height: 500,
@@ -36,45 +47,45 @@ export const plotFuncLinearRegression = (state) => {
     color: { legend: true },
     marks: [
       // Plot.dot(filteredData, {
-      //   x: "year",
+      //   x: "time",
       //   y: "lifeExpectancy",
-      //   fill: "country",
+      //   fill: "name",
       // }),
       Plot.dot(filteredDataBelow, {
-        x: "year",
+        x: "time",
         y: "lifeExpectancy",
-        fill: "country",
+        fill: "name",
       }),
       Plot.dot(filteredDataAbove, {
-        x: "year",
+        x: "time",
         y: "lifeExpectancy",
-        fill: "country",
+        fill: "name",
       }),
       // Plot.linearRegressionY(filteredData, {
       //   x: "year",
       //   y: "lifeExpectancy",
-      //   stroke: "country",
+      //   stroke: "name",
       // }),
       // Plot.linearRegressionY(filteredData, {
       //   x: "year",
       //   y: "lifeExpectancy",
       // }),
       Plot.linearRegressionY(filteredDataBelow, {
-        x: "year",
+        x: "time",
         y: "lifeExpectancy",
-        stroke: "country",
+        stroke: "name",
       }),
       Plot.linearRegressionY(filteredDataBelow, {
-        x: "year",
+        x: "time",
         y: "lifeExpectancy",
       }),
       Plot.linearRegressionY(filteredDataAbove, {
-        x: "year",
+        x: "time",
         y: "lifeExpectancy",
-        stroke: "country",
+        stroke: "name",
       }),
       Plot.linearRegressionY(filteredDataAbove, {
-        x: "year",
+        x: "time",
         y: "lifeExpectancy",
       }),
     ],

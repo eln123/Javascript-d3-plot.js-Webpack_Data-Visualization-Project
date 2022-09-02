@@ -1,7 +1,7 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncFacet = (data) => {
-  console.log(data);
+  console.log("data", data);
   return {
     y: {
       grid: true,

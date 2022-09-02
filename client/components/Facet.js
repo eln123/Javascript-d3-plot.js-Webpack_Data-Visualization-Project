@@ -2,168 +2,73 @@ import React from "react";
 import { converter } from "../../csvConverter";
 import { plotFuncFacet } from "./plot/plotFacet";
 import { PlotFigure } from "plot-react";
+import { connect } from "react-redux";
 
-export default class PlotFacet extends React.Component {
+export class PlotFacet extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.state = {
-      data: [],
-
-      combined: [],
-      lifeExpectancy: [],
-      incomePerPerson: [],
-      population: [],
       regions: ["americas", "europe", "asia"],
       years: ["1900", "1930"],
-      countryRegionConverter: [],
     };
+    this.helper = this.helper.bind(this);
     this.selectCountry = this.selectCountry.bind(this);
   }
 
-  async componentDidMount() {
-    const urlCountryRegionConverter =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Countries_Regions";
-    const urlLifeExpectancyByCountry =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByCountry";
-    const urlIncomePerPersonByCountry =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/IncomePerPerson_ByCountry";
-    const urlPopulationByCountry =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Population_ByCountry";
+  helper() {
+    console.log(this.props);
+    const lifeExpectancyArr = this.props.data.lifeExpectancy;
+    const incomeArr = this.props.data.incomePerPerson;
+    const populationArr = this.props.data.population;
 
-    ///////////////////
-    await converter(urlCountryRegionConverter, (results) => {
-      const data = results.data;
+    let combinedDataArr = [];
+    // filters
+    const regions = this.state.regions;
+    const minYear = this.state.years[0];
 
-      this.setState({ ...this.state, countryRegionConverter: results.data });
-    });
-    await converter(urlLifeExpectancyByCountry, (results) => {
-      const data = results.data;
-      let fixed = [];
-      for (let i = 0; i < data.length; i++) {
-        let obj = data[i];
-        for (let key in obj) {
-          if (key !== "country") {
-            let pushThis = {};
-            pushThis.time = key;
-            pushThis.name = obj.country;
-            pushThis.lifeExpectancy = obj[key];
-            fixed.push(pushThis);
-          }
+    const maxYear = this.state.years[1];
+    //
+    const filteredLE = lifeExpectancyArr.filter(
+      (obj) =>
+        regions.includes(obj.region) &&
+        +obj.time <= +maxYear &&
+        +obj.time >= +minYear
+    );
+
+    const filteredIPP = incomeArr.filter(
+      (obj) =>
+        regions.includes(obj.region) &&
+        +obj.time < +maxYear &&
+        +obj.time > +minYear
+    );
+    const filteredPop = populationArr.filter(
+      (obj) =>
+        regions.includes(obj.region) &&
+        +obj.time < +maxYear &&
+        +obj.time > +minYear
+    );
+
+    let combined = filteredLE;
+
+    for (let i = 0; i < filteredIPP.length; i++) {
+      let obj = filteredIPP[i];
+      for (let j = 0; j < combined.length; j++) {
+        if (combined[j].name === obj.name && combined[j].time === obj.time) {
+          combined[j].incomePerPerson = obj["Income per person"];
         }
       }
-      const countryRegionConverter = this.state.countryRegionConverter;
-      let lifeExpectancyData = fixed.map((obj) => {
-        for (let i = 0; i < countryRegionConverter.length; i++) {
-          let converterObj = countryRegionConverter[i];
+    }
 
-          if (converterObj.name === obj.name) {
-            obj.region = converterObj["four_regions"];
-          }
-        }
-        return obj;
-      });
-      this.setState({ ...this.state, lifeExpectancy: lifeExpectancyData });
-    });
-
-    ////////////////////
-    await converter(urlIncomePerPersonByCountry, (results) => {
-      let data = results.data;
-
-      const countryRegionConverter = this.state.countryRegionConverter;
-      let incomeData = results.data.map((obj) => {
-        for (let i = 0; i < countryRegionConverter.length; i++) {
-          let converterObj = countryRegionConverter[i];
-
-          if (converterObj.name === obj.name) {
-            obj.region = converterObj["four_regions"];
-          }
-        }
-        return obj;
-      });
-
-      this.setState({ ...this.state, incomePerPerson: incomeData });
-    });
-    //////////////////////
-    await converter(urlPopulationByCountry, (results) => {
-      const countryRegionConverter = this.state.countryRegionConverter;
-      let populationData = results.data.map((obj) => {
-        for (let i = 0; i < countryRegionConverter.length; i++) {
-          let converterObj = countryRegionConverter[i];
-
-          if (converterObj.name === obj.name) {
-            obj.region = converterObj["four_regions"];
-          }
-        }
-        return obj;
-      });
-      this.setState({ ...this.state, population: populationData });
-    });
-
-    await converter(urlPopulationByCountry, (results) => {
-      this.setState({ ...this.state });
-
-      const lifeExpectancyArr = this.state.lifeExpectancy;
-      const incomeArr = this.state.incomePerPerson;
-      const populationArr = this.state.population;
-
-      let combinedDataArr = [];
-      // filters
-      const regions = this.state.regions;
-      const minYear = this.state.years[0];
-
-      const maxYear = this.state.years[1];
-      //
-      const filteredLE = lifeExpectancyArr.filter(
-        (obj) =>
-          regions.includes(obj.region) &&
-          +obj.time <= +maxYear &&
-          +obj.time >= +minYear
-      );
-
-      const filteredIPP = incomeArr.filter(
-        (obj) =>
-          regions.includes(obj.region) &&
-          +obj.time < +maxYear &&
-          +obj.time > +minYear
-      );
-      const filteredPop = populationArr.filter(
-        (obj) =>
-          regions.includes(obj.region) &&
-          +obj.time < +maxYear &&
-          +obj.time > +minYear
-      );
-      //
-      const countryRegionConverter = this.state.countryRegionConverter;
-      let combined = filteredLE;
-
-      for (let i = 0; i < filteredIPP.length; i++) {
-        let obj = filteredIPP[i];
-        for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name && combined[j].time === obj.time) {
-            combined[j].incomePerPerson = obj["Income per person"];
-          }
+    for (let i = 0; i < filteredPop.length; i++) {
+      let obj = filteredPop[i];
+      for (let j = 0; j < combined.length; j++) {
+        if (combined[j].name === obj.name && combined[j].time === obj.time) {
+          combined[j].population = obj.Population;
         }
       }
+    }
 
-      for (let i = 0; i < filteredPop.length; i++) {
-        let obj = filteredPop[i];
-        for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name && combined[j].time === obj.time) {
-            combined[j].population = obj.Population;
-          }
-        }
-      }
-      for (let i = 0; i < countryRegionConverter.length; i++) {
-        let obj = countryRegionConverter[i];
-        for (let j = 0; j < combined.length; j++) {
-          if (combined[j].name === obj.name && combined[j].time === obj.time) {
-            combined[j].region = obj["four_regions"];
-          }
-        }
-      }
-
-      this.setState({ ...this.state, combined, data: combined });
-    });
+    return combined;
   }
 
   selectCountry(evt) {
@@ -184,23 +89,21 @@ export default class PlotFacet extends React.Component {
     }
   }
   render() {
-    const data = this.state.data;
-    const countriesCombined = d3.groups(data, (d) => d.country);
-
-    const showData = this.state.data.filter(
-      (obj, index) => obj.country !== countriesCombined[0]
-    );
-
-    return (
-      <div>
-        <div className="plotArrow" ref={this.myRef}>
-          {data ? (
-            <PlotFigure options={plotFuncFacet(this.state.data)} />
-          ) : (
-            "hi"
-          )}
+    if (this.props.data.lifeExpectancy) {
+      let combined = this.helper();
+      return (
+        <div>
+          <PlotFigure options={plotFuncFacet(combined)} />
         </div>
-      </div>
-    );
+      );
+    } else {
+      return "hi";
+    }
   }
 }
+
+const mapState = (state) => {
+  return { data: state.data };
+};
+
+export default connect(mapState)(PlotFacet);
