@@ -1,30 +1,23 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncLinearRegression = (state) => {
-  const filteredData = state.data.filter(
-    (obj, index) =>
-      state.countries.includes(obj.name) &&
-      +obj.time >= 1800 &&
-      +obj.time <= 2100
-  );
-  console.log(filteredData);
-  //
+  let minYear = state.years[0];
+  let maxYear = state.years[1];
+  // const filteredData = state.data.filter((obj, index) =>
+  //   state.countries.includes(obj.name)
+  // );
+
   const filteredDataBelow = state.data.filter((obj, index) => {
-    return (
-      state.countries.includes(obj.name) &&
-      +obj.time >= 1980 &&
-      +obj.time <= 2020
-    );
+    state.countries.includes(obj.name) &&
+      +obj.time >= +minYear &&
+      +obj.time <= +state.half;
   });
-  // .map((obj) => {
-  //   obj.lifeExpectancy = +obj.lifeExpectancy;
-  //   return obj;
-  // });
+
   const filteredDataAbove = state.data.filter(
     (obj, index) =>
       state.countries.includes(obj.name) &&
-      +obj.time >= 2000 &&
-      +obj.time <= 2020
+      +obj.time >= +state.half &&
+      +obj.time <= +maxYear
   );
 
   // .map((obj) => {

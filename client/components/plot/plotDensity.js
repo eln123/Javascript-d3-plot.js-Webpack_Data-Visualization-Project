@@ -1,8 +1,9 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncDensity = (data) => {
-  console.log(data);
-  return {
+
+  let chart = {
+
     width: 1400,
     height: 800,
     nice: true,
@@ -17,7 +18,7 @@ export const plotFuncDensity = (data) => {
 
     color: { legend: true },
     marks: [
-      ["asia", "americas", "africa", "europe", "oceania"].map((region) =>
+      ["asia", "americas", "africa", "europe"].map((region) =>
         Plot.density(data, {
           weight: (d) => (d.region === region ? 1 : -1),
           x: "time",
@@ -39,4 +40,6 @@ export const plotFuncDensity = (data) => {
       Plot.frame(),
     ],
   };
+  console.log("41line");
+  return chart;
 };

@@ -9,13 +9,48 @@ export class PlotDensity extends React.Component {
     super(props);
     this.state = this.state = {
       regions: ["americas", "europe", "asia"],
+      minYear: "",
+      maxYear: "",
       years: ["1950", "2020"],
     };
-    this.selectCountry = this.selectCountry.bind(this);
+    this.selectRegion = this.selectRegion.bind(this);
     this.helper = this.helper.bind(this);
+    this.changeMinYear = this.changeMinYear.bind(this);
+    this.changeMaxYear = this.changeMaxYear.bind(this);
+    this.updateMinYear = this.updateMinYear.bind(this);
+    this.updateMaxYear = this.updateMaxYear.bind(this);
+  }
+  updateMinYear(evt) {
+    evt.preventDefault;
+    this.setState({
+      ...this.state,
+      minYear: evt.target.value,
+    });
+  }
+  updateMaxYear(evt) {
+    this.setState({
+      ...this.state,
+      maxYear: evt.target.value,
+    });
+  }
+  changeMinYear(evt) {
+    evt.preventDefault();
+
+    this.setState({
+      ...this.state,
+      years: [String(this.state.minYear), this.state.years[1]],
+    });
+  }
+  changeMaxYear(evt) {
+    evt.preventDefault();
+    this.setState({
+      ...this.state,
+      years: [this.state.years[0], String(this.state.maxYear)],
+    });
   }
 
   helper() {
+    console.log("helperStarted");
     const lifeExpectancyArr = this.props.data.lifeExpectancy;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
@@ -34,6 +69,7 @@ export class PlotDensity extends React.Component {
         +obj.time <= +maxYear &&
         +obj.time >= +minYear
     );
+    console.log("lifeExpFunc1");
 
     const filteredIPP = incomeArr.filter(
       (obj) =>
@@ -41,12 +77,14 @@ export class PlotDensity extends React.Component {
         +obj.time < +maxYear &&
         +obj.time > +minYear
     );
+    console.log("income2");
     const filteredPop = populationArr.filter(
       (obj) =>
         regions.includes(obj.region) &&
         +obj.time < +maxYear &&
         +obj.time > +minYear
     );
+    console.log("pop3");
 
     let combined = filteredLE;
 
@@ -67,51 +105,73 @@ export class PlotDensity extends React.Component {
         }
       }
     }
-
+    console.log("loopFunc5");
+    combined = combined.filter(
+      (obj) => +obj.population > 0 && +obj.lifeExpectancy > 0
+    );
+    console.log("helperEnded");
     return combined;
   }
 
-  selectCountry(evt) {
+  selectRegion(evt) {
+    console.log("selectRegionStarted");
     if (evt.target.checked === true) {
       this.setState({
         ...this.state,
-        countries: [...this.state.countries, evt.target.name],
+        regions: [...this.state.regions, String(evt.target.name)],
       });
+      console.log("selectRegionIfTrueEnded");
     } else {
       const newState = {
         ...this.state,
-        countries: this.state.countries.filter(
-          (country) => country !== evt.target.name
+        regions: this.state.regions.filter(
+          (region) => region !== String(evt.target.name)
         ),
       };
 
       this.setState(newState);
+      console.log("selectRegionElseEnded");
     }
   }
   render() {
+    console.log("render");
     if (this.props.data.lifeExpectancy) {
-      const data = this.helper();
-      let datas = this.props.data.lifeExpectancy.map((obj) => obj.name);
-      let nameArr = [];
-      for (let i = 0; i < datas.length; i++) {
-        let name = datas[i];
-        if (!nameArr.includes(name)) {
-          nameArr.push(name);
-        }
-      }
+      let regionArr = ["asia", "americas", "africa", "europe"];
+      let data = this.helper();
       return (
         <div className="confine">
           <PlotFigure options={plotFuncDensity(data)} />
+          <form onSubmit={this.changeMinYear}>
+            <label htmlFor="minYear"> MinYear </label>
+            <input
+              name="minYear"
+              placeholder="minYear"
+              onChange={this.updateMinYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
+
+          <form onSubmit={this.changeMaxYear}>
+            <label htmlFor="maxYear"> MaxYear </label>
+            <input
+              name="value"
+              placeholder="maxYear"
+              onChange={this.updateMaxYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
           <fieldset className="checkBoxes">
             <label htmlFor="checkBox">
-              {nameArr.map((country, index) => (
+              {regionArr.map((region, index) => (
                 <div key={index}>
                   <input
                     type="checkbox"
-                    name={country}
-                    onClick={this.selectCountry}
+
+                    name={region}
+                    onClick={this.selectRegion}
+
                   />
-                  {country}
+                  {region}
                 </div>
               ))}
             </label>

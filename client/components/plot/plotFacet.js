@@ -1,7 +1,6 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncFacet = (data) => {
-  console.log("data", data);
   return {
     y: {
       grid: true,
@@ -11,7 +10,8 @@ export const plotFuncFacet = (data) => {
       tickFormat: (d) => d,
       type: "linear",
     },
-    height: 300,
+    height: 900,
+    width: 1500,
     grid: true,
     facet: {
       data: data.filter((d) => d),
@@ -24,7 +24,7 @@ export const plotFuncFacet = (data) => {
       Plot.dot(data, {
         x: "time",
         y: "lifeExpectancy",
-        r: 3,
+        r: 1,
         facet: "exclude",
         fill: "black",
       }),
