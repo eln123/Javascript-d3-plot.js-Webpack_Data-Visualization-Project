@@ -43,6 +43,7 @@ class Navi extends React.Component {
                 <a href="/density">Density</a>
                 <a href="/arrow">Arrow</a>
                 <a href="/bubble">Bubble</a>
+                <a href="/facet">Facet</a>
               </div>
             </div>
           </div>
