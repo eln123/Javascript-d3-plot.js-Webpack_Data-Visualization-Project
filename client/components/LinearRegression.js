@@ -38,7 +38,8 @@ export class LinearRegression extends React.Component {
       let state = this.helper();
 
       return (
-        <div className="plotLinear">
+
+        <div className="chartComponent">
           <div className="plotLinearRegression">
             <PlotFigure options={plotFuncLinearRegression(state)} />
           </div>

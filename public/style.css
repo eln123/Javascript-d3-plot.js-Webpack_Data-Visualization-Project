@@ -583,7 +583,12 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   margin-top:-4px;
   font-weight:700;
 }
+/* ############# Linear Regression ############### */
 
+.chartComponent {
+  background-color: #ffffff;
+  filter: invert(89%);
+}
 
 /* ############# ABOUT US ############### */
 
@@ -608,10 +613,12 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   padding: 0;
 }
 body {
-  background: url(http://img6.uploadhouse.com/fileuploads/17737/17737075bdad5cfa9423bb2c3c2beee695c72bb8.jpg);
+  /* background: url(http://img6.uploadhouse.com/fileuploads/17737/17737075bdad5cfa9423bb2c3c2beee695c72bb8.jpg); */
   /* color: #b1b1b1; */
   /* margin: 15px auto 0; */
   /* width: 410px; */
+  background-color: black
+  /* filter: invert(89%); */
 }
 #contact {
   /* overflow: auto; */

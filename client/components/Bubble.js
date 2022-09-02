@@ -83,6 +83,7 @@ export class Bubble extends React.Component {
   }
   render() {
     return (
+      
       <div id="backgroundOfBubblePage">
         <div className="bubble"></div>
       </div>
