@@ -20,7 +20,7 @@ export const getDataFromGithub = () => async (dispatch) => {
   let countryRegionConverter = await converter(urlCountryRegionConverter);
   countryRegionConverter = countryRegionConverter.data;
   state = { ...state, countryRegionConverter: countryRegionConverter };
-  console.log("SDFSFSF", state.countryRegionConverter);
+
   /////////////////
   let lifeExpectancy = await converter(urlLifeExpectancyByRegion);
   let data = lifeExpectancy.data;
@@ -38,7 +38,7 @@ export const getDataFromGithub = () => async (dispatch) => {
     }
   }
   converted = addRegion(converted, countryRegionConverter);
-  console.log("converted", converted);
+
   state = { ...state, lifeExpectancy: converted };
 
   ////////////////////
