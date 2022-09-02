@@ -33,7 +33,6 @@ export class Routes extends Component {
     return (
       <div>
         <Switch>
-          <Route path="/plot" exact component={Plot} />
           <Route path="/bubble" exact component={Bubble} />
 
           <Route path="/linearRegression" exact component={LinearRegression} />

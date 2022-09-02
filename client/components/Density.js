@@ -91,9 +91,31 @@ export class PlotDensity extends React.Component {
   render() {
     if (this.props.data.lifeExpectancy) {
       const data = this.helper();
+      let datas = this.props.data.lifeExpectancy.map((obj) => obj.name);
+      let nameArr = [];
+      for (let i = 0; i < datas.length; i++) {
+        let name = datas[i];
+        if (!nameArr.includes(name)) {
+          nameArr.push(name);
+        }
+      }
       return (
-        <div className="chartComponent">
+        <div className="confine">
           <PlotFigure options={plotFuncDensity(data)} />
+          <fieldset className="checkBoxes">
+            <label htmlFor="checkBox">
+              {nameArr.map((country, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={country[0]}
+                    onClick={this.selectCountry}
+                  />
+                  {country}
+                </div>
+              ))}
+            </label>
+          </fieldset>
         </div>
       );
     }
