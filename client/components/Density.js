@@ -108,7 +108,7 @@ export class PlotDensity extends React.Component {
                 <div key={index}>
                   <input
                     type="checkbox"
-                    name={country[0]}
+                    name={country}
                     onClick={this.selectCountry}
                   />
                   {country}

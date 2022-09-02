@@ -32,7 +32,7 @@ form div {
   filter: invert(89%);
 } */
 .search {
-  width: 230px;
+  width: 240px;
 }
 #container {
   padding: 10% 20%;
@@ -103,10 +103,12 @@ App.js Css Here
 .App {
   width: 100vw;
   height: 100vh;
+  background-color: #ffffff1d;
+  /* filter: invert(89%); */
 }
 
 /************
-Navi.js Css Here
+Navi.js Css Herea
 ************/
 .navbar_container {
   color: blue;
@@ -663,12 +665,12 @@ body {
   resize: none;
 }
 #contact #form input.name {
-  background: #222222
+  background: #7d7b7b
     url(http://img7.uploadhouse.com/fileuploads/17737/177370145f09fe433945815665aa214f80dbc6af.png)
     no-repeat 10px 8px;
 }
 #contact #form input.email {
-  background: #222222
+  background: #7d7b7b
     url(http://img6.uploadhouse.com/fileuploads/17737/177370138cc63992182149e9befabff3eafa6d23.png)
     no-repeat 10px 9px;
 }
@@ -689,7 +691,7 @@ body {
   float: right;
   padding: 0px 0px 5px 0px;
   margin: 10px 16px 0px 0px;
-  background: #222222;
+  background: #7d7b7b;
   color: #f1f1f1;
   font: 14px/16px "Bree Serif", Georgia, serif;
 }

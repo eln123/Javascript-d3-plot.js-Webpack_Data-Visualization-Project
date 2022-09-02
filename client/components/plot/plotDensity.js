@@ -3,8 +3,8 @@ import * as Plot from "@observablehq/plot";
 export const plotFuncDensity = (data) => {
   console.log(data);
   return {
-    width: 1000,
-    height: 1000,
+    width: 1400,
+    height: 800,
     nice: true,
     y: {
       grid: true,

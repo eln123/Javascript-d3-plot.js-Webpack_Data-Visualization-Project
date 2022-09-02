@@ -37,11 +37,12 @@ class Navi extends React.Component {
             <div className="dropdown">
               <button className="dropbtn">Charts</button>
               <div className="dropdown-content">
+                <a href="/arrow">Arrow</a>
+                <a href="/linearRegression">linear Regression</a>
                 <a href="/Population">Population</a>
 
-                <a href="/linearRegression">linear Regression</a>
                 <a href="/density">Density</a>
-                <a href="/arrow">Arrow</a>
+
                 <a href="/bubble">Bubble</a>
                 <a href="/facet">Facet</a>
               </div>

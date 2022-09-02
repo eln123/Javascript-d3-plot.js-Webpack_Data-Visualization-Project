@@ -123,6 +123,26 @@ export class PlotArrow extends React.Component {
       this.setState(newState);
     }
   }
+  selectCountry2(evt) {
+    const country =
+      evt.target.value.slice(0, 1).toUpperCase() + evt.target.value.slice(1);
+
+    if (country) {
+      const newState = {
+        ...this.state,
+        countries: [...this.state.countries, country],
+      };
+      this.setState(newState);
+    } else {
+      const newState = {
+        ...this.state,
+        countries: this.state.countries.filter(
+          (country) => country !== evt.target.value
+        ),
+      };
+      this.setState(newState);
+    }
+  }
   render() {
     if (this.props.data.lifeExpectancy) {
       let combined = this.helper();
@@ -136,7 +156,7 @@ export class PlotArrow extends React.Component {
       }
       console.log(nameArr);
       return (
-        <div>
+        <div className="confine">
           <PlotFigure options={plotFuncArrow(combined)} />
           <div>
             <form onSubmit={this.changeMinYear}>
@@ -159,21 +179,32 @@ export class PlotArrow extends React.Component {
               <button type="submit"> Update </button>
             </form>
           </div>
-          <div className="checkBoxes">
-            <fieldset>
-              <label htmlFor="checkBox">
-                {nameArr.map((country, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      name={country}
-                      onClick={this.selectCountry}
-                    />
-                    {country}
-                  </div>
-                ))}
-              </label>
-            </fieldset>
+          <div>
+            <label htmlFor="searchBox">
+              <input
+                type="text"
+                className="search"
+                id="search"
+                placeholder="Enter Country Name"
+                onChange={(event) => this.selectCountry2(event)}
+              />
+            </label>
+            <div className="checkBoxes">
+              <fieldset>
+                <label htmlFor="checkBox">
+                  {nameArr.map((country, index) => (
+                    <div key={index}>
+                      <input
+                        type="checkbox"
+                        name={country}
+                        onClick={this.selectCountry}
+                      />
+                      {country}
+                    </div>
+                  ))}
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       );

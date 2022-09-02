@@ -35,6 +35,26 @@ export class LinearRegression extends React.Component {
       console.log(this.setState(newState));
     }
   }
+  selectCountry2(evt) {
+    const country =
+      evt.target.value.slice(0, 1).toUpperCase() + evt.target.value.slice(1);
+
+    if (country) {
+      const newState = {
+        ...this.state,
+        countries: [...this.state.countries, country],
+      };
+      this.setState(newState);
+    } else {
+      const newState = {
+        ...this.state,
+        countries: this.state.countries.filter(
+          (country) => country !== evt.target.value
+        ),
+      };
+      this.setState(newState);
+    }
+  }
   render() {
     if (this.props.data.lifeExpectancy) {
       let state = this.helper();
@@ -52,20 +72,31 @@ export class LinearRegression extends React.Component {
           <div className="plotLinearRegression">
             <PlotFigure options={plotFuncLinearRegression(state)} />
           </div>
-          <fieldset className="checkBoxes">
-            <label htmlFor="checkBox">
-              {nameArr.map((country, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={country[0]}
-                    onClick={this.selectCountry}
-                  />
-                  {country}
-                </div>
-              ))}
+          <div>
+            <label htmlFor="searchBox">
+              <input
+                type="text"
+                className="search"
+                id="search"
+                placeholder="Enter Country Name"
+                onChange={(event) => this.selectCountry2(event)}
+              />
             </label>
-          </fieldset>
+            <fieldset className="checkBoxes">
+              <label htmlFor="checkBox">
+                {nameArr.map((country, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={country}
+                      onClick={this.selectCountry}
+                    />
+                    {country}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
+          </div>
           {/* <div>
             <fieldset>
               <label htmlFor="myCheckBox">

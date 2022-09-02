@@ -16,7 +16,7 @@ export default class Population extends React.Component {
     super();
     this.state = {
       data: [],
-      countries: [],
+      countries: ["China", "United States of America"],
     };
 
     this.selectCountry = this.selectCountry.bind(this);
@@ -130,31 +130,32 @@ export default class Population extends React.Component {
         <div className="confine">
           <svg className="svg2" width="1525" height="950"></svg>
 
-          <div className="checkBoxes">
+          <div>
             <label htmlFor="searchBox">
               <input
                 type="text"
                 className="search"
                 id="search"
-                placeholder="Country"
+                placeholder="Enter Country Name"
                 onChange={(event) => this.selectCountry2(event)}
               />
             </label>
-
-            <fieldset>
-              <label htmlFor="checkBox">
-                {byCountry.map((country, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      name={country[0]}
-                      onClick={this.selectCountry}
-                    />
-                    {country[0]}
-                  </div>
-                ))}
-              </label>
-            </fieldset>
+            <div className="checkBoxes">
+              <fieldset>
+                <label htmlFor="checkBox">
+                  {byCountry.map((country, index) => (
+                    <div key={index}>
+                      <input
+                        type="checkbox"
+                        name={country[0]}
+                        onClick={this.selectCountry}
+                      />
+                      {country[0]}
+                    </div>
+                  ))}
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
 
