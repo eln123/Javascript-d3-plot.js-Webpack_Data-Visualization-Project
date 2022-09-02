@@ -18,8 +18,9 @@ export const getDataFromGithub = () => async (dispatch) => {
   let state = {};
 
   let countryRegionConverter = await converter(urlCountryRegionConverter);
-
-  state = { ...state, countryRegionConverter: countryRegionConverter.data };
+  countryRegionConverter = countryRegionConverter.data;
+  state = { ...state, countryRegionConverter: countryRegionConverter };
+  console.log("SDFSFSF", state.countryRegionConverter);
   /////////////////
   let lifeExpectancy = await converter(urlLifeExpectancyByRegion);
   let data = lifeExpectancy.data;
@@ -36,20 +37,38 @@ export const getDataFromGithub = () => async (dispatch) => {
       }
     }
   }
+  converted = addRegion(converted, countryRegionConverter);
+  console.log("converted", converted);
   state = { ...state, lifeExpectancy: converted };
 
   ////////////////////
   let incomePerPerson = await converter(urlIncomePerPersonByRegion);
-  state = { ...state, incomePerPerson: incomePerPerson.data };
+  incomePerPerson = addRegion(incomePerPerson.data, countryRegionConverter);
+  state = { ...state, incomePerPerson: incomePerPerson };
   //////////////////////
   let population = await converter(urlPopulationByRegion);
-  state = { ...state, population: population.data };
+  population = addRegion(population.data, countryRegionConverter);
+  state = { ...state, population: population };
   /////////////////////////////
   /////////////////
 
   //////////////////
   ///////////////////
   dispatch(setData(state));
+};
+
+var addRegion = (arr, countryRegionConverter) => {
+  let returnArr = arr.map((obj) => {
+    for (let i = 0; i < countryRegionConverter.length; i++) {
+      let converterObj = countryRegionConverter[i];
+
+      if (converterObj.name === obj.name) {
+        obj.region = converterObj["four_regions"];
+      }
+    }
+    return obj;
+  });
+  return returnArr;
 };
 
 export default function (state = {}, action) {
