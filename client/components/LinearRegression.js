@@ -92,7 +92,6 @@ export class LinearRegression extends React.Component {
       };
 
       this.setState(newState);
-      console.log(this.setState(newState));
     }
   }
   selectCountry2(evt) {
@@ -118,16 +117,12 @@ export class LinearRegression extends React.Component {
   render() {
     if (this.props.data.lifeExpectancy) {
       let data = this.helper();
-      let datas = this.props.data.lifeExpectancy
-        .map((obj) => obj.region)
-        .filter((obj) => obj);
-      let regionArr = [];
-      for (let i = 0; i < datas.length; i++) {
-        let region = datas[i];
-        if (!regionArr.includes(region)) {
-          regionArr.push(region);
+      let names = this.props.data.countryRegionConverter.map((obj) => obj.name);
+      let checked = (country) => {
+        if (this.state.countries.includes(country)) {
+          return "checked";
         }
-      }
+      };
 
       return (
         <div className="confine">
@@ -152,7 +147,7 @@ export class LinearRegression extends React.Component {
               />
               <button type="submit"> Update </button>
             </form>
-            <form onSubmit={this.changehalf}>
+            <form onSubmit={this.changeHalf}>
               <label htmlFor="Split Year"> SplitYear </label>
               <input
                 name="value"
@@ -172,14 +167,15 @@ export class LinearRegression extends React.Component {
             </label>
             <fieldset className="checkBoxes">
               <label htmlFor="checkBox">
-                {regionArr.map((region, index) => (
+                {names.map((country, index) => (
                   <div key={index}>
                     <input
                       type="checkbox"
-                      name={region}
-                      onClick={this.selectRegion}
+                      name={country}
+                      checked={checked(country)}
+                      onClick={this.selectCountry}
                     />
-                    {region}
+                    {country}
                   </div>
                 ))}
               </label>
