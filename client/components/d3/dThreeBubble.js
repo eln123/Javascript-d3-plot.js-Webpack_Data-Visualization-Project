@@ -5,6 +5,7 @@ export const bubbleFunc = (data) => {
   // var margin = { top: 40, right: 150, bottom: 60, left: 30 },
   //   width = 500 - margin.left - margin.right,
   //   height = 420 - margin.top - margin.bottom;
+  d3.select(".bubble").selectAll("*").remove();
   var margin = { top: 100, right: 300, bottom: 60, left: 100 };
   const width = 1400 - margin.left - margin.right;
   const height = 1000 - margin.top - margin.bottom;

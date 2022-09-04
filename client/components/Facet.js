@@ -141,18 +141,22 @@ export class PlotFacet extends React.Component {
   render() {
     if (this.props.data.lifeExpectancy) {
       let data = this.helper();
-      let datas = this.props.data.lifeExpectancy
-        .map((obj) => obj.region)
-        .filter((obj) => obj);
-      let regionArr = [];
-      for (let i = 0; i < datas.length; i++) {
-        let region = datas[i];
-        if (!regionArr.includes(region)) {
-          regionArr.push(region);
+      //   let datas = this.props.data.lifeExpectancy
+      //     .map((obj) => obj.region)
+      //     .filter((obj) => obj);
+      //   let regionArr = [];
+      //   for (let i = 0; i < datas.length; i++) {
+      //     let region = datas[i];
+      //     if (!regionArr.includes(region)) {
+      //       regionArr.push(region);
+      //     }
+      //   }
+      let regionArr = ["asia", "americas", "africa", "europe"];
+      let checked = (region) => {
+        if (this.state.regions.includes(region)) {
+          return "checked";
         }
-      }
-      let one = data.filter((obj) => +obj.lifeExpectancy < 5);
-
+      };
       return (
         <div className="confine">
           <PlotFigure options={plotFuncFacet(data)} />
@@ -182,6 +186,7 @@ export class PlotFacet extends React.Component {
                   <input
                     type="checkbox"
                     name={region}
+                    checked={checked(region)}
                     onClick={this.selectRegion}
                   />
                   {region}

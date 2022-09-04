@@ -154,7 +154,11 @@ export class PlotArrow extends React.Component {
           nameArr.push(name);
         }
       }
-      console.log(nameArr);
+      let checked = (country) => {
+        if (this.state.countries.includes(country)) {
+          return "checked";
+        }
+      };
       return (
         <div className="confine">
           <PlotFigure options={plotFuncArrow(combined)} />
@@ -196,6 +200,7 @@ export class PlotArrow extends React.Component {
                     <div key={index}>
                       <input
                         type="checkbox"
+                        checked={checked(country)}
                         name={country}
                         onClick={this.selectCountry}
                       />

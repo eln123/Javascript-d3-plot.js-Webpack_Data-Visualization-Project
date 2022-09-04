@@ -69,7 +69,6 @@ export class PlotDensity extends React.Component {
         +obj.time <= +maxYear &&
         +obj.time >= +minYear
     );
-    console.log("lifeExpFunc1");
 
     const filteredIPP = incomeArr.filter(
       (obj) =>
@@ -77,14 +76,13 @@ export class PlotDensity extends React.Component {
         +obj.time < +maxYear &&
         +obj.time > +minYear
     );
-    console.log("income2");
+
     const filteredPop = populationArr.filter(
       (obj) =>
         regions.includes(obj.region) &&
         +obj.time < +maxYear &&
         +obj.time > +minYear
     );
-    console.log("pop3");
 
     let combined = filteredLE;
 
@@ -105,22 +103,20 @@ export class PlotDensity extends React.Component {
         }
       }
     }
-    console.log("loopFunc5");
+
     combined = combined.filter(
       (obj) => +obj.population > 0 && +obj.lifeExpectancy > 0
     );
-    console.log("helperEnded");
+
     return combined;
   }
 
   selectRegion(evt) {
-    console.log("selectRegionStarted");
     if (evt.target.checked === true) {
       this.setState({
         ...this.state,
         regions: [...this.state.regions, String(evt.target.name)],
       });
-      console.log("selectRegionIfTrueEnded");
     } else {
       const newState = {
         ...this.state,
@@ -130,14 +126,17 @@ export class PlotDensity extends React.Component {
       };
 
       this.setState(newState);
-      console.log("selectRegionElseEnded");
     }
   }
   render() {
-    console.log("render");
     if (this.props.data.lifeExpectancy) {
       let regionArr = ["asia", "americas", "africa", "europe"];
       let data = this.helper();
+      let checked = (region) => {
+        if (this.state.regions.includes(region)) {
+          return "checked";
+        }
+      };
       return (
         <div className="confine">
           <PlotFigure options={plotFuncDensity(data)} />
@@ -166,10 +165,9 @@ export class PlotDensity extends React.Component {
                 <div key={index}>
                   <input
                     type="checkbox"
-
                     name={region}
+                    checked={checked(region)}
                     onClick={this.selectRegion}
-
                   />
                   {region}
                 </div>

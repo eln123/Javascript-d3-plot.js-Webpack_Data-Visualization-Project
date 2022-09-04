@@ -3,27 +3,36 @@ import * as Plot from "@observablehq/plot";
 export const plotFuncLinearRegression = (state) => {
   let minYear = state.years[0];
   let maxYear = state.years[1];
-  // const filteredData = state.data.filter((obj, index) =>
-  //   state.countries.includes(obj.name)
-  // );
-
-  const filteredDataBelow = state.data.filter((obj, index) => {
-    state.countries.includes(obj.name) &&
-      +obj.time >= +minYear &&
-      +obj.time <= +state.half;
+  let splitYear = state.half;
+  //
+  let filteredName = state.data.filter((obj, index) => {
+    return state.countries.includes(obj.name);
   });
 
-  const filteredDataAbove = state.data.filter(
-    (obj, index) =>
-      state.countries.includes(obj.name) &&
-      +obj.time >= +state.half &&
-      +obj.time <= +maxYear
+  //
+  let filteredYearsBelow = filteredName.filter(
+    (obj, index) => +obj.time >= +minYear && +obj.time <= +splitYear
   );
 
-  // .map((obj) => {
-  //   obj.lifeExpectancy = +obj.lifeExpectancy;
-  //   return obj;
-  // });
+  let filteredDataBelow = filteredYearsBelow.map((obj) => {
+    obj.time = +obj.time;
+
+    obj.lifeExpectancy = +obj.lifeExpectancy;
+    return obj;
+  });
+  //
+
+  let filteredYearsAbove = filteredName.filter(
+    (obj, index) => +obj.time >= +splitYear && +obj.time <= +maxYear
+  );
+
+  let filteredDataAbove = filteredYearsAbove.map((obj) => {
+    obj.time = +obj.time;
+
+    obj.lifeExpectancy = +obj.lifeExpectancy;
+    return obj;
+  });
+  //
 
   return {
     height: 500,

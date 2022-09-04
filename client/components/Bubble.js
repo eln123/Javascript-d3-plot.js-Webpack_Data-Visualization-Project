@@ -13,15 +13,13 @@ export class Bubble extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      updatedYear: "",
       year: "2023",
-      combined: [],
-      lifeExpectancy: [],
-      incomePerPerson: [],
-      population: [],
-      countryRegionConverter: [],
+      regions: ["africa", "americas", "asia", "europe"],
     };
-    this.selectCountry = this.selectCountry.bind(this);
+    this.selectRegion = this.selectRegion.bind(this);
+    this.updateYear = this.updateYear.bind(this);
+    this.changeYear = this.changeYear.bind(this);
   }
 
   componentDidUpdate() {
@@ -30,9 +28,16 @@ export class Bubble extends React.Component {
     const populationArr = this.props.data.population;
 
     const year = this.state.year;
-    const filteredLE = lifeExpectancyArr.filter((obj) => obj.time === year);
-    const filteredIPP = incomeArr.filter((obj) => obj.time === year);
-    const filteredPop = populationArr.filter((obj) => obj.time === year);
+    const regions = this.state.regions;
+    const filteredLE = lifeExpectancyArr.filter(
+      (obj) => obj.time === year && regions.includes(obj.region)
+    );
+    const filteredIPP = incomeArr.filter(
+      (obj) => obj.time === year && regions.includes(obj.region)
+    );
+    const filteredPop = populationArr.filter(
+      (obj) => obj.time === year && regions.includes(obj.region)
+    );
     //
     const countryRegionConverter = this.props.data.countryRegionConverter;
 
@@ -61,32 +66,81 @@ export class Bubble extends React.Component {
         }
       }
     }
-    console.log(combined);
+
     bubbleFunc(combined);
   }
-  selectCountry(evt) {
+
+  updateYear(evt) {
+    this.setState({
+      ...this.state,
+      updatedYear: evt.target.value,
+    });
+  }
+  changeYear(evt) {
+    evt.preventDefault();
+
+    this.setState({
+      ...this.state,
+      year: String(this.state.updatedYear),
+      yearFilterChange: true,
+    });
+  }
+  selectRegion(evt) {
+    console.log("selectRegionStarted");
     if (evt.target.checked === true) {
       this.setState({
         ...this.state,
-        countries: [...this.state.countries, evt.target.name],
+        regions: [...this.state.regions, String(evt.target.name)],
       });
     } else {
+      console.log(this.state);
       const newState = {
         ...this.state,
-        countries: this.state.countries.filter(
-          (country) => country !== evt.target.name
+        regions: this.state.regions.filter(
+          (region) => region !== String(evt.target.name)
         ),
       };
-
+      console.log(newState);
       this.setState(newState);
+      console.log(this.state);
     }
   }
   render() {
-    return (
-      <div className="confine">
-        <div className="bubble"></div>
-      </div>
-    );
+    if (this.props.data.lifeExpectancy) {
+      let regionArr = ["asia", "americas", "africa", "europe"];
+      let checked = (region) => {
+        if (this.state.regions.includes(region)) {
+          return "checked";
+        }
+      };
+      return (
+        <div className="confine">
+          <div className="bubble"></div>
+          <form onSubmit={this.changeYear}>
+            <label htmlFor="maxYear"> Current Year: {this.state.year} </label>
+            <input name="value" placeholder="Year" onChange={this.updateYear} />
+            <button type="submit"> Update </button>
+          </form>
+          <fieldset className="checkBoxes">
+            <label htmlFor="checkBox">
+              {regionArr.map((region, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    checked={checked(region)}
+                    name={region}
+                    onClick={this.selectRegion}
+                  />
+                  {region}
+                </div>
+              ))}
+            </label>
+          </fieldset>
+        </div>
+      );
+    } else {
+      return "hi";
+    }
   }
 }
 
