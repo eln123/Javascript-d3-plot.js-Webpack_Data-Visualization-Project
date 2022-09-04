@@ -12,6 +12,12 @@ class Contactus extends React.Component {
     return (
       <div>
         <section id="contact">
+          <h3>
+            <img
+              className="npmLogo"
+              src="https://i.ibb.co/g7rkmSm/npmLogo.png"
+            />
+          </h3>
           <div className="content">
             <div id="form">
               <form action="" id="contactForm" method="post">

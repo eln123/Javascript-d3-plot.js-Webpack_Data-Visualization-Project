@@ -8,7 +8,7 @@ export const bubbleFunc = (data) => {
   d3.select(".bubble").selectAll("*").remove();
   var margin = { top: 100, right: 300, bottom: 60, left: 100 };
   const width = 1400 - margin.left - margin.right;
-  const height = 1000 - margin.top - margin.bottom;
+  const height = 880 - margin.top - margin.bottom;
   data = data.filter((obj) => obj.population > 0);
   // append the svg object to the body of the page
   var svg = d3
@@ -65,7 +65,7 @@ export const bubbleFunc = (data) => {
   // Add a scale for bubble color
   var myColor = d3
     .scaleOrdinal()
-    .domain(["asia", "europe", "americas", "africa", "oceania"])
+    .domain(["asia", "europe", "americas", "africa"])
     .range(d3.schemeSet1);
 
   // ---------------------------//
@@ -165,8 +165,8 @@ export const bubbleFunc = (data) => {
 
   var size = 20;
 
-  var allgroups = ["Asia", "Europe", "Americas", "Africa", "Oceania"].map(
-    (name) => name.toLowerCase()
+  var allgroups = ["Asia", "Europe", "Americas", "Africa"].map((name) =>
+    name.toLowerCase()
   );
 
   svg

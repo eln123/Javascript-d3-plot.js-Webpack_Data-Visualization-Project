@@ -158,28 +158,6 @@ export default class Population extends React.Component {
             </div>
           </div>
         </div>
-
-        <div>potential table</div>
-        {/* <table>
-          <thead>
-            <tr>
-              <th>country</th>
-              <th>year</th>
-              <th>population</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.data
-              .filter((obj, index) => index < 20)
-              .map((obj, index) => (
-                <tr key={index}>
-                  <td>{obj.country}</td>
-                  <td>{obj.year}</td>
-                  <td>{obj.population}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table> */}
       </div>
     );
   }
