@@ -2,6 +2,7 @@ import React from 'react'
 
 
 
+
  class aboutUs1 extends React.Component {
   constructor(){
     super()
@@ -35,7 +36,7 @@ panels.forEach(panel => {
     return (
       <div className='aboutUs'>
         <section id="section01">
-  <h1>NPM_CEED</h1>
+  <h3><img className='npmLogo' src='https://i.ibb.co/g7rkmSm/npmLogo.png'/></h3>
   <div className='quote'>
   <p>
     <h1>"Data visualization helps to bridge the gap between numbers and words"</h1>

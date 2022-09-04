@@ -594,7 +594,13 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
 }
 
 /* ############# ABOUT US ############### */
-
+.npmLogo {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  height: 5rem;
+  display:block;
+  margin-left: auto;
+}
 .aboutUs {
   flex: auto;
   color: white;
