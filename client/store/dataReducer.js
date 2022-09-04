@@ -8,13 +8,14 @@ const setData = (data) => ({ type: SET_DATA, data });
 export const getDataFromGithub = () => async (dispatch) => {
   const urlCountryRegionConverter =
     "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Countries_Regions";
-  const urlLifeExpectancyByRegion =
+  const urlLifeExpectancyByCountry =
     "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/LifeExpectancy_ByCountry";
-  const urlIncomePerPersonByRegion =
+  const urlIncomePerPersonByCountry =
     "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/IncomePerPerson_ByCountry";
-  const urlPopulationByRegion =
+  const urlPopulationByCountry =
     "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/Population_ByCountry";
-
+  const urlChildMortalityByCountry =
+    "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/ChildMortalityRate_ByCountry";
   let state = {};
 
   let countryRegionConverter = await converter(urlCountryRegionConverter);
@@ -22,7 +23,7 @@ export const getDataFromGithub = () => async (dispatch) => {
   state = { ...state, countryRegionConverter: countryRegionConverter };
 
   /////////////////
-  let lifeExpectancy = await converter(urlLifeExpectancyByRegion);
+  let lifeExpectancy = await converter(urlLifeExpectancyByCountry);
   let data = lifeExpectancy.data;
   let converted = [];
   for (let i = 0; i < data.length; i++) {
@@ -42,13 +43,18 @@ export const getDataFromGithub = () => async (dispatch) => {
   state = { ...state, lifeExpectancy: converted };
 
   ////////////////////
-  let incomePerPerson = await converter(urlIncomePerPersonByRegion);
+  let incomePerPerson = await converter(urlIncomePerPersonByCountry);
   incomePerPerson = addRegion(incomePerPerson.data, countryRegionConverter);
   state = { ...state, incomePerPerson: incomePerPerson };
   //////////////////////
-  let population = await converter(urlPopulationByRegion);
+  let population = await converter(urlPopulationByCountry);
   population = addRegion(population.data, countryRegionConverter);
   state = { ...state, population: population };
+
+  let childMortality = await converter(urlChildMortalityByCountry);
+  childMortality = addRegion(childMortality.data, countryRegionConverter);
+  state = { ...state, childMortality: childMortality };
+
   /////////////////////////////
   /////////////////
 

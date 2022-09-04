@@ -8,6 +8,7 @@ export class LinearRegression extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      display: "Child mortality",
       minYear: "",
       maxYear: "",
       splitYear: "",
@@ -24,6 +25,7 @@ export class LinearRegression extends React.Component {
     this.updateMaxYear = this.updateMaxYear.bind(this);
     this.updateSplitYear = this.updateSplitYear.bind(this);
     this.changeHalf = this.changeHalf.bind(this);
+    this.selectDisplay = this.selectDisplay.bind(this);
   }
   updateMinYear(evt) {
     evt.preventDefault;
@@ -68,14 +70,61 @@ export class LinearRegression extends React.Component {
   }
 
   helper() {
-    let data = this.props.data.lifeExpectancy;
+    if (this.state.display === "lifeExpectancy") {
+      let data = this.props.data.lifeExpectancy;
+      console.log(data);
+      return {
+        data: data,
+        display: this.state.display,
+        countries: this.state.countries,
+        half: this.state.half,
+        years: this.state.years,
+      };
+    }
+    if (this.state.display === "Child mortality") {
+      let data = this.props.data.childMortality;
 
-    return {
-      data: data,
-      countries: this.state.countries,
-      half: this.state.half,
-      years: this.state.years,
-    };
+      return {
+        data: data,
+        display: this.state.display,
+        countries: this.state.countries,
+        half: this.state.half,
+        years: this.state.years,
+      };
+    }
+    if (this.state.display === "Income per person") {
+      let data = this.props.data.incomePerPerson;
+
+      return {
+        data: data,
+        display: this.state.display,
+        countries: this.state.countries,
+        half: this.state.half,
+        years: this.state.years,
+      };
+    }
+  }
+  selectDisplay(evt) {
+    if (evt.target.checked === true) {
+      if (evt.target.name === "Life expectancy") {
+        this.setState({
+          ...this.state,
+          display: "lifeExpectancy",
+        });
+      }
+      if (evt.target.name === "Child mortality") {
+        this.setState({
+          ...this.state,
+          display: "Child mortality",
+        });
+      }
+      if (evt.target.name === "Income per person") {
+        this.setState({
+          ...this.state,
+          display: "Income per person",
+        });
+      }
+    }
   }
   selectCountry(evt) {
     if (evt.target.checked === true) {
@@ -123,7 +172,16 @@ export class LinearRegression extends React.Component {
           return "checked";
         }
       };
-
+      let displays = [
+        "Life expectancy",
+        "Child mortality",
+        "Income per person",
+      ];
+      let checkForDisplay = (display) => {
+        if (this.state.display === display) {
+          return "checked";
+        }
+      };
       return (
         <div className="confine">
           <div className="plotLinearRegression">
@@ -156,6 +214,21 @@ export class LinearRegression extends React.Component {
               />
               <button type="submit"> Update </button>
             </form>
+            <fieldset className="checkBoxesForDisplay">
+              <label htmlFor="checkBox">
+                {displays.map((display, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={display}
+                      checked={checkForDisplay(display)}
+                      onClick={this.selectDisplay}
+                    />
+                    {display}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
             <label htmlFor="searchBox">
               <input
                 type="text"
@@ -184,7 +257,7 @@ export class LinearRegression extends React.Component {
         </div>
       );
     }
-    return <div>hi</div>;
+    return <div></div>;
   }
 }
 

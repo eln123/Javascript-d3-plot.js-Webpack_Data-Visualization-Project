@@ -50,7 +50,6 @@ export class PlotDensity extends React.Component {
   }
 
   helper() {
-    console.log("helperStarted");
     const lifeExpectancyArr = this.props.data.lifeExpectancy;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
@@ -177,7 +176,7 @@ export class PlotDensity extends React.Component {
         </div>
       );
     }
-    return "hi";
+    return <div></div>;
   }
 }
 

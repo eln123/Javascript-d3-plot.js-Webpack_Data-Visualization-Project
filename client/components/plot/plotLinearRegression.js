@@ -4,6 +4,8 @@ export const plotFuncLinearRegression = (state) => {
   let minYear = state.years[0];
   let maxYear = state.years[1];
   let splitYear = state.half;
+  let yVar = state.display;
+
   //
   let filteredName = state.data.filter((obj, index) => {
     return state.countries.includes(obj.name);
@@ -17,7 +19,8 @@ export const plotFuncLinearRegression = (state) => {
   let filteredDataBelow = filteredYearsBelow.map((obj) => {
     obj.time = +obj.time;
 
-    obj.lifeExpectancy = +obj.lifeExpectancy;
+    // obj.lifeExpectancy = +obj.lifeExpectancy;
+    obj[`${yVar}`] = +obj[`${yVar}`];
     return obj;
   });
   //
@@ -29,7 +32,8 @@ export const plotFuncLinearRegression = (state) => {
   let filteredDataAbove = filteredYearsAbove.map((obj) => {
     obj.time = +obj.time;
 
-    obj.lifeExpectancy = +obj.lifeExpectancy;
+    // obj.lifeExpectancy = +obj.lifeExpectancy;
+    obj[`${yVar}`] = +obj[`${yVar}`];
     return obj;
   });
   //
@@ -55,12 +59,12 @@ export const plotFuncLinearRegression = (state) => {
       // }),
       Plot.dot(filteredDataBelow, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${yVar}`,
         fill: "name",
       }),
       Plot.dot(filteredDataAbove, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${yVar}`,
         fill: "name",
       }),
       // Plot.linearRegressionY(filteredData, {
@@ -74,21 +78,21 @@ export const plotFuncLinearRegression = (state) => {
       // }),
       Plot.linearRegressionY(filteredDataBelow, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${yVar}`,
         stroke: "name",
       }),
       Plot.linearRegressionY(filteredDataBelow, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${yVar}`,
       }),
       Plot.linearRegressionY(filteredDataAbove, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${yVar}`,
         stroke: "name",
       }),
       Plot.linearRegressionY(filteredDataAbove, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${yVar}`,
       }),
     ],
   };

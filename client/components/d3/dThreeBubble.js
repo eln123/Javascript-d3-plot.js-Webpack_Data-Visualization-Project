@@ -1,10 +1,12 @@
 import { color, style } from "d3";
 
-export const bubbleFunc = (data) => {
+export const bubbleFunc = (bubbleObj) => {
   // set the dimensions and margins of the graph
   // var margin = { top: 40, right: 150, bottom: 60, left: 30 },
   //   width = 500 - margin.left - margin.right,
   //   height = 420 - margin.top - margin.bottom;
+  let data = bubbleObj.data;
+  let display = bubbleObj.display;
   d3.select(".bubble").selectAll("*").remove();
   var margin = { top: 100, right: 300, bottom: 60, left: 100 };
   const width = 1400 - margin.left - margin.right;
@@ -65,7 +67,7 @@ export const bubbleFunc = (data) => {
   // Add a scale for bubble color
   var myColor = d3
     .scaleOrdinal()
-    .domain(["asia", "europe", "americas", "africa", "oceania"])
+    .domain(["asia", "europe", "americas", "africa"])
     .range(d3.schemeSet1);
 
   // ---------------------------//
@@ -165,8 +167,8 @@ export const bubbleFunc = (data) => {
 
   var size = 20;
 
-  var allgroups = ["Asia", "Europe", "Americas", "Africa", "Oceania"].map(
-    (name) => name.toLowerCase()
+  var allgroups = ["Asia", "Europe", "Americas", "Africa"].map((name) =>
+    name.toLowerCase()
   );
 
   svg
