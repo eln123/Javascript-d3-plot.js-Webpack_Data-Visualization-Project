@@ -214,47 +214,49 @@ export class LinearRegression extends React.Component {
             />
             <button type="submit"> Update </button>
           </form>
-          <fieldset className="checkBoxesForDisplay">
-            <label htmlFor="checkBox">
-              {displays.map((display, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={display}
-                    checked={checkForDisplay(display)}
-                    onClick={this.selectDisplay}
-                  />
-                  {display}
-                </div>
-              ))}
-            </label>
-          </fieldset>
-
-          <label htmlFor="searchBox">
-            <input
-              type="text"
-              className="search"
-              id="search"
-              placeholder="Enter Country Name"
-              onChange={(event) => this.selectCountry2(event)}
-            />
-          </label>
-          <div className="checkBoxes">
-            <fieldset>
+          <div>
+            <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
-                {names.map((country, index) => (
+                {displays.map((display, index) => (
                   <div key={index}>
                     <input
                       type="checkbox"
-                      name={country}
-                      checked={checked(country)}
-                      onClick={this.selectCountry}
+                      name={display}
+                      checked={checkForDisplay(display)}
+                      onClick={this.selectDisplay}
                     />
-                    {country}
+                    {display}
                   </div>
                 ))}
               </label>
             </fieldset>
+
+            <label htmlFor="searchBox">
+              <input
+                type="text"
+                className="search"
+                id="search"
+                placeholder="Enter Country Name"
+                onChange={(event) => this.selectCountry2(event)}
+              />
+            </label>
+            <div className="checkBoxes">
+              <fieldset>
+                <label htmlFor="checkBox">
+                  {names.map((country, index) => (
+                    <div key={index}>
+                      <input
+                        type="checkbox"
+                        name={country}
+                        checked={checked(country)}
+                        onClick={this.selectCountry}
+                      />
+                      {country}
+                    </div>
+                  ))}
+                </label>
+              </fieldset>
+            </div>
           </div>
         </div>
       );

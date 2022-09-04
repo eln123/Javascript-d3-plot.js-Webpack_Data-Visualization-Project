@@ -216,36 +216,38 @@ export class PlotFacet extends React.Component {
             />
             <button type="submit"> Update </button>
           </form>
-          <fieldset className="checkBoxesForDisplay">
-            <label htmlFor="checkBox">
-              {displays.map((display, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={display}
-                    checked={checkForDisplay(display)}
-                    onClick={this.selectDisplay}
-                  />
-                  {display}
-                </div>
-              ))}
-            </label>
-          </fieldset>
-          <fieldset className="checkBoxes">
-            <label htmlFor="checkBox">
-              {regionArr.map((region, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    name={region}
-                    checked={checked(region)}
-                    onClick={this.selectRegion}
-                  />
-                  {region}
-                </div>
-              ))}
-            </label>
-          </fieldset>
+          <div>
+            <fieldset className="checkBoxesForDisplay">
+              <label htmlFor="checkBox">
+                {displays.map((display, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={display}
+                      checked={checkForDisplay(display)}
+                      onClick={this.selectDisplay}
+                    />
+                    {display}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
+            <fieldset className="checkBoxes">
+              <label htmlFor="checkBox">
+                {regionArr.map((region, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={region}
+                      checked={checked(region)}
+                      onClick={this.selectRegion}
+                    />
+                    {region}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
+          </div>
         </div>
       );
     } else {
