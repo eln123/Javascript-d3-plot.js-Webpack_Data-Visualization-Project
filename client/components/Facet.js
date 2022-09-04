@@ -10,6 +10,7 @@ export class PlotFacet extends React.Component {
     this.state = this.state = {
       minYear: "",
       maxYear: "",
+      display: "lifeExpectancy",
       regions: ["americas", "europe", "asia"],
       years: ["1900", "1930"],
     };
@@ -19,6 +20,7 @@ export class PlotFacet extends React.Component {
     this.changeMaxYear = this.changeMaxYear.bind(this);
     this.updateMinYear = this.updateMinYear.bind(this);
     this.updateMaxYear = this.updateMaxYear.bind(this);
+    this.selectDisplay = this.selectDisplay.bind(this);
   }
   updateMinYear(evt) {
     evt.preventDefault;
@@ -65,60 +67,92 @@ export class PlotFacet extends React.Component {
       this.setState(newState);
     }
   }
+  selectDisplay(evt) {
+    if (evt.target.checked === true) {
+      if (evt.target.name === "Life expectancy") {
+        this.setState({
+          ...this.state,
+          display: "lifeExpectancy",
+        });
+      }
+      if (evt.target.name === "Child mortality") {
+        this.setState({
+          ...this.state,
+          display: "Child mortality",
+        });
+      }
+      if (evt.target.name === "Income per person") {
+        this.setState({
+          ...this.state,
+          display: "Income per person",
+        });
+      }
+    }
+  }
 
   helper() {
     const lifeExpectancyArr = this.props.data.lifeExpectancy;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
+    const childMortalityArr = this.props.data.childMortality;
 
-    let combinedDataArr = [];
     // filters
     const regions = this.state.regions;
     const minYear = this.state.years[0];
 
     const maxYear = this.state.years[1];
     //
-    const filteredLE = lifeExpectancyArr.filter(
-      (obj) =>
-        regions.includes(obj.region) &&
-        +obj.time <= +maxYear &&
-        +obj.time >= +minYear
-    );
-
-    const filteredIPP = incomeArr.filter(
-      (obj) =>
-        regions.includes(obj.region) &&
-        +obj.time < +maxYear &&
-        +obj.time > +minYear
-    );
-    const filteredPop = populationArr.filter(
-      (obj) =>
-        regions.includes(obj.region) &&
-        +obj.time < +maxYear &&
-        +obj.time > +minYear
-    );
-
-    let combined = filteredLE;
-
-    for (let i = 0; i < filteredIPP.length; i++) {
-      let obj = filteredIPP[i];
-      for (let j = 0; j < combined.length; j++) {
-        if (combined[j].name === obj.name && combined[j].time === obj.time) {
-          combined[j].incomePerPerson = obj["Income per person"];
-        }
-      }
+    const display = this.state.display;
+    if (display === "lifeExpectancy") {
+      return { data: lifeExpectancyArr, display };
     }
-
-    for (let i = 0; i < filteredPop.length; i++) {
-      let obj = filteredPop[i];
-      for (let j = 0; j < combined.length; j++) {
-        if (combined[j].name === obj.name && combined[j].time === obj.time) {
-          combined[j].population = obj.Population;
-        }
-      }
+    if (display === "Child mortality") {
+      return { data: childMortalityArr, display };
     }
+    if (display === "Income per person") {
+      return { data: incomeArr, display };
+    }
+    // const filteredLE = lifeExpectancyArr.filter(
+    //   (obj) =>
+    //     regions.includes(obj.region) &&
+    //     +obj.time <= +maxYear &&
+    //     +obj.time >= +minYear
+    // );
 
-    return combined;
+    // const filteredIPP = incomeArr.filter(
+    //   (obj) =>
+    //     regions.includes(obj.region) &&
+    //     +obj.time < +maxYear &&
+    //     +obj.time > +minYear
+    // );
+    // const filteredPop = populationArr.filter(
+    //   (obj) =>
+    //     regions.includes(obj.region) &&
+    //     +obj.time < +maxYear &&
+    //     +obj.time > +minYear
+    // );
+
+    // let combined = filteredLE;
+
+    // for (let i = 0; i < filteredIPP.length; i++) {
+    //   let obj = filteredIPP[i];
+    //   for (let j = 0; j < combined.length; j++) {
+    //     if (combined[j].name === obj.name && combined[j].time === obj.time) {
+    //       combined[j].incomePerPerson = obj["Income per person"];
+    //     }
+    //   }
+    // }
+
+    // for (let i = 0; i < filteredPop.length; i++) {
+    //   let obj = filteredPop[i];
+    //   for (let j = 0; j < combined.length; j++) {
+    //     if (combined[j].name === obj.name && combined[j].time === obj.time) {
+    //       combined[j].population = obj.Population;
+    //     }
+    //   }
+    // }
+
+    // return combined;
   }
 
   selectCountry(evt) {
@@ -157,6 +191,16 @@ export class PlotFacet extends React.Component {
           return "checked";
         }
       };
+      let displays = [
+        "Life expectancy",
+        "Child mortality",
+        "Income per person",
+      ];
+      let checkForDisplay = (display) => {
+        if (this.state.display === display) {
+          return "checked";
+        }
+      };
       return (
         <div className="confine">
           <PlotFigure options={plotFuncFacet(data)} />
@@ -179,6 +223,21 @@ export class PlotFacet extends React.Component {
             />
             <button type="submit"> Update </button>
           </form>
+          <fieldset className="checkBoxesForDisplay">
+            <label htmlFor="checkBox">
+              {displays.map((display, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={display}
+                    checked={checkForDisplay(display)}
+                    onClick={this.selectDisplay}
+                  />
+                  {display}
+                </div>
+              ))}
+            </label>
+          </fieldset>
           <fieldset className="checkBoxes">
             <label htmlFor="checkBox">
               {regionArr.map((region, index) => (
@@ -197,7 +256,7 @@ export class PlotFacet extends React.Component {
         </div>
       );
     } else {
-      return "hi";
+      return <div></div>;
     }
   }
 }

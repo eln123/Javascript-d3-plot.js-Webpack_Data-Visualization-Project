@@ -4,27 +4,28 @@ export const plotFuncArrow = (state) => {
   const width = 1200;
   const minYear = state.years[0];
   const maxYear = state.years[1];
-  console.log("minYear", minYear);
-  console.log("state.data", state.data);
-  const dataOne = state.data.filter((obj, index) => index % 2);
-  const dataTwo = state.data.filter((obj, index) => !(index % 2));
+  const display = state.display;
+  const dataOne = state.data.filter((obj, index) => obj.time === minYear);
+  const dataTwo = state.data.filter((obj, index) => obj.time === maxYear);
 
   let data = [];
   for (let i = 0; i < dataOne.length; i++) {
     let obj = dataOne[i];
     let newObj = {};
     newObj.name = obj.name;
-    newObj[`${obj.time}LE`] = obj.lifeExpectancy;
+    newObj[`${obj.time}${display}`] = obj[`${display}`];
     newObj[`${obj.time}Pop`] = obj.population;
     newObj[`${obj.time}IPP`] = obj.incomePerPerson;
     data.push(newObj);
   }
+
   for (let i = 0; i < dataTwo.length; i++) {
     let obj = dataTwo[i];
     for (let j = 0; j < data.length; j++) {
       let currentInside = data[j];
       if (currentInside.name === obj.name) {
-        currentInside[`${obj.time}LE`] = obj.lifeExpectancy;
+        console.log(currentInside);
+        currentInside[`${obj.time}${display}`] = obj[`${display}`];
         currentInside[`${obj.time}Pop`] = obj.population;
         currentInside[`${obj.time}IPP`] = obj.incomePerPerson;
       }
@@ -41,14 +42,14 @@ export const plotFuncArrow = (state) => {
       label: "Population →",
     },
     y: {
-      label: "↑ Life Expectancy",
+      label: `${display}`,
 
       type: "log",
     },
     color: {
       type: "diverging",
       scheme: "burd",
-      label: `Change in Life Expectancy from ${minYear} to ${maxYear}`,
+      label: `Change in ${display} from ${minYear} to ${maxYear}`,
       legend: true,
       ticks: 6,
       tickFormat: "+f",
@@ -56,15 +57,15 @@ export const plotFuncArrow = (state) => {
     marks: [
       Plot.arrow(data, {
         x1: `${minYear}Pop`,
-        y1: `${minYear}LE`,
+        y1: `${minYear}${display}`,
         x2: `${maxYear}Pop`,
-        y2: `${maxYear}LE`,
+        y2: `${maxYear}${display}`,
         bend: true,
-        stroke: (d) => d[`${maxYear}LE`] - d[`${minYear}LE`],
+        stroke: (d) => d[`${maxYear}${display}`] - d[`${minYear}${display}`],
       }),
       Plot.text(data, {
         x: `${maxYear}Pop`,
-        y: `${maxYear}LE`,
+        y: `${maxYear}${display}`,
         // filter: "highlight",
         text: "name",
         fill: "currentColor",

@@ -12,7 +12,7 @@ export class PlotArrow extends React.Component {
       minYear: "",
       maxYear: "",
       years: ["1980", "2020"],
-
+      display: "lifeExpectancy",
       countries: ["China", "United States", "India", "Afghanistan"],
     };
     this.selectCountry = this.selectCountry.bind(this);
@@ -21,6 +21,29 @@ export class PlotArrow extends React.Component {
     this.changeMaxYear = this.changeMaxYear.bind(this);
     this.updateMinYear = this.updateMinYear.bind(this);
     this.updateMaxYear = this.updateMaxYear.bind(this);
+    this.selectDisplay = this.selectDisplay.bind(this);
+  }
+  selectDisplay(evt) {
+    if (evt.target.checked === true) {
+      if (evt.target.name === "Life expectancy") {
+        this.setState({
+          ...this.state,
+          display: "lifeExpectancy",
+        });
+      }
+      if (evt.target.name === "Child mortality") {
+        this.setState({
+          ...this.state,
+          display: "Child mortality",
+        });
+      }
+      if (evt.target.name === "Income per person") {
+        this.setState({
+          ...this.state,
+          display: "Income per person",
+        });
+      }
+    }
   }
   updateMinYear(evt) {
     evt.preventDefault;
@@ -53,7 +76,7 @@ export class PlotArrow extends React.Component {
   }
   helper() {
     const lifeExpectancyArr = this.props.data.lifeExpectancy;
-
+    const childMortalityArr = this.props.data.childMortality;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
     const countryRegionConverter = this.props.data.countryRegionConverter;
@@ -61,10 +84,25 @@ export class PlotArrow extends React.Component {
     // filters
     const years = this.state.years;
     const countries = this.state.countries;
+    const display = this.state.display;
     //
-    const filteredLE = lifeExpectancyArr.filter(
-      (obj) => years.includes(obj.time) && countries.includes(obj.name)
-    );
+    const filteredDisplay = () => {
+      if (display === "lifeExpectancy") {
+        return lifeExpectancyArr.filter(
+          (obj) => years.includes(obj.time) && countries.includes(obj.name)
+        );
+      } else if (display === "Child mortality") {
+        return childMortalityArr.filter(
+          (obj) => years.includes(obj.time) && countries.includes(obj.name)
+        );
+      } else {
+        return incomeArr.filter(
+          (obj) => years.includes(obj.time) && countries.includes(obj.name)
+        );
+      }
+    };
+    let displayArr = filteredDisplay();
+    console.log(displayArr);
 
     const filteredIPP = incomeArr.filter(
       (obj) => years.includes(obj.time) && countries.includes(obj.name)
@@ -76,7 +114,7 @@ export class PlotArrow extends React.Component {
 
     //
 
-    let combined = filteredLE;
+    let combined = displayArr;
 
     for (let i = 0; i < filteredIPP.length; i++) {
       let obj = filteredIPP[i];
@@ -95,16 +133,9 @@ export class PlotArrow extends React.Component {
         }
       }
     }
-    for (let i = 0; i < countryRegionConverter.length; i++) {
-      let obj = countryRegionConverter[i];
-      for (let j = 0; j < combined.length; j++) {
-        if (combined[j].name === obj.name) {
-          combined[j].region = obj["four_regions"];
-        }
-      }
-    }
+    combined = combined.filter((obj) => obj.region);
 
-    return { data: combined, years: this.state.years };
+    return { data: combined, years: this.state.years, display: display };
   }
   selectCountry(evt) {
     if (evt.target.checked === true) {
@@ -159,6 +190,16 @@ export class PlotArrow extends React.Component {
           return "checked";
         }
       };
+      let displays = [
+        "Life expectancy",
+        "Child mortality",
+        "Income per person",
+      ];
+      let checkForDisplay = (display) => {
+        if (this.state.display === display) {
+          return "checked";
+        }
+      };
       return (
         <div className="confine">
           <PlotFigure options={plotFuncArrow(combined)} />
@@ -184,6 +225,21 @@ export class PlotArrow extends React.Component {
             </form>
           </div>
           <div>
+            <fieldset className="checkBoxesForDisplay">
+              <label htmlFor="checkBox">
+                {displays.map((display, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      name={display}
+                      checked={checkForDisplay(display)}
+                      onClick={this.selectDisplay}
+                    />
+                    {display}
+                  </div>
+                ))}
+              </label>
+            </fieldset>
             <label htmlFor="searchBox">
               <input
                 type="text"
@@ -193,6 +249,7 @@ export class PlotArrow extends React.Component {
                 onChange={(event) => this.selectCountry2(event)}
               />
             </label>
+
             <div className="checkBoxes">
               <fieldset>
                 <label htmlFor="checkBox">
@@ -214,7 +271,7 @@ export class PlotArrow extends React.Component {
         </div>
       );
     }
-    return <div>"hi"</div>;
+    return <div></div>;
   }
 }
 const mapState = (state) => {

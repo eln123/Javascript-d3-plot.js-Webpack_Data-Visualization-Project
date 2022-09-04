@@ -15,6 +15,7 @@ export class Bubble extends React.Component {
     this.state = {
       updatedYear: "",
       year: "2023",
+      display: "lifeExpectancy",
       regions: ["africa", "americas", "asia", "europe"],
     };
     this.selectRegion = this.selectRegion.bind(this);
@@ -26,6 +27,7 @@ export class Bubble extends React.Component {
     const lifeExpectancyArr = this.props.data.lifeExpectancy;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
+    const childMortalityArr = this.props.data.childMortality;
 
     const year = this.state.year;
     const regions = this.state.regions;
@@ -38,10 +40,14 @@ export class Bubble extends React.Component {
     const filteredPop = populationArr.filter(
       (obj) => obj.time === year && regions.includes(obj.region)
     );
-    //
+    const filteredCM = childMortalityArr.filter(
+      (obj) => obj.time === year && regions.includes(obj.region)
+    );
     const countryRegionConverter = this.props.data.countryRegionConverter;
-
+    //
+    let display = this.state.display;
     let combined = filteredLE;
+
     for (let i = 0; i < filteredIPP.length; i++) {
       let obj = filteredIPP[i];
       for (let j = 0; j < combined.length; j++) {
@@ -66,8 +72,8 @@ export class Bubble extends React.Component {
         }
       }
     }
-
-    bubbleFunc(combined);
+    let bubbleObj = { data: combined, display: display };
+    bubbleFunc(bubbleObj);
   }
 
   updateYear(evt) {
@@ -139,7 +145,7 @@ export class Bubble extends React.Component {
         </div>
       );
     } else {
-      return "hi";
+      return <div></div>;
     }
   }
 }

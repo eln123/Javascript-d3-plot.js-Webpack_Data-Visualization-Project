@@ -1,6 +1,7 @@
 import * as Plot from "@observablehq/plot";
 
-export const plotFuncFacet = (data) => {
+export const plotFuncFacet = (dataObj) => {
+  let data = dataObj.data.filter((obj) => obj.region);
   return {
     y: {
       grid: true,
@@ -23,7 +24,7 @@ export const plotFuncFacet = (data) => {
       Plot.frame(),
       Plot.dot(data, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${dataObj.display}`,
         r: 1,
         facet: "exclude",
         fill: "black",
