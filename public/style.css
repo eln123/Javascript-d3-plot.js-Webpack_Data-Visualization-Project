@@ -183,9 +183,12 @@ Navi.js Css Here -RIGHT
 #navi .rightside {
   flex: 30%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   align-items: center;
-  padding-right: 25px;
+
+
+
 }
 
 #navi .rightside input {
@@ -208,6 +211,13 @@ Navi.js Css Here -RIGHT
 #navi .rightside .media-link {
   color: aliceblue;
   padding-right: 25px;
+}
+
+
+#navi .rightside .media-link {
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
 }
 
 /******************************************
