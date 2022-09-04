@@ -101,8 +101,9 @@ Chart2 (svg2)  Css Here
 App.js Css Here
 ************/
 .App {
-  width: 100vw;
+  width: 98vw;
   height: 100vh;
+
   /* background-color: #ffffff1d; */
   /* filter: invert(89%); */
 }
@@ -722,7 +723,7 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
 }
 
 /* *************************************************************************** */
-/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+
 
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -732,23 +733,18 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   padding: 0;
 }
 body {
-  /* background: url(http://img6.uploadhouse.com/fileuploads/17737/17737075bdad5cfa9423bb2c3c2beee695c72bb8.jpg); */
-  /* color: black; */
-  /* margin: 15px auto 0; */
-  /* width: 410px; */
+
 
   background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN52ZuyOBkX594iqFcBi-iz2lMOv2rZzxHhQ&usqp=CAU);
   background-size: cover;
-  background-repeat: no-repeat; /* filter: invert(11%); */
+  background-repeat: no-repeat;
+  margin: 5px;
+
+
 }
 
 #contact {
-  /* overflow: auto; */
-  /* text-align: center;
-  padding-top: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; */
+
   background-color: rgba(72, 72, 72, 0.4);
   padding-left: 35px;
   padding-right: 35px;
