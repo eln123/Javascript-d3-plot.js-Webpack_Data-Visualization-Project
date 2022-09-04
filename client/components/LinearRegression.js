@@ -196,69 +196,66 @@ export class LinearRegression extends React.Component {
             <button type="submit"> Update </button>
           </form>
 
+          <form onSubmit={this.changeMaxYear}>
+            <label htmlFor="maxYear"> MaxYear </label>
+            <input
+              name="value"
+              placeholder="maxYear"
+              onChange={this.updateMaxYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
+          <form onSubmit={this.changeHalf}>
+            <label htmlFor="Split Year"> SplitYear </label>
+            <input
+              name="value"
+              placeholder="Split Year"
+              onChange={this.updateSplitYear}
+            />
+            <button type="submit"> Update </button>
+          </form>
+          <fieldset className="checkBoxesForDisplay">
+            <label htmlFor="checkBox">
+              {displays.map((display, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={display}
+                    checked={checkForDisplay(display)}
+                    onClick={this.selectDisplay}
+                  />
+                  {display}
+                </div>
+              ))}
+            </label>
+          </fieldset>
 
-            <form onSubmit={this.changeMaxYear}>
-              <label htmlFor="maxYear"> MaxYear </label>
-              <input
-                name="value"
-                placeholder="maxYear"
-                onChange={this.updateMaxYear}
-              />
-              <button type="submit"> Update </button>
-            </form>
-            <form onSubmit={this.changeHalf}>
-              <label htmlFor="Split Year"> SplitYear </label>
-              <input
-                name="value"
-                placeholder="Split Year"
-                onChange={this.updateSplitYear}
-              />
-              <button type="submit"> Update </button>
-            </form>
-            <fieldset className="checkBoxesForDisplay">
+          <label htmlFor="searchBox">
+            <input
+              type="text"
+              className="search"
+              id="search"
+              placeholder="Enter Country Name"
+              onChange={(event) => this.selectCountry2(event)}
+            />
+          </label>
+          <div className="checkBoxes">
+            <fieldset>
               <label htmlFor="checkBox">
-                {displays.map((display, index) => (
+                {names.map((country, index) => (
                   <div key={index}>
                     <input
                       type="checkbox"
-                      name={display}
-                      checked={checkForDisplay(display)}
-                      onClick={this.selectDisplay}
+                      name={country}
+                      checked={checked(country)}
+                      onClick={this.selectCountry}
                     />
-                    {display}
+                    {country}
                   </div>
                 ))}
               </label>
             </fieldset>
-
-            <label htmlFor="searchBox">
-              <input
-                type="text"
-                className="search"
-                id="search"
-                placeholder="Enter Country Name"
-                onChange={(event) => this.selectCountry2(event)}
-              />
-            </label>
-            <div className="checkBoxes">
-              <fieldset>
-                <label htmlFor="checkBox">
-                  {names.map((country, index) => (
-                    <div key={index}>
-                      <input
-                        type="checkbox"
-                        name={country}
-                        checked={checked(country)}
-                        onClick={this.selectCountry}
-                      />
-                      {country}
-                    </div>
-                  ))}
-                </label>
-              </fieldset>
-            </div>
           </div>
-          {/* </div> */}
         </div>
       );
     }
