@@ -48,7 +48,7 @@ class FeedbackPage extends React.Component {
               </p>
 
               <div className="submit">
-                <input type="submit" value="SEND" id="button-blue" />
+                <input type="submit" value="Send" id="button-blue" />
                 <div className="ease"></div>
               </div>
             </form>
