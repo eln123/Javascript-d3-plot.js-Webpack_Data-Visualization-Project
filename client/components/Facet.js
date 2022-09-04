@@ -87,6 +87,12 @@ export class PlotFacet extends React.Component {
           display: "Income per person",
         });
       }
+      if (evt.target.name === "Population") {
+        this.setState({
+          ...this.state,
+          display: "Population",
+        });
+      }
     }
   }
 
@@ -104,55 +110,41 @@ export class PlotFacet extends React.Component {
     //
     const display = this.state.display;
     if (display === "lifeExpectancy") {
-      return { data: lifeExpectancyArr, display };
+      const filteredLE = lifeExpectancyArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
+      );
+      return { data: filteredLE, display };
     }
     if (display === "Child mortality") {
-      return { data: childMortalityArr, display };
+      const filteredCM = childMortalityArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
+      );
+      return { data: filteredCM, display };
     }
     if (display === "Income per person") {
-      return { data: incomeArr, display };
+      const filteredIPP = incomeArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
+      );
+      return { data: filteredIPP, display };
     }
-    // const filteredLE = lifeExpectancyArr.filter(
-    //   (obj) =>
-    //     regions.includes(obj.region) &&
-    //     +obj.time <= +maxYear &&
-    //     +obj.time >= +minYear
-    // );
-
-    // const filteredIPP = incomeArr.filter(
-    //   (obj) =>
-    //     regions.includes(obj.region) &&
-    //     +obj.time < +maxYear &&
-    //     +obj.time > +minYear
-    // );
-    // const filteredPop = populationArr.filter(
-    //   (obj) =>
-    //     regions.includes(obj.region) &&
-    //     +obj.time < +maxYear &&
-    //     +obj.time > +minYear
-    // );
-
-    // let combined = filteredLE;
-
-    // for (let i = 0; i < filteredIPP.length; i++) {
-    //   let obj = filteredIPP[i];
-    //   for (let j = 0; j < combined.length; j++) {
-    //     if (combined[j].name === obj.name && combined[j].time === obj.time) {
-    //       combined[j].incomePerPerson = obj["Income per person"];
-    //     }
-    //   }
-    // }
-
-    // for (let i = 0; i < filteredPop.length; i++) {
-    //   let obj = filteredPop[i];
-    //   for (let j = 0; j < combined.length; j++) {
-    //     if (combined[j].name === obj.name && combined[j].time === obj.time) {
-    //       combined[j].population = obj.Population;
-    //     }
-    //   }
-    // }
-
-    // return combined;
+    if (display === "Population") {
+      const filteredPop = populationArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time < +maxYear &&
+          +obj.time > +minYear
+      );
+      return { data: filteredPop, display };
+    }
   }
 
   selectCountry(evt) {
@@ -195,6 +187,7 @@ export class PlotFacet extends React.Component {
         "Life expectancy",
         "Child mortality",
         "Income per person",
+        "Population",
       ];
       let checkForDisplay = (display) => {
         if (this.state.display === display) {

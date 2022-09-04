@@ -1,9 +1,9 @@
 import * as Plot from "@observablehq/plot";
 
-export const plotFuncDensity = (data) => {
-
+export const plotFuncDensity = (dataObj) => {
+  let data = dataObj.data;
+  let display = dataObj.display;
   let chart = {
-
     width: 1400,
     height: 800,
     nice: true,
@@ -22,7 +22,7 @@ export const plotFuncDensity = (data) => {
         Plot.density(data, {
           weight: (d) => (d.region === region ? 1 : -1),
           x: "time",
-          y: "lifeExpectancy",
+          y: `${display}`,
           z: null,
           fill: (d) => d.region,
           fillOpacity: 0.2,
@@ -32,7 +32,7 @@ export const plotFuncDensity = (data) => {
       ),
       Plot.dot(data, {
         x: "time",
-        y: "lifeExpectancy",
+        y: `${display}`,
         fill: "region",
         strokeWidth: 0.5,
         stroke: "white",
@@ -40,6 +40,6 @@ export const plotFuncDensity = (data) => {
       Plot.frame(),
     ],
   };
-  console.log("41line");
+
   return chart;
 };
