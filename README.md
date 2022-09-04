@@ -1,76 +1,43 @@
-# Dashboard_data_visualization
+######  NPM_CEED DATA VISUALIZATION  ######
 
-# FS-App-Template
 
-## Setup
+# About The Project
 
-To use this as boilerplate, you'll need to take the following steps:
-
-- Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
-
-- Now you will have to add the fs-app-template as a remote and merge it into your own repository.
-
-```
-git remote add boilermaker git@github.com:FullstackAcademy/fs-app-template.git
-git fetch boilermaker
-git merge boilermaker/main
-git branch -m master main
-```
-
-## Customize
-
-Now that you've got the code, follow these steps to get acclimated:
-
-- Update project name and description in `package.json`
-- `npm install`
-- Create two postgres databases (`MY_APP_NAME` should match the `name`
-  parameter in `package.json`):
-- These commands will create both your **development** and **test** databases
-
-```
-createdb <YOUR APP NAME HERE FROM package.json>
-createdb <YOUR APP NAME HERE FROM package.json>-test
-```
-
-- By default, running `npm test` will use your test database, while
-  regular development uses development database
+- Contributors: 
+    - Chris Lee https://github.com/LEE012896
+    - Ethan Nair https://github.com/eln123
+    - Emre Basbaydar https://github.com/emrebsbydr
+    - Dat Vu https://github.com/datvuny
+  
+- Capstone project demonstrating the variety of data visualization
 
 ## Start
 
-Sync and seed your database by running `npm run seed`. Running `npm run start:dev` will make great things happen!
-
+- npm install
 - start:dev will both start your server and build your client side files using webpack
-- start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
-- start:dev:seed will start your server and also seed your database (this is useful when you are making schema changes and you don't want to run your seed script separately)
 
-### Heroku
 
-1.  Set up the [Heroku command line tools][heroku-cli]
-2.  `heroku login`
-3.  Add a git remote for heroku:
+### Languages and Technologies
 
-[heroku-cli]: https://devcenter.heroku.com/articles/heroku-cli
+- D3.JS, React, Redux, HTML, CSS, Javascript
 
-- **If you are creating a new app...**
 
-  1.  `heroku create` or `heroku create your-app-name` if you have a
-      name in mind.
-  2.  `heroku config:set JWT=<your secret here!>` to set a secret for JWT signing
+#### License
 
-Database Setup
+- Distributed under the MIT License. See LICENSE.txt for more information.
 
-3.  `heroku addons:create heroku-postgresql:hobby-dev` to add
-    ("provision") a postgres database to your heroku dyno (This creates your production database)
 
-4.  `heroku config:set SEED=true` to get heroku to sync and seed your database
+#### Contact
 
-5.  note everytime your app restarts, the database tables will be dropped and re-created. To avoid this you can `config:unset SEED`
+- Team NPM_CEED - https://twitter.com/CeedNpm - @CeedNpm
+- Project Link: https://github.com/2206-capstone-npm-CEED
 
-- **If you already have a Heroku app...**
 
-  1.  `heroku git:remote your-app-name` You'll need to be a
-      collaborator on the app.
+#### Acknowledgments
 
-Now, you should be deployed!
+- Would have not been made possible without the help, advice and guidance from:
+  - Dax Kerchner
+  - Travis Stratton
+  - Sulaiman Marey
+  - Christopher Nieves
+  - Veronica McGowan

@@ -39,8 +39,8 @@ export const plotFuncLinearRegression = (state) => {
   //
 
   return {
-    height: 500,
-    width: 1000,
+    height: 900,
+    width: 1500,
     y: {
       grid: true,
       type: "log",

@@ -10,7 +10,7 @@ export const bubbleFunc = (bubbleObj) => {
   d3.select(".bubble").selectAll("*").remove();
   var margin = { top: 100, right: 300, bottom: 60, left: 100 };
   const width = 1400 - margin.left - margin.right;
-  const height = 1000 - margin.top - margin.bottom;
+  const height = 880 - margin.top - margin.bottom;
   data = data.filter((obj) => obj.population > 0);
   // append the svg object to the body of the page
   var svg = d3

@@ -51,8 +51,8 @@ class Navi extends React.Component {
 
           <div className="middle">
             <div className="links" id={this.state.showlinks ? "hidden" : ""}>
-              <a href="/feedback">Feedback</a>
               <a href="/aboutus">About us</a>
+              <a href="/feedback">Feedback</a>
               <a href="/contact">Contact</a>
             </div>
           </div>
