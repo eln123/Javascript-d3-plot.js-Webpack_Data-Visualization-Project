@@ -11,9 +11,11 @@ export class PlotDensity extends React.Component {
       regions: ["americas", "europe", "asia"],
       minYear: "",
       maxYear: "",
+      display: "lifeExpectancy",
       years: ["1950", "2020"],
     };
     this.selectRegion = this.selectRegion.bind(this);
+    this.selectDisplay = this.selectDisplay.bind(this);
     this.helper = this.helper.bind(this);
     this.changeMinYear = this.changeMinYear.bind(this);
     this.changeMaxYear = this.changeMaxYear.bind(this);
@@ -53,61 +55,51 @@ export class PlotDensity extends React.Component {
     const lifeExpectancyArr = this.props.data.lifeExpectancy;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
+    const childMortalityArr = this.props.data.childMortality;
 
-    let combinedDataArr = [];
     // filters
     const regions = this.state.regions;
     const minYear = this.state.years[0];
 
     const maxYear = this.state.years[1];
-
     //
-    const filteredLE = lifeExpectancyArr.filter(
-      (obj) =>
-        regions.includes(obj.region) &&
-        +obj.time <= +maxYear &&
-        +obj.time >= +minYear
-    );
-
-    const filteredIPP = incomeArr.filter(
-      (obj) =>
-        regions.includes(obj.region) &&
-        +obj.time < +maxYear &&
-        +obj.time > +minYear
-    );
-
-    const filteredPop = populationArr.filter(
-      (obj) =>
-        regions.includes(obj.region) &&
-        +obj.time < +maxYear &&
-        +obj.time > +minYear
-    );
-
-    let combined = filteredLE;
-
-    for (let i = 0; i < filteredIPP.length; i++) {
-      let obj = filteredIPP[i];
-      for (let j = 0; j < combined.length; j++) {
-        if (combined[j].name === obj.name && combined[j].time === obj.time) {
-          combined[j].incomePerPerson = obj["Income per person"];
-        }
-      }
+    const display = this.state.display;
+    if (display === "lifeExpectancy") {
+      const filteredLE = lifeExpectancyArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
+      );
+      return { data: filteredLE, display };
     }
-
-    for (let i = 0; i < filteredPop.length; i++) {
-      let obj = filteredPop[i];
-      for (let j = 0; j < combined.length; j++) {
-        if (combined[j].name === obj.name && combined[j].time === obj.time) {
-          combined[j].population = obj.Population;
-        }
-      }
+    if (display === "Child mortality") {
+      const filteredCM = childMortalityArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
+      );
+      return { data: filteredCM, display };
     }
-
-    combined = combined.filter(
-      (obj) => +obj.population > 0 && +obj.lifeExpectancy > 0
-    );
-
-    return combined;
+    if (display === "Income per person") {
+      const filteredIPP = incomeArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time <= +maxYear &&
+          +obj.time >= +minYear
+      );
+      return { data: filteredIPP, display };
+    }
+    if (display === "Population") {
+      const filteredPop = populationArr.filter(
+        (obj) =>
+          regions.includes(obj.region) &&
+          +obj.time < +maxYear &&
+          +obj.time > +minYear
+      );
+      return { data: filteredPop, display };
+    }
   }
 
   selectRegion(evt) {
@@ -127,6 +119,34 @@ export class PlotDensity extends React.Component {
       this.setState(newState);
     }
   }
+  selectDisplay(evt) {
+    if (evt.target.checked === true) {
+      if (evt.target.name === "Life expectancy") {
+        this.setState({
+          ...this.state,
+          display: "lifeExpectancy",
+        });
+      }
+      if (evt.target.name === "Child mortality") {
+        this.setState({
+          ...this.state,
+          display: "Child mortality",
+        });
+      }
+      if (evt.target.name === "Income per person") {
+        this.setState({
+          ...this.state,
+          display: "Income per person",
+        });
+      }
+      if (evt.target.name === "Population") {
+        this.setState({
+          ...this.state,
+          display: "Population",
+        });
+      }
+    }
+  }
   render() {
     if (this.props.data.lifeExpectancy) {
       let regionArr = ["asia", "americas", "africa", "europe"];
@@ -136,6 +156,18 @@ export class PlotDensity extends React.Component {
           return "checked";
         }
       };
+      let displays = [
+        "Life expectancy",
+        "Child mortality",
+        "Income per person",
+        "Population",
+      ];
+      let checkForDisplay = (display) => {
+        if (this.state.display === display) {
+          return "checked";
+        }
+      };
+
       return (
         <div className="confine">
           <PlotFigure options={plotFuncDensity(data)} />
@@ -158,6 +190,21 @@ export class PlotDensity extends React.Component {
             />
             <button type="submit"> Update </button>
           </form>
+          <fieldset className="checkBoxesForDisplay">
+            <label htmlFor="checkBox">
+              {displays.map((display, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={display}
+                    checked={checkForDisplay(display)}
+                    onClick={this.selectDisplay}
+                  />
+                  {display}
+                </div>
+              ))}
+            </label>
+          </fieldset>
           <fieldset className="checkBoxes">
             <label htmlFor="checkBox">
               {regionArr.map((region, index) => (
