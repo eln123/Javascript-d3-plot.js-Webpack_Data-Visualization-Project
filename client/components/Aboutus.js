@@ -21,8 +21,8 @@ function toggleOpen() {
 
 function toggleActive(event) {
 	if (event.propertyName.includes('flex')) {
-		this.classList.toggle('active')		
-	}	
+		this.classList.toggle('active')
+	}
 }
 
 panels.forEach(panel => {
@@ -52,7 +52,7 @@ panels.forEach(panel => {
       <img className="img-responsive" id="css3" src="//inf3cti0n95.github.io/img/css3.svg"/>
 		<img className="img-responsive" id="html5" src="//inf3cti0n95.github.io/img/html5.svg"/>
 		<img className="img-responsive" id="js" src="//inf3cti0n95.github.io/img/js.svg"/>
-    <img className="img-responsive" id="D3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKITt73WPupY0OkfcdtkB9ZQBpLIvUZhj8kw&usqp=CAU"/>
+    <img className="img-responsive" id="D3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7EGo-Lt2Kw58PqIegd7MlYUTr5G7kE3vdJA&usqp=CAU"/>
 		<img className="img-responsive" id="redux" src="https://daqxzxzy8xq3u.cloudfront.net/wp-content/uploads/2019/04/21032431/redux-cover-imgage-1024x768.jpg"/>
 	  <img className="img-responsive" id="react" src="https://miro.medium.com/max/1400/0*EitUXT-pqbaQSCTt.gif"/>
     </div>
@@ -62,7 +62,7 @@ panels.forEach(panel => {
       <p>"Data is essential in decision making"</p>
     </div>
     <div className="panel panel3">
-      
+
       <p><img src='https://media-exp1.licdn.com/dms/image/C4E03AQFHmXN9nIIOdQ/profile-displayphoto-shrink_100_100/0/1585526355754?e=1667433600&v=beta&t=yCnZP0BJLV_M8_vFAa16JrOi3tCmH1p05WvSOivdN-Y'/>Ethan Nair</p>
       <p>E</p>
       <p>"I like solving problems and adding value to the world."</p>
