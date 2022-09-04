@@ -667,12 +667,14 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
 /* Flex Children */
 .panel > * {
   margin: 0;
-  width: 100%;
+  width: 30%;
   transition: transform 0.5s;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 51%;
+  padding: 2px;
 }
 
 .panel *:first-child {
