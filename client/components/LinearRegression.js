@@ -186,34 +186,36 @@ export class LinearRegression extends React.Component {
         <div className="confine">
           {/* <div className="plotLinearRegression"> */}
           <PlotFigure options={plotFuncLinearRegression(data)} />
-          <form onSubmit={this.changeMinYear}>
-            <label htmlFor="minYear"> MinYear </label>
-            <input
-              name="minYear"
-              placeholder="minYear"
-              onChange={this.updateMinYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
+          <div>
+            <form onSubmit={this.changeMinYear}>
+              <label htmlFor="minYear"> MinYear </label>
+              <input
+                name="minYear"
+                placeholder="minYear"
+                onChange={this.updateMinYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
 
-          <form onSubmit={this.changeMaxYear}>
-            <label htmlFor="maxYear"> MaxYear </label>
-            <input
-              name="value"
-              placeholder="maxYear"
-              onChange={this.updateMaxYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
-          <form onSubmit={this.changeHalf}>
-            <label htmlFor="Split Year"> SplitYear </label>
-            <input
-              name="value"
-              placeholder="Split Year"
-              onChange={this.updateSplitYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
+            <form onSubmit={this.changeMaxYear}>
+              <label htmlFor="maxYear"> MaxYear </label>
+              <input
+                name="value"
+                placeholder="maxYear"
+                onChange={this.updateMaxYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
+            <form onSubmit={this.changeHalf}>
+              <label htmlFor="Split Year"> SplitYear </label>
+              <input
+                name="value"
+                placeholder="Split Year"
+                onChange={this.updateSplitYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
+          </div>
           <div>
             <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
