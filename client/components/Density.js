@@ -171,25 +171,27 @@ export class PlotDensity extends React.Component {
       return (
         <div className="confine">
           <PlotFigure options={plotFuncDensity(data)} />
-          <form onSubmit={this.changeMinYear}>
-            <label htmlFor="minYear"> MinYear </label>
-            <input
-              name="minYear"
-              placeholder="minYear"
-              onChange={this.updateMinYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
+          <div>
+            <form onSubmit={this.changeMinYear}>
+              <label htmlFor="minYear"> MinYear </label>
+              <input
+                name="minYear"
+                placeholder="minYear"
+                onChange={this.updateMinYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
 
-          <form onSubmit={this.changeMaxYear}>
-            <label htmlFor="maxYear"> MaxYear </label>
-            <input
-              name="value"
-              placeholder="maxYear"
-              onChange={this.updateMaxYear}
-            />
-            <button type="submit"> Update </button>
-          </form>
+            <form onSubmit={this.changeMaxYear}>
+              <label htmlFor="maxYear"> MaxYear </label>
+              <input
+                name="value"
+                placeholder="maxYear"
+                onChange={this.updateMaxYear}
+              />
+              <button type="submit"> Update </button>
+            </form>
+          </div>
           <div>
             <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
