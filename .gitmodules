@@ -1,9 +1,0 @@
-[submodule "ddf--gapminder--population"]
-	path = ddf--gapminder--population
-	url = git@github.com:open-numbers/ddf--gapminder--population.git
-[submodule "plot"]
-	path = plot
-	url = git@github.com:observablehq/plot.git
-[submodule "stdlib"]
-	path = stdlib
-	url = git@github.com:observablehq/stdlib.git
