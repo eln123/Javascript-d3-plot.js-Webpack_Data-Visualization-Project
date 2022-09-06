@@ -101,7 +101,7 @@ Chart2 (svg2)  Css Here
 App.js Css Here
 ************/
 .App {
-  width: 98vw;
+  width: 99.5vw;
   height: 100vh;
 
   /* background-color: #ffffff1d; */
@@ -748,7 +748,7 @@ body {
   background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN52ZuyOBkX594iqFcBi-iz2lMOv2rZzxHhQ&usqp=CAU);
   background-size: cover;
   background-repeat: no-repeat;
-  margin: 5px;
+  margin: 0px;
 }
 
 #contact {
