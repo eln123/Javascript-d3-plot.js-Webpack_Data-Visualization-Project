@@ -6,20 +6,16 @@ export const plotFuncLinearRegression = (state) => {
   let splitYear = state.half;
   let yVar = state.display;
 
-  //
   let filteredName = state.data.filter((obj, index) => {
     return state.countries.includes(obj.name);
   });
 
-  //
   let filteredYearsBelow = filteredName.filter(
     (obj, index) => +obj.time >= +minYear && +obj.time <= +splitYear
   );
 
   let filteredDataBelow = filteredYearsBelow.map((obj) => {
     obj.time = +obj.time;
-
-    // obj.lifeExpectancy = +obj.lifeExpectancy;
     obj[`${yVar}`] = +obj[`${yVar}`];
     return obj;
   });
@@ -31,8 +27,6 @@ export const plotFuncLinearRegression = (state) => {
 
   let filteredDataAbove = filteredYearsAbove.map((obj) => {
     obj.time = +obj.time;
-
-    // obj.lifeExpectancy = +obj.lifeExpectancy;
     obj[`${yVar}`] = +obj[`${yVar}`];
     return obj;
   });
@@ -52,11 +46,6 @@ export const plotFuncLinearRegression = (state) => {
     grid: true,
     color: { legend: true },
     marks: [
-      // Plot.dot(filteredData, {
-      //   x: "time",
-      //   y: "lifeExpectancy",
-      //   fill: "name",
-      // }),
       Plot.dot(filteredDataBelow, {
         x: "time",
         y: `${yVar}`,
@@ -67,15 +56,6 @@ export const plotFuncLinearRegression = (state) => {
         y: `${yVar}`,
         fill: "name",
       }),
-      // Plot.linearRegressionY(filteredData, {
-      //   x: "year",
-      //   y: "lifeExpectancy",
-      //   stroke: "name",
-      // }),
-      // Plot.linearRegressionY(filteredData, {
-      //   x: "year",
-      //   y: "lifeExpectancy",
-      // }),
       Plot.linearRegressionY(filteredDataBelow, {
         x: "time",
         y: `${yVar}`,

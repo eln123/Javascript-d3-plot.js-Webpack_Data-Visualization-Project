@@ -1,5 +1,4 @@
 import React from "react";
-import { converter } from "../../csvConverter";
 import { plotFuncArrow } from "./plot/plotArrow";
 import { PlotFigure } from "plot-react";
 import { connect } from "react-redux";
@@ -85,7 +84,6 @@ export class PlotArrow extends React.Component {
     const years = this.state.years;
     const countries = this.state.countries;
     const display = this.state.display;
-    //
     const filteredDisplay = () => {
       if (display === "lifeExpectancy") {
         return lifeExpectancyArr.filter(
@@ -102,7 +100,6 @@ export class PlotArrow extends React.Component {
       }
     };
     let displayArr = filteredDisplay();
-    console.log(displayArr);
 
     const filteredIPP = incomeArr.filter(
       (obj) => years.includes(obj.time) && countries.includes(obj.name)
@@ -111,8 +108,6 @@ export class PlotArrow extends React.Component {
     const filteredPop = populationArr.filter(
       (obj) => years.includes(obj.time) && countries.includes(obj.name)
     );
-
-    //
 
     let combined = displayArr;
 

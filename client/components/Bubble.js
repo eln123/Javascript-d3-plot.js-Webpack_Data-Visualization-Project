@@ -1,12 +1,5 @@
-//
-// y = lifeExpectancy
-// x = income
-// circle size = population
-// circle color = region
-
 import React from "react";
 import { bubbleFunc } from "./d3/dThreeBubble";
-import { PlotFigure } from "plot-react";
 import { connect } from "react-redux";
 
 export class Bubble extends React.Component {
@@ -44,7 +37,7 @@ export class Bubble extends React.Component {
       (obj) => obj.time === year && regions.includes(obj.region)
     );
     const countryRegionConverter = this.props.data.countryRegionConverter;
-    //
+
     let display = this.state.display;
     let combined = filteredLE;
 
@@ -92,23 +85,18 @@ export class Bubble extends React.Component {
     });
   }
   selectRegion(evt) {
-    console.log("selectRegionStarted");
     if (evt.target.checked === true) {
       this.setState({
         ...this.state,
         regions: [...this.state.regions, String(evt.target.name)],
       });
     } else {
-      console.log(this.state);
-      const newState = {
+      this.setState({
         ...this.state,
         regions: this.state.regions.filter(
           (region) => region !== String(evt.target.name)
         ),
-      };
-      console.log(newState);
-      this.setState(newState);
-      console.log(this.state);
+      });
     }
   }
   render() {
@@ -152,8 +140,6 @@ export class Bubble extends React.Component {
 
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     data: state.data,
   };
 };

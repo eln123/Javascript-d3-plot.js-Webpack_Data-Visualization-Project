@@ -1,5 +1,4 @@
 import React from "react";
-import { converter } from "../../csvConverter";
 import { plotFuncDensity } from "./plot/plotDensity";
 import { PlotFigure } from "plot-react";
 import { connect } from "react-redux";
@@ -56,13 +55,9 @@ export class PlotDensity extends React.Component {
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
     const childMortalityArr = this.props.data.childMortality;
-
-    // filters
     const regions = this.state.regions;
     const minYear = this.state.years[0];
-
     const maxYear = this.state.years[1];
-    //
     const display = this.state.display;
     if (display === "lifeExpectancy") {
       const filteredLE = lifeExpectancyArr.filter(
@@ -109,14 +104,12 @@ export class PlotDensity extends React.Component {
         regions: [...this.state.regions, String(evt.target.name)],
       });
     } else {
-      const newState = {
+      this.setState({
         ...this.state,
         regions: this.state.regions.filter(
           (region) => region !== String(evt.target.name)
         ),
-      };
-
-      this.setState(newState);
+      });
     }
   }
   selectDisplay(evt) {

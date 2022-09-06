@@ -1,5 +1,4 @@
 import React from "react";
-import { converter } from "../../csvConverter";
 import { plotFuncFacet } from "./plot/plotFacet";
 import { PlotFigure } from "plot-react";
 import { connect } from "react-redux";
@@ -57,14 +56,12 @@ export class PlotFacet extends React.Component {
         regions: [...this.state.regions, String(evt.target.name)],
       });
     } else {
-      const newState = {
+      this.setState({
         ...this.state,
         regions: this.state.regions.filter(
           (region) => region !== String(evt.target.name)
         ),
-      };
-
-      this.setState(newState);
+      });
     }
   }
   selectDisplay(evt) {
@@ -101,13 +98,9 @@ export class PlotFacet extends React.Component {
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
     const childMortalityArr = this.props.data.childMortality;
-
-    // filters
     const regions = this.state.regions;
     const minYear = this.state.years[0];
-
     const maxYear = this.state.years[1];
-    //
     const display = this.state.display;
     if (display === "lifeExpectancy") {
       const filteredLE = lifeExpectancyArr.filter(
@@ -167,16 +160,6 @@ export class PlotFacet extends React.Component {
   render() {
     if (this.props.data.lifeExpectancy) {
       let data = this.helper();
-      //   let datas = this.props.data.lifeExpectancy
-      //     .map((obj) => obj.region)
-      //     .filter((obj) => obj);
-      //   let regionArr = [];
-      //   for (let i = 0; i < datas.length; i++) {
-      //     let region = datas[i];
-      //     if (!regionArr.includes(region)) {
-      //       regionArr.push(region);
-      //     }
-      //   }
       let regionArr = ["asia", "americas", "africa", "europe"];
       let checked = (region) => {
         if (this.state.regions.includes(region)) {
