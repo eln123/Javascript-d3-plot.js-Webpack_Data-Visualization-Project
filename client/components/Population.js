@@ -1,15 +1,7 @@
 import React from "react";
 import { converter } from "../../csvConverter";
-import { dThreeFunction } from "./d3/dThree";
 import { dThreeFunction2 } from "./d3/dThree";
-
-import { useRef, useEffect } from "react";
-import { ContactSupportOutlined } from "@material-ui/icons";
 import { countryList } from "./CountryList";
-
-/**
- * COMPONENT
- */
 
 export default class Population extends React.Component {
   constructor() {
@@ -17,18 +9,20 @@ export default class Population extends React.Component {
     this.state = {
       data: [],
       countries: ["China", "United States of America"],
+      display: "Child mortality",
+      minYear: "",
+      maxYear: "",
+      splitYear: "",
+      half: "2000",
+      years: ["1980", "2020"],
     };
 
     this.selectCountry = this.selectCountry.bind(this);
     this.selectCountry2 = this.selectCountry2.bind(this);
   }
   async componentDidMount() {
-    const urlC02Emissions =
-      "https://raw.githubusercontent.com/2206-capstone-npm-CEED/Dashboard_All_Datas/main/CO2_emissions_per_ton";
     const urlPopulation =
       "https://raw.githubusercontent.com/open-numbers/ddf--gapminder--population/master/ddf--datapoints--population--by--country--year.csv";
-    const testurl =
-      "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv";
 
     const results = await converter(urlPopulation);
 
@@ -58,10 +52,6 @@ export default class Population extends React.Component {
   }
   selectCountry(evt) {
     if (evt.target.checked === true) {
-      const newState = {
-        ...this.state,
-        countries: [...this.state.countries, evt.target.name],
-      };
       this.setState({
         ...this.state,
         countries: [...this.state.countries, evt.target.name],
@@ -70,13 +60,12 @@ export default class Population extends React.Component {
 
       dThreeFunction2(d3data, this.state.countries);
     } else {
-      const newState = {
+      this.setState({
         ...this.state,
         countries: this.state.countries.filter(
           (country) => country !== evt.target.name
         ),
-      };
-      this.setState(newState);
+      });
       let d3data = this.state.data.filter((obj, index) => obj.year < 2023);
 
       dThreeFunction2(d3data, this.state.countries);

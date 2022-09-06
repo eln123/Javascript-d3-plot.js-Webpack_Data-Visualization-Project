@@ -66,7 +66,6 @@ export const plotFuncArrow = (state) => {
       Plot.text(data, {
         x: `${maxYear}Pop`,
         y: `${maxYear}${display}`,
-        // filter: "highlight",
         text: "name",
         fill: "currentColor",
         stroke: "white",

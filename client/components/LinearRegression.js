@@ -1,5 +1,4 @@
 import React from "react";
-
 import { plotFuncLinearRegression } from "./plot/plotLinearRegression";
 import { PlotFigure } from "plot-react";
 import { connect } from "react-redux";
@@ -72,7 +71,6 @@ export class LinearRegression extends React.Component {
   helper() {
     if (this.state.display === "lifeExpectancy") {
       let data = this.props.data.lifeExpectancy;
-      console.log(data);
       return {
         data: data,
         display: this.state.display,
@@ -133,14 +131,12 @@ export class LinearRegression extends React.Component {
         countries: [...this.state.countries, evt.target.name],
       });
     } else {
-      const newState = {
+      this.setState({
         ...this.state,
         countries: this.state.countries.filter(
           (country) => country !== evt.target.name
         ),
-      };
-
-      this.setState(newState);
+      });
     }
   }
   selectCountry2(evt) {
@@ -148,19 +144,17 @@ export class LinearRegression extends React.Component {
       evt.target.value.slice(0, 1).toUpperCase() + evt.target.value.slice(1);
 
     if (country) {
-      const newState = {
+      this.setState({
         ...this.state,
         countries: [...this.state.countries, country],
-      };
-      this.setState(newState);
+      });
     } else {
-      const newState = {
+      this.setState({
         ...this.state,
         countries: this.state.countries.filter(
           (country) => country !== evt.target.value
         ),
-      };
-      this.setState(newState);
+      });
     }
   }
   render() {
@@ -184,7 +178,6 @@ export class LinearRegression extends React.Component {
       };
       return (
         <div className="confine">
-          {/* <div className="plotLinearRegression"> */}
           <PlotFigure options={plotFuncLinearRegression(data)} />
           <div>
             <form onSubmit={this.changeMinYear}>

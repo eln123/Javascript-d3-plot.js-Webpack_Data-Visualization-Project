@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import Population from "./components/Population";
-import Plot from "./components/Plot";
 import Bubble from "./components/Bubble";
 
 import LinearRegression from "./components/LinearRegression";
