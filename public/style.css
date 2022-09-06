@@ -72,9 +72,6 @@ div.tooltip {
   filter: invert(89%);
 }
 
-/***********************
-Chart2 (svg2)  Css Here
-************************/
 .axis path {
   stroke: black;
   stroke-width: 2px;
@@ -97,20 +94,10 @@ Chart2 (svg2)  Css Here
   font-family: "Arial Black", Gadget, sans-serif;
 }
 
-/************
-App.js Css Here
-************/
 .App {
   width: 99.5vw;
   height: 100vh;
-
-  /* background-color: #ffffff1d; */
-  /* filter: invert(89%); */
 }
-
-/************
-Navi.js Css Herea
-************/
 
 .navbar_container {
   color: blue;
@@ -123,9 +110,6 @@ Navi.js Css Herea
   display: flex;
 }
 
-/*************************
-Navi.js Css Here - LEFTSIDE
-*************************/
 #navi .leftside {
   flex: 30%;
   display: flex;
@@ -156,12 +140,8 @@ Navi.js Css Here - LEFTSIDE
   display: none;
 }
 
-/*************************
-Navi.js Css Here -MIDDLE
-*************************/
 #navi .middle {
   flex: 40%;
-  /* background-color: rgb(231, 39, 25); */
   background-color: #191a1b;
   display: flex;
   justify-content: center;
@@ -183,9 +163,6 @@ Navi.js Css Here -MIDDLE
   display: flex;
 }
 
-/*************************
-Navi.js Css Here -RIGHT
-*************************/
 #navi .rightside {
   flex: 30%;
   display: flex;
@@ -221,10 +198,6 @@ Navi.js Css Here -RIGHT
   justify-content: space-between;
   width: 160px;
 }
-
-/******************************************
-SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
-*******************************************/
 
 @media only screen and (max-width: 1350px) {
   #navi .leftside a {
@@ -329,16 +302,12 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   }
 }
 
-/* set chart list display:none */
 @media only screen and (max-width: 1500px) {
   #navi .middle .chartlist {
     visibility: hidden;
   }
 }
 
-/* .charts {
-  overflow: default;
-} */
 .dropbtn {
   background-color: #191a1b;
   color: white;
@@ -347,14 +316,11 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   border: none;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
-  /* box-shadow: 0px 18px 36px 0px rgb(233 233 233 / 20%); */
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -365,7 +331,6 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   box-shadow: 0px 18px 36px 0px rgba(238, 238, 238, 0.404);
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -373,22 +338,17 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #6d777c;
 }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #6d777c;
 }
-
-/* ***************** HomePage ******************** */
 
 .container__item {
   margin: 0 auto 40px;
@@ -404,7 +364,6 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   overflow: hidden;
   font-family: "Montserrat", sans-serif;
   color: #fff7f5;
-  /* background-color: #eff3f4; */
   background-image: url("https://i.pinimg.com/originals/2e/e6/99/2ee6998e34c3e2eff7b894c66cfc5267.jpg");
 }
 
@@ -548,7 +507,6 @@ SET THE SIZE  AGAIN WHEN THE PIXEL CHANGING
   }
 }
 
-/* %%%%%%%%%%%%%%%% FEEDBACK %%%%%%%%%%%%%%%% */
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 #form-div {
@@ -618,14 +576,12 @@ textarea#comment {
     no-repeat 10px 8px;
   font-size: 21px;
 }
-/* ############# Linear Regression ############### */
 
 .chartComponent {
   background-color: #ffffff;
   filter: invert(89%);
 }
 
-/* ############# ABOUT US ############### */
 .npmLogo {
   -webkit-filter: invert(100%);
   filter: invert(100%);
@@ -696,7 +652,6 @@ textarea#comment {
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWKNQihdqOn4lJTo-33D0LcFEInTrvUfwnQw&usqp=CAU);
 }
 
-/* Flex Children */
 .panel > * {
   margin: 0;
   width: 30%;
@@ -718,7 +673,6 @@ textarea#comment {
 
 .panel p {
   text-transform: uppercase;
-  /* font-family: 'Amatic SC', cursive; */
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
   font-size: 2em;
 }
@@ -734,9 +688,6 @@ textarea#comment {
 .panel.active * {
   transform: translatey(0);
 }
-
-/* *************************************************************************** */
-
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -769,10 +720,6 @@ body {
 }
 #contact #form {
   width: 410px;
-  /* float: center;
-  position: relative;
-  left: 650px;
-  top: 260px; */
 }
 #contact #form h2 {
   font: 48px "Bree Serif", Georgia, serif;
@@ -841,21 +788,6 @@ body {
   font-weight: 700;
   border: #fbfbfb solid 4px;
   font-weight: 700;
-
-  /*
-  width: 60%;
-  border: #fbfbfb solid 4px;
-  cursor: pointer;
-  background-color: #13476a;
-  color: white;
-  font-size: 24px;
-  padding-top: 22px;
-  padding-bottom: 22px;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-  margin-top: -4px;
-  font-weight: 700; */
 }
 #contact #captcha span {
   width: 44px;
