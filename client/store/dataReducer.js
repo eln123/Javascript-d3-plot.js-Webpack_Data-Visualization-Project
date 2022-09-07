@@ -1,4 +1,3 @@
-import axios from "axios";
 import { converter } from "../../csvConverter";
 
 const SET_DATA = "SET_DATA";
@@ -22,7 +21,6 @@ export const getDataFromGithub = () => async (dispatch) => {
   countryRegionConverter = countryRegionConverter.data;
   state = { ...state, countryRegionConverter: countryRegionConverter };
 
-  /////////////////
   let lifeExpectancy = await converter(urlLifeExpectancyByCountry);
   let data = lifeExpectancy.data;
   let converted = [];
@@ -41,12 +39,9 @@ export const getDataFromGithub = () => async (dispatch) => {
   converted = addRegion(converted, countryRegionConverter);
 
   state = { ...state, lifeExpectancy: converted };
-
-  ////////////////////
   let incomePerPerson = await converter(urlIncomePerPersonByCountry);
   incomePerPerson = addRegion(incomePerPerson.data, countryRegionConverter);
   state = { ...state, incomePerPerson: incomePerPerson };
-  //////////////////////
   let population = await converter(urlPopulationByCountry);
   population = addRegion(population.data, countryRegionConverter);
   state = { ...state, population: population };
@@ -55,15 +50,10 @@ export const getDataFromGithub = () => async (dispatch) => {
   childMortality = addRegion(childMortality.data, countryRegionConverter);
   state = { ...state, childMortality: childMortality };
 
-  /////////////////////////////
-  /////////////////
-
-  //////////////////
-  ///////////////////
   dispatch(setData(state));
 };
 
-var addRegion = (arr, countryRegionConverter) => {
+let addRegion = (arr, countryRegionConverter) => {
   let returnArr = arr.map((obj) => {
     for (let i = 0; i < countryRegionConverter.length; i++) {
       let converterObj = countryRegionConverter[i];

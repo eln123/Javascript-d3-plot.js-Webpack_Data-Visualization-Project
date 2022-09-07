@@ -4,12 +4,12 @@ export const bubbleFunc = (bubbleObj) => {
   let data = bubbleObj.data;
   let display = bubbleObj.display;
   d3.select(".bubble").selectAll("*").remove();
-  var margin = { top: 100, right: 300, bottom: 60, left: 100 };
+  let margin = { top: 100, right: 300, bottom: 60, left: 100 };
   const width = 1400 - margin.left - margin.right;
   const height = 880 - margin.top - margin.bottom;
   data = data.filter((obj) => obj.population > 0);
   // append the svg object to the body of the page
-  var svg = d3
+  let svg = d3
     .select(".bubble")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -22,7 +22,7 @@ export const bubbleFunc = (bubbleObj) => {
   // ---------------------------//
 
   // Add X axis
-  var x = d3.scaleLinear().domain([0, 75000]).range([0, width]);
+  let x = d3.scaleLinear().domain([0, 75000]).range([0, width]);
   svg
     .append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -44,7 +44,7 @@ export const bubbleFunc = (bubbleObj) => {
     .style("font-size", "21px");
 
   // Add Y axis
-  var y = d3.scaleLinear().domain([35, 90]).range([height, 0]);
+  let y = d3.scaleLinear().domain([35, 90]).range([height, 0]);
   svg.append("g").call(d3.axisLeft(y)).style("font-size", "20px");
 
   // Add Y axis label:
@@ -58,10 +58,10 @@ export const bubbleFunc = (bubbleObj) => {
     .style("font-size", "21px");
 
   // Add a scale for bubble size
-  var z = d3.scaleSqrt().domain([200000, 1310000000]).range([2, 30]);
+  let z = d3.scaleSqrt().domain([200000, 1310000000]).range([2, 30]);
 
   // Add a scale for bubble color
-  var myColor = d3
+  let myColor = d3
     .scaleOrdinal()
     .domain(["asia", "europe", "americas", "africa"])
     .range(d3.schemeSet1);
@@ -71,7 +71,7 @@ export const bubbleFunc = (bubbleObj) => {
   // ---------------------------//
 
   // -1- Create a tooltip div that is hidden by default:
-  var tooltip = d3
+  let tooltip = d3
     .select(".bubble")
     .append("div")
     .style("opacity", 0)
@@ -83,7 +83,7 @@ export const bubbleFunc = (bubbleObj) => {
     .style("font-size", "20px");
 
   // -2- Create 3 functions to show / update (when mouse move but stay oTypeError: d3.mouse is not a functionn same circle) / hide the tooltip
-  var showTooltip = function (evt) {
+  let showTooltip = function (evt) {
     tooltip.transition().duration(200);
     tooltip
       .style("opacity", 1)
@@ -100,21 +100,16 @@ export const bubbleFunc = (bubbleObj) => {
       .style("left", d3.pointer(evt)[0] + 30 + "px")
       .style("top", d3.pointer(evt)[1] + 30 + "px");
   };
-  var moveTooltip = function (evt) {
+  let moveTooltip = function (evt) {
     tooltip
       .style("left", d3.pointer(evt)[0] + 30 + "px")
       .style("top", d3.pointer(evt)[1] + 30 + "px");
   };
-  var hideTooltip = function (evt) {
+  let hideTooltip = function (evt) {
     tooltip.transition().duration(200).style("opacity", 0);
   };
 
-  // ---------------------------//
-  //       HIGHLIGHT GROUP      //
-  // ---------------------------//
-
-  // What to do when one group is hovered
-  var highlight = function (d) {
+  let highlight = function (d) {
     // reduce opacity of all groups
     d3.selectAll(".bubbles").style("opacity", 0.05);
     // expect the one that is hovered
@@ -122,7 +117,7 @@ export const bubbleFunc = (bubbleObj) => {
   };
 
   // And when it is not hovered anymore
-  var noHighlight = function (d) {
+  let noHighlight = function (d) {
     d3.selectAll(".bubbles").style("opacity", 1);
   };
 
@@ -161,9 +156,9 @@ export const bubbleFunc = (bubbleObj) => {
   //       LEGEND              //
   // ---------------------------//
 
-  var size = 20;
+  let size = 20;
 
-  var allgroups = ["Asia", "Europe", "Americas", "Africa"].map((name) =>
+  let allgroups = ["Asia", "Europe", "Americas", "Africa"].map((name) =>
     name.toLowerCase()
   );
 

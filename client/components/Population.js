@@ -106,13 +106,6 @@ export default class Population extends React.Component {
     const byCountry = d3.groups(allcountry, (d) => d.country);
     console.log(allcountry);
     console.log(byCountry);
-    const showData = this.state.data.filter(
-      (obj, index) => obj.country !== byCountry[0]
-    );
-
-    const countryName = countryList.map((country) => {
-      return country[1];
-    });
 
     return (
       <div>
@@ -151,7 +144,3 @@ export default class Population extends React.Component {
     );
   }
 }
-
-/**
- * CONTAINER
- */

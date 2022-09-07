@@ -1,28 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { Route, Switch } from "react-router-dom";
-
 import Population from "./components/Population";
 import Bubble from "./components/Bubble";
-
 import LinearRegression from "./components/LinearRegression";
 import PlotArrow from "./components/Arrow";
 import PlotDensity from "./components/Density";
-
 import PlotFacet from "./components/Facet";
-
 import HomePage from "./components/HomePage";
-
 import FeedbackPage from "./components/FeedbackPage";
 import Aboutus from "./components/Aboutus";
 import Contactus from "./components/ContactUs";
 
 import { getDataFromGithub } from "./store/dataReducer";
-
-/**
- * COMPONENT
- */
 
 export class Routes extends Component {
   async componentDidMount() {
@@ -33,7 +23,6 @@ export class Routes extends Component {
       <div>
         <Switch>
           <Route path="/bubble" exact component={Bubble} />
-
           <Route path="/linearRegression" exact component={LinearRegression} />
           <Route path="/density" exact component={PlotDensity} />
           <Route path="/facet" exact component={PlotFacet} />
@@ -52,8 +41,6 @@ export class Routes extends Component {
 
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     data: state.data,
   };
 };
