@@ -24,7 +24,6 @@ export const plotFuncArrow = (state) => {
     for (let j = 0; j < data.length; j++) {
       let currentInside = data[j];
       if (currentInside.name === obj.name) {
-        console.log(currentInside);
         currentInside[`${obj.time}${display}`] = obj[`${display}`];
         currentInside[`${obj.time}Pop`] = obj.population;
         currentInside[`${obj.time}IPP`] = obj.incomePerPerson;
@@ -37,6 +36,8 @@ export const plotFuncArrow = (state) => {
     height: Math.min(800, width),
     grid: true,
     inset: 10,
+
+    style: { fontSize: 20 },
     x: {
       type: "log",
       label: "Population →",
