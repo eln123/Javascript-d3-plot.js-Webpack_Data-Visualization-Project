@@ -5,16 +5,18 @@ import { connect } from "react-redux";
 import { getDataFromGithub } from "../store/dataReducer";
 
 export class PlotArrow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = this.state = {
+  constructor() {
+    super();
+    this.state = {
       minYear: "",
       maxYear: "",
       years: ["1980", "2020"],
       display: "lifeExpectancy",
       countries: ["China", "United States", "India", "Afghanistan"],
+      countryBeingSearched: "",
     };
     this.selectCountry = this.selectCountry.bind(this);
+    this.searchCountry = this.searchCountry.bind(this);
     this.helper = this.helper.bind(this);
     this.changeMinYear = this.changeMinYear.bind(this);
     this.changeMaxYear = this.changeMaxYear.bind(this);
@@ -149,24 +151,34 @@ export class PlotArrow extends React.Component {
       this.setState(newState);
     }
   }
-  selectCountry2(evt) {
-    const country =
-      evt.target.value.slice(0, 1).toUpperCase() + evt.target.value.slice(1);
+  searchCountry(evt) {
+    this.state.countryBeingSearched = evt.target.value.toLowerCase();
+    let boxPreSpread = document.getElementById("countryFilterDiv");
+    let box = [...boxPreSpread.childNodes].map((div) =>
+      div.innerText.toLowerCase()
+    );
+    let lengthSoFar = this.state.countryBeingSearched.length;
 
-    if (country) {
-      const newState = {
-        ...this.state,
-        countries: [...this.state.countries, country],
-      };
-      this.setState(newState);
+    let filteredBox = box.filter(
+      (name) => name.slice(0, lengthSoFar) === this.state.countryBeingSearched
+    );
+    if (this.state.countryBeingSearched.length) {
+      let first = filteredBox[0];
+
+      let newStart = [...boxPreSpread.childNodes].filter(
+        (div) => div.innerText.toLowerCase() === first
+      );
+      console.log(first);
+      // boxPreSpread.scrollTo({
+      //   top: newStart.offsetTop,
+      //   behavior: "smooth",
+      // });
     } else {
-      const newState = {
-        ...this.state,
-        countries: this.state.countries.filter(
-          (country) => country !== evt.target.value
-        ),
-      };
-      this.setState(newState);
+      let afg = [...boxPreSpread.childNodes][0];
+      boxPreSpread.scrollTo({
+        top: afg.offsetTop,
+        behavior: "auto",
+      });
     }
   }
   render() {
@@ -196,9 +208,12 @@ export class PlotArrow extends React.Component {
         }
       };
       return (
-        <div className="confine">
-          <PlotFigure options={plotFuncArrow(combined)} />
-          <div>
+        <div id="graphContainer">
+          <div id="plotContainer">
+            <PlotFigure options={plotFuncArrow(combined)} />
+          </div>
+
+          <div id="yearFilterDiv">
             <form onSubmit={this.changeMinYear}>
               <label htmlFor="minYear"> MinYear </label>
               <input
@@ -219,7 +234,8 @@ export class PlotArrow extends React.Component {
               <button type="submit"> Update </button>
             </form>
           </div>
-          <div>
+
+          <div id="subjectFilterDiv">
             <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
                 {displays.map((display, index) => (
@@ -228,39 +244,41 @@ export class PlotArrow extends React.Component {
                       type="checkbox"
                       name={display}
                       checked={checkForDisplay(display)}
-                      onClick={this.selectDisplay}
+                      onChange={this.selectDisplay}
                     />
                     {display}
                   </div>
                 ))}
               </label>
             </fieldset>
-            <label htmlFor="searchBox">
-              <input
-                type="text"
-                className="search"
-                id="search"
-                placeholder="Enter Country Name"
-                onChange={(event) => this.selectCountry2(event)}
-              />
-            </label>
+          </div>
 
-            <div className="checkBoxes">
-              <fieldset>
-                <label htmlFor="checkBox">
-                  {nameArr.map((country, index) => (
-                    <div key={index}>
-                      <input
-                        type="checkbox"
-                        checked={checked(country)}
-                        name={country}
-                        onClick={this.selectCountry}
-                      />
-                      {country}
-                    </div>
-                  ))}
-                </label>
-              </fieldset>
+          <div id="countryFilterDiv">
+            <div id="countrySearchBox">
+              <label htmlFor="searchBox">
+                <input
+                  id="countryFilterSearchInput"
+                  type="text"
+                  placeholder="Enter Country Name"
+                  onChange={(event) => this.searchCountry(event)}
+                />
+              </label>
+            </div>
+
+            <div>
+              <label id="countryCheckbox" htmlFor="checkBox">
+                {nameArr.map((country, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      checked={checked(country)}
+                      name={country}
+                      onChange={this.selectCountry}
+                    />
+                    {country}
+                  </div>
+                ))}
+              </label>
             </div>
           </div>
         </div>

@@ -177,7 +177,7 @@ export class LinearRegression extends React.Component {
         }
       };
       return (
-        <div className="confine">
+        <div>
           <PlotFigure options={plotFuncLinearRegression(data)} />
           <div>
             <form onSubmit={this.changeMinYear}>
@@ -218,7 +218,7 @@ export class LinearRegression extends React.Component {
                       type="checkbox"
                       name={display}
                       checked={checkForDisplay(display)}
-                      onClick={this.selectDisplay}
+                      onChange={this.selectDisplay}
                     />
                     {display}
                   </div>
@@ -244,7 +244,7 @@ export class LinearRegression extends React.Component {
                         type="checkbox"
                         name={country}
                         checked={checked(country)}
-                        onClick={this.selectCountry}
+                        onChange={this.selectCountry}
                       />
                       {country}
                     </div>

@@ -8,6 +8,8 @@ button:hover {
   cursor: pointer;
 }
 
+
+
 a {
   text-decoration: none;
   color: white;
@@ -99,105 +101,17 @@ div.tooltip {
   height: 100vh;
 }
 
-.navbar_container {
-  color: blue;
-}
-#navi {
-  background-color: #191a1b;
-  width: 100%;
-  height: 80px;
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-}
 
-#navi .leftside {
-  flex: 30%;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-#navi .leftside .links {
-  max-height: 80px;
-}
-#navi .leftside a {
-  text-decoration: none;
-  color: white;
-  font-size: 25px;
-  margin-left: 15px;
-}
 
-#home-icon {
-  height: 65px;
-  width: 105px;
-  margin: 10px;
-}
+
 #D3 {
   border-radius: 50%;
   padding: 2px;
 }
 
-#navi .leftside .button {
-  display: none;
-}
 
-#navi .middle {
-  flex: 40%;
-  background-color: #191a1b;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-#navi .middle .links {
-  max-height: 80px;
-}
 
-#navi .middle .links a {
-  text-decoration: none;
-
-  font-size: 25px;
-  margin-left: 15px;
-}
-
-#navi .middle #hidden {
-  display: flex;
-}
-
-#navi .rightside {
-  flex: 30%;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#navi .rightside input {
-  width: 160px;
-  height: 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  padding-left: 15px;
-  color: black;
-}
-
-.rightside button {
-  height: 53px;
-  width: 80px;
-  border-radius: 6px;
-  font-size: 16px;
-}
-
-#navi .rightside .media-link {
-  color: aliceblue;
-  padding-right: 25px;
-}
-
-#navi .rightside .media-link {
-  display: flex;
-  justify-content: space-between;
-  width: 160px;
-}
 
 @media only screen and (max-width: 1350px) {
   #navi .leftside a {
@@ -237,80 +151,13 @@ div.tooltip {
   }
 }
 
-@media only screen and (max-width: 700px) {
-  #navi .leftside a {
-    font-size: 15px;
-  }
 
-  .rightside button {
-    height: 40px;
-    width: 50px;
-    border-radius: 6px;
-    font-size: 10px;
-  }
 
-  #navi .rightside input {
-    width: 50px;
-    height: 8px;
-    border: none;
-    border-radius: 3px;
-    font-size: 9px;
-    padding-left: 15px;
-    color: black;
-  }
-}
 
-@media only screen and (max-width: 1050px) {
-  #navi .middle .links {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 880px) {
-  #navi .leftside .charts {
-    display: none;
-  }
-
-  #navi .leftside .button {
-    display: flex;
-  }
-
-  #navi .middle #hidden {
-    position: absolute;
-    left: 0px;
-    top: 80px;
-    max-height: 320px;
-    width: 20%;
-    background-color: #021e39;
-    display: flex;
-    flex-direction: column;
-    margin-top: 3px;
-  }
-
-  #navi .middle #hidden a {
-    margin: 5px;
-    font-size: 12px;
-  }
-
-  #navi .middle {
-    background-color: #021e39;
-    flex: 0%;
-  }
-
-  #navi .rightside {
-    flex: 40%;
-  }
-}
-
-@media only screen and (max-width: 1500px) {
-  #navi .middle .chartlist {
-    visibility: hidden;
-  }
-}
 
 .dropbtn {
   background-color: #191a1b;
-  color: white;
+
   padding: 16px;
   font-size: 20px;
   border: none;
@@ -319,12 +166,13 @@ div.tooltip {
 .dropdown {
   position: relative;
   display: inline-block;
+ 
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #191a1b;
+  
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -332,10 +180,12 @@ div.tooltip {
 }
 
 .dropdown-content a {
-  color: black;
+  color: white;
+  background-color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+
 }
 
 .dropdown-content a:hover {
@@ -354,18 +204,7 @@ div.tooltip {
   margin: 0 auto 40px;
 }
 
-.landing-page-container {
-  width: 100%;
-  min-height: 100%;
-  height: 90rem;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: bottom;
-  overflow: hidden;
-  font-family: "Montserrat", sans-serif;
-  color: #fff7f5;
-  background-image: url("https://i.pinimg.com/originals/2e/e6/99/2ee6998e34c3e2eff7b894c66cfc5267.jpg");
-}
+
 
 .content__wrapper {
   max-width: 1200px;
@@ -408,52 +247,6 @@ div.tooltip {
   color: #ffffff;
 }
 
-.ellipses {
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  border-style: solid;
-}
-
-.ellipses__outer--thin {
-  width: 100%;
-  height: 100%;
-  border-width: 1px;
-  border-color: rgba(255, 248, 248, 0.1);
-  animation: ellipsesOrbit 15s ease-in-out infinite;
-}
-
-.ellipses__outer--thin::after {
-  content: "";
-  background-image: url("https://s29.postimg.org/5h0r4ftkn/ellipses_dial.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  opacity: 0.15;
-}
-
-.ellipses__outer--thick {
-  width: 99.5%;
-  height: 99.5%;
-  border-color: #f0fdff transparent;
-  border-width: 2px;
-  transform: rotate(-45deg);
-  animation: ellipsesRotate 15s ease-in-out infinite;
-}
-
-.ellipses__orbit {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-width: 2px;
-  border-color: #eefdff;
-  top: 5rem;
-  right: 6.75rem;
-}
-
 .scroller {
   width: 7.5rem;
   float: right;
@@ -487,27 +280,7 @@ div.tooltip {
   opacity: 0.7;
 }
 
-@keyframes ellipsesRotate {
-  0% {
-    transform: rotate(-45deg);
-  }
 
-  100% {
-    transform: rotate(-405deg);
-  }
-}
-
-@keyframes ellipsesOrbit {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 #form-div {
   background-color: rgba(72, 72, 72, 0.4);
@@ -524,76 +297,17 @@ div.tooltip {
   border-radius: 7px;
   -webkit-border-radius: 7px;
 }
-.feedback-input {
-  color: #3c3c3c;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  border-radius: 0;
-  line-height: 22px;
-  background-color: #fbfbfb;
-  padding: 13px 13px 13px 54px;
-  margin-bottom: 10px;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 3px solid rgba(0, 0, 0, 0);
-}
-#button-blue {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  float: left;
-  width: 100%;
-  border: #fbfbfb solid 4px;
-  cursor: pointer;
-  background-color: #13476a;
-  color: white;
-  font-size: 24px;
-  padding-top: 22px;
-  padding-bottom: 22px;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-  margin-top: -4px;
-  font-weight: 700;
-}
-input#name {
-  background: white
-    url(http://img7.uploadhouse.com/fileuploads/17737/177370145f09fe433945815665aa214f80dbc6af.png)
-    no-repeat 10px 8px;
-  font-size: 21px;
-}
-input#email {
-  background: white
-    url(http://img6.uploadhouse.com/fileuploads/17737/177370138cc63992182149e9befabff3eafa6d23.png)
-    no-repeat 10px 9px;
-  font-size: 21px;
-}
-textarea#comment {
-  background: white
-    url(http://img3.uploadhouse.com/fileuploads/17737/1773701229ed8c2f465a8274623ca8976adaf196.png)
-    no-repeat 10px 8px;
-  font-size: 21px;
-}
+
+
+
 
 .chartComponent {
   background-color: #ffffff;
   filter: invert(89%);
 }
 
-.npmLogo {
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-  height: 5rem;
-  display: block;
-  margin-left: auto;
-}
-.aboutUs {
-  flex: auto;
-  color: white;
-  align-items: center;
-}
+
+
 .img-responsive {
   height: 2em;
 }
@@ -691,113 +405,59 @@ textarea#comment {
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN52ZuyOBkX594iqFcBi-iz2lMOv2rZzxHhQ&usqp=CAU);
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: 0px;
+
+
+
+#graphContainer {
+  height: 90vh;
+  width: 100vw;
+  border: 10px solid red;
+  position: relative
 }
 
-#contact {
-  background-color: rgba(72, 72, 72, 0.4);
-  padding-left: 35px;
-  padding-right: 35px;
-  padding-top: 35px;
-  padding-bottom: 50px;
-  width: 450px;
-  float: left;
-  left: 50%;
+#plotContainer {
+  
+ 
+  border: 2px solid green;
   position: absolute;
-  margin-top: 30px;
-  margin-left: -260px;
-  border-radius: 7px;
-  -webkit-border-radius: 7px;
-  box-shadow: 0px 18px 36px 0px rgb(233 233 233 / 20%);
+  left: 20%;
+  top: 10%
 }
-#contact #form {
-  width: 410px;
+
+#yearFilterDiv {
+
+  border: 2px solid green;
+  position: absolute;
+  left: 10%;
+  top: 17%;
+  
 }
-#contact #form h2 {
-  font: 48px "Bree Serif", Georgia, serif;
+
+#subjectFilterDiv {
+  border: 2px solid green;
+  position: absolute;
+  left: 10%;
+  top: 25%;
+  display: flex;
+  justify-content: center;
+
 }
-#contact #form span {
-  display: block;
-  float: left;
-  width: 100px;
-  padding-top: 5px;
-  font: 14px/16px "Bree Serif", Georgia, serif;
-  filter: invert(100%);
+
+#countryFilterDiv {
+  border: 2px solid green;
+  position: absolute;
+  left: 67%;
+  top: 16%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+  height: 50vh;
+  overflow: auto;
 }
-#contact #form input {
-  float: left;
-  width: 255px;
-  border: 0px;
-  color: #100f0f;
-  padding: 10px 10px 10px 30px;
-  font: 11px/20px "Open Sans", Verdana, Helvetica, sans-serif;
-  margin-bottom: 10px;
-}
-#contact #form textarea {
-  float: left;
-  border: 0px;
-  width: 255px;
-  height: 140px;
-  padding: 10px 10px 10px 30px;
-  font: 11px/20px "Open Sans", Verdana, Helvetica, sans-serif;
-  color: #f1f1f1;
-  resize: none;
-}
-#contact #form input.name {
-  background: white
-    url(http://img7.uploadhouse.com/fileuploads/17737/177370145f09fe433945815665aa214f80dbc6af.png)
-    no-repeat 10px 8px;
-  font-size: 21px;
-}
-#contact #form input.email {
-  background: white
-    url(http://img6.uploadhouse.com/fileuploads/17737/177370138cc63992182149e9befabff3eafa6d23.png)
-    no-repeat 10px 9px;
-  font-size: 21px;
-}
-#contact #form input.captcha {
-  background: #222222
-    url(http://img3.uploadhouse.com/fileuploads/17737/17737011310213e71805ecf2292144cbbecf42ad.png)
-    no-repeat 10px 9px;
-}
-#contact #form textarea.message {
-  background: #222222
-    url(http://img3.uploadhouse.com/fileuploads/17737/1773701229ed8c2f465a8274623ca8976adaf196.png)
-    no-repeat 10px 8px;
-}
-#contact #form input.submit {
-  cursor: pointer;
-  width: 85px;
-  height: 90px;
-  float: right;
-  padding: 0px 0px 5px 0px;
-  margin: 10px 16px 0px 0px;
-  background-color: #13476a;
-  color: white;
-  font: 14px/16px "Bree Serif", Georgia, serif;
-  font-size: 24px;
-  width: 40%;
-  font-weight: 700;
-  border: #fbfbfb solid 4px;
-  font-weight: 700;
-}
-#contact #captcha span {
-  width: 44px;
-}
-#contact #captcha input {
-  background: url(http://img3.uploadhouse.com/fileuploads/17737/17737011310213e71805ecf2292144cbbecf42ad.png)
-    no-repeat scroll 0 0 transparent;
-  margin: 5px 0 0;
-  padding: 0;
-  border: medium none;
-  cursor: pointer;
-  width: 15px;
+
+#countryFilterSearchInput {
+  width: 200px;
+  font-size: 20px
 }
