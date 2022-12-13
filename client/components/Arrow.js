@@ -153,6 +153,8 @@ export class PlotArrow extends React.Component {
   }
   searchCountry(evt) {
     this.state.countryBeingSearched = evt.target.value.toLowerCase();
+    if (this.state.countryBeingSearched.length === 0) return;
+
     let boxPreSpread = document.getElementById("countryFilterDiv");
     let box = [...boxPreSpread.childNodes].map((div) =>
       div.innerText.toLowerCase()
@@ -162,24 +164,25 @@ export class PlotArrow extends React.Component {
     let filteredBox = box.filter(
       (name) => name.slice(0, lengthSoFar) === this.state.countryBeingSearched
     );
-    if (this.state.countryBeingSearched.length) {
-      let first = filteredBox[0];
+    console.log(filteredBox);
+    // if (this.state.countryBeingSearched.length) {
+    //   let first = filteredBox[0];
 
-      let newStart = [...boxPreSpread.childNodes].filter(
-        (div) => div.innerText.toLowerCase() === first
-      );
-      console.log(first);
-      // boxPreSpread.scrollTo({
-      //   top: newStart.offsetTop,
-      //   behavior: "smooth",
-      // });
-    } else {
-      let afg = [...boxPreSpread.childNodes][0];
-      boxPreSpread.scrollTo({
-        top: afg.offsetTop,
-        behavior: "auto",
-      });
-    }
+    //   let newStart = [...boxPreSpread.childNodes].filter(
+    //     (div) => div.innerText.toLowerCase() === first
+    //   );
+
+    //   boxPreSpread.scrollTo({
+    //     top: newStart.offsetTop,
+    //     behavior: "smooth",
+    //   });
+    // } else {
+    //   let afg = [...boxPreSpread.childNodes][0];
+    //   boxPreSpread.scrollTo({
+    //     top: afg.offsetTop,
+    //     behavior: "auto",
+    //   });
+    // }
   }
   render() {
     if (this.props.data.lifeExpectancy) {
@@ -195,6 +198,8 @@ export class PlotArrow extends React.Component {
       let checked = (country) => {
         if (this.state.countries.includes(country)) {
           return "checked";
+        } else {
+          return false;
         }
       };
       let displays = [
@@ -207,6 +212,7 @@ export class PlotArrow extends React.Component {
           return "checked";
         }
       };
+
       return (
         <div id="graphContainer">
           <div id="plotContainer">
@@ -267,17 +273,32 @@ export class PlotArrow extends React.Component {
 
             <div>
               <label id="countryCheckbox" htmlFor="checkBox">
-                {nameArr.map((country, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      checked={checked(country)}
-                      name={country}
-                      onChange={this.selectCountry}
-                    />
-                    {country}
-                  </div>
-                ))}
+                {nameArr
+                  .filter((country, index) => {
+                    let chars =
+                      this.state.countryBeingSearched.split("").length;
+                    console.log(chars);
+
+                    let countryChars = country.slice(0, chars);
+                    if (index < 10 && chars) {
+                      console.log(chars, countryChars);
+                    }
+
+                    if (chars && countryChars !== chars) return;
+                  })
+                  .map((country, index) => {
+                    return (
+                      <div key={index}>
+                        <input
+                          type="checkbox"
+                          checked={checked(country)}
+                          name={country}
+                          onChange={this.selectCountry}
+                        />
+                        {country}
+                      </div>
+                    );
+                  })}
               </label>
             </div>
           </div>
