@@ -152,37 +152,7 @@ export class PlotArrow extends React.Component {
     }
   }
   searchCountry(evt) {
-    this.state.countryBeingSearched = evt.target.value.toLowerCase();
-    if (this.state.countryBeingSearched.length === 0) return;
-
-    let boxPreSpread = document.getElementById("countryFilterDiv");
-    let box = [...boxPreSpread.childNodes].map((div) =>
-      div.innerText.toLowerCase()
-    );
-    let lengthSoFar = this.state.countryBeingSearched.length;
-
-    let filteredBox = box.filter(
-      (name) => name.slice(0, lengthSoFar) === this.state.countryBeingSearched
-    );
-    console.log(filteredBox);
-    // if (this.state.countryBeingSearched.length) {
-    //   let first = filteredBox[0];
-
-    //   let newStart = [...boxPreSpread.childNodes].filter(
-    //     (div) => div.innerText.toLowerCase() === first
-    //   );
-
-    //   boxPreSpread.scrollTo({
-    //     top: newStart.offsetTop,
-    //     behavior: "smooth",
-    //   });
-    // } else {
-    //   let afg = [...boxPreSpread.childNodes][0];
-    //   boxPreSpread.scrollTo({
-    //     top: afg.offsetTop,
-    //     behavior: "auto",
-    //   });
-    // }
+    this.setState({ ...this.state, countryBeingSearched: evt.target.value });
   }
   render() {
     if (this.props.data.lifeExpectancy) {
@@ -195,6 +165,16 @@ export class PlotArrow extends React.Component {
           nameArr.push(name);
         }
       }
+
+      if (this.state.countryBeingSearched.length) {
+        console.log(nameArr);
+        nameArr = nameArr.filter((country) =>
+          country
+            .toLowerCase()
+            .includes(this.state.countryBeingSearched.toLowerCase())
+        );
+      }
+
       let checked = (country) => {
         if (this.state.countries.includes(country)) {
           return "checked";
@@ -272,34 +252,21 @@ export class PlotArrow extends React.Component {
             </div>
 
             <div>
-              <label id="countryCheckbox" htmlFor="checkBox">
-                {nameArr
-                  .filter((country, index) => {
-                    let chars =
-                      this.state.countryBeingSearched.split("").length;
-                    console.log(chars);
-
-                    let countryChars = country.slice(0, chars);
-                    if (index < 10 && chars) {
-                      console.log(chars, countryChars);
-                    }
-
-                    if (chars && countryChars !== chars) return;
-                  })
-                  .map((country, index) => {
-                    return (
-                      <div key={index}>
-                        <input
-                          type="checkbox"
-                          checked={checked(country)}
-                          name={country}
-                          onChange={this.selectCountry}
-                        />
-                        {country}
-                      </div>
-                    );
-                  })}
-              </label>
+              <div id="countryCheckbox">
+                {nameArr.map((country, index) => {
+                  return (
+                    <div key={index}>
+                      <input
+                        type="checkbox"
+                        checked={checked(country)}
+                        name={country}
+                        onChange={this.selectCountry}
+                      />
+                      {country}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
