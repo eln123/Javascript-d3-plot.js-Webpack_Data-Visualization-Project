@@ -1,7 +1,9 @@
 import React from "react";
 
 class ImportantFacts extends React.Component {
-  constructor() {}
+  constructor() {
+    super();
+  }
   render() {
     return <div>hi</div>;
   }
