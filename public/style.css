@@ -2,13 +2,12 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  background-image: linear-gradient(rgb(243, 209, 19), green, rgb(0, 191, 255), white 85%, yellow)
 }
 
 button:hover {
   cursor: pointer;
 }
-
-
 
 a {
   text-decoration: none;
@@ -411,43 +410,75 @@ div.tooltip {
 #graphContainer {
   height: 90vh;
   width: 100vw;
-  border: 10px solid red;
-  position: relative
+  position: relative;
+  font-size: 24px;
+  
 }
 
 #plotContainer {
+  position: absolute;
+  left: 48%;
+  transform: translateX(-50%);
+  top: 10%;
+  background-color: white
+}
+
+#arrowPlotContainer {
+  position: absolute;
+  left: 23%;
   
- 
-  border: 2px solid green;
+  top: 10%;
+  background-color: white
+}
+
+.bubble {
+  border: 2px solid black;
   position: absolute;
   left: 20%;
-  top: 10%
+  top: 10%;
+  background-color: white
 }
 
 #yearFilterDiv {
 
-  border: 2px solid green;
+  border: 2px solid black;
   position: absolute;
-  left: 10%;
-  top: 17%;
+  left: 9%;
+  top: 14%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: white
   
 }
 
-#subjectFilterDiv {
-  border: 2px solid green;
-  position: absolute;
-  left: 10%;
-  top: 25%;
+#yearFormDiv {
   display: flex;
-  justify-content: center;
-
+  flex-direction: column;
+  
+ 
 }
 
-#countryFilterDiv {
-  border: 2px solid green;
+#subjectFilterDiv {
+ 
   position: absolute;
-  left: 67%;
-  top: 16%;
+  left: 9%;
+  top: 35%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+ 
+}
+
+
+
+#countryFilterDiv {
+  border: 2px solid black;
+  position: absolute;
+  left: 70%;
+  top: 11%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -455,9 +486,64 @@ div.tooltip {
   gap: 20px;
   height: 50vh;
   overflow: auto;
+  background-color: white;
+}
+
+
+
+#linearRegressionCountryFilterDiv {
+  border: 2px solid black;
+  position: absolute;
+  left: 76%;
+  top: 11%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+  height: 50vh;
+  overflow: auto;
+  background-color: white;
 }
 
 #countryFilterSearchInput {
   width: 200px;
-  font-size: 20px
+  font-size: 20px;
+  
+}
+
+#yearUpdateButton {
+  font-size: 24px
+}
+
+#yearInput {
+  font-size: 24px
+}
+
+#countryCheckBox {
+    position: absolute;
+    top: 15vh;
+    left: 73.5vw;
+    border: 2px solid black;
+    padding: 20px 30px;
+    font-size: 24px;
+    background-color: white;
+    
+}
+
+#regionCheckBox {
+  position: absolute;
+  top: 15vh;
+  left: 75.5vw;
+  border: 2px solid black;
+  padding: 20px 30px;
+  font-size: 24px;
+  background-color: white;
+  
+}
+
+#countryCheckbox > div {
+  display: flex;
+  
+  margin-left: 20px
 }

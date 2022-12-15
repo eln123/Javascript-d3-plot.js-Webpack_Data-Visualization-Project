@@ -165,9 +165,9 @@ export class PlotArrow extends React.Component {
           nameArr.push(name);
         }
       }
+      console.log(nameArr);
 
       if (this.state.countryBeingSearched.length) {
-        console.log(nameArr);
         nameArr = nameArr.filter((country) =>
           country
             .toLowerCase()
@@ -195,7 +195,7 @@ export class PlotArrow extends React.Component {
 
       return (
         <div id="graphContainer">
-          <div id="plotContainer">
+          <div id="arrowPlotContainer">
             <PlotFigure options={plotFuncArrow(combined)} />
           </div>
 

@@ -178,9 +178,11 @@ export class PlotFacet extends React.Component {
         }
       };
       return (
-        <div className="confine">
-          <PlotFigure options={plotFuncFacet(data)} />
-          <div>
+        <div id="graphContainer">
+          <div id="plotContainer">
+            <PlotFigure options={plotFuncFacet(data)} />
+          </div>
+          <div id="yearFilterDiv">
             <form onSubmit={this.changeMinYear}>
               <label htmlFor="minYear"> MinYear </label>
               <input
@@ -201,7 +203,8 @@ export class PlotFacet extends React.Component {
               <button type="submit"> Update </button>
             </form>
           </div>
-          <div>
+
+          <div id="subjectFilterDiv">
             <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
                 {displays.map((display, index) => (
@@ -217,21 +220,23 @@ export class PlotFacet extends React.Component {
                 ))}
               </label>
             </fieldset>
-            <fieldset className="checkBoxes">
-              <label htmlFor="checkBox">
-                {regionArr.map((region, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      name={region}
-                      checked={checked(region)}
-                      onClick={this.selectRegion}
-                    />
-                    {region}
-                  </div>
-                ))}
-              </label>
-            </fieldset>
+          </div>
+
+          <div>
+            <div id="regionCheckBox">
+              <label htmlFor="checkBox">Regions</label>
+              {regionArr.map((region, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={region}
+                    checked={checked(region)}
+                    onClick={this.selectRegion}
+                  />
+                  {region}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       );
