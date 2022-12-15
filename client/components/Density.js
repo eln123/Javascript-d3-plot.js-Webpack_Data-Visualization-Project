@@ -143,6 +143,7 @@ export class PlotDensity extends React.Component {
   render() {
     if (this.props.data.lifeExpectancy) {
       let regionArr = ["asia", "americas", "africa", "europe"];
+
       let data = this.helper();
       let checked = (region) => {
         if (this.state.regions.includes(region)) {
@@ -162,9 +163,12 @@ export class PlotDensity extends React.Component {
       };
 
       return (
-        <div className="confine">
-          <PlotFigure options={plotFuncDensity(data)} />
-          <div>
+        <div id="graphContainer">
+          <div id="plotContainer">
+            <PlotFigure options={plotFuncDensity(data)} />
+          </div>
+
+          <div id="yearFilterDiv">
             <form onSubmit={this.changeMinYear}>
               <label htmlFor="minYear"> MinYear </label>
               <input
@@ -176,16 +180,19 @@ export class PlotDensity extends React.Component {
             </form>
 
             <form onSubmit={this.changeMaxYear}>
-              <label htmlFor="maxYear"> MaxYear </label>
-              <input
-                name="value"
-                placeholder="maxYear"
-                onChange={this.updateMaxYear}
-              />
-              <button type="submit"> Update </button>
+              <div>
+                <label htmlFor="maxYear"> MaxYear </label>
+                <input
+                  name="value"
+                  placeholder="maxYear"
+                  onChange={this.updateMaxYear}
+                />
+                <button type="submit"> Update </button>
+              </div>
             </form>
           </div>
-          <div>
+
+          <div id="subjectFilterDiv">
             <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
                 {displays.map((display, index) => (
@@ -201,21 +208,23 @@ export class PlotDensity extends React.Component {
                 ))}
               </label>
             </fieldset>
-            <fieldset className="checkBoxes">
-              <label htmlFor="checkBox">
-                {regionArr.map((region, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      name={region}
-                      checked={checked(region)}
-                      onClick={this.selectRegion}
-                    />
-                    {region}
-                  </div>
-                ))}
-              </label>
-            </fieldset>
+          </div>
+
+          <div>
+            <div id="regionCheckBox">
+              <label htmlFor="checkBox">Regions</label>
+              {regionArr.map((region, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={region}
+                    checked={checked(region)}
+                    onClick={this.selectRegion}
+                  />
+                  {region}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       );

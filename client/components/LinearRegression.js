@@ -14,9 +14,11 @@ export class LinearRegression extends React.Component {
       half: "2000",
       years: ["1980", "2020"],
       countries: ["China", "United States"],
+      countryBeingSearched: "",
     };
 
     this.selectCountry = this.selectCountry.bind(this);
+    this.searchCountry = this.searchCountry.bind(this);
     this.helper = this.helper.bind(this);
     this.changeMinYear = this.changeMinYear.bind(this);
     this.changeMaxYear = this.changeMaxYear.bind(this);
@@ -157,10 +159,26 @@ export class LinearRegression extends React.Component {
       });
     }
   }
+  searchCountry(evt) {
+    console.log(evt.target.value);
+    this.setState({ ...this.state, countryBeingSearched: evt.target.value });
+  }
   render() {
     if (this.props.data.lifeExpectancy) {
       let data = this.helper();
-      let names = this.props.data.countryRegionConverter.map((obj) => obj.name);
+      let nameArr = this.props.data.countryRegionConverter.map(
+        (obj) => obj.name
+      );
+      console.log(nameArr);
+
+      if (this.state.countryBeingSearched.length) {
+        nameArr = nameArr.filter((country) =>
+          country
+            .toLowerCase()
+            .includes(this.state.countryBeingSearched.toLowerCase())
+        );
+      }
+
       let checked = (country) => {
         if (this.state.countries.includes(country)) {
           return "checked";
@@ -177,9 +195,12 @@ export class LinearRegression extends React.Component {
         }
       };
       return (
-        <div>
-          <PlotFigure options={plotFuncLinearRegression(data)} />
-          <div>
+        <div id="graphContainer">
+          <div id="plotContainer">
+            <PlotFigure options={plotFuncLinearRegression(data)} />
+          </div>
+
+          <div id="yearFilterDiv">
             <form onSubmit={this.changeMinYear}>
               <label htmlFor="minYear"> MinYear </label>
               <input
@@ -209,7 +230,8 @@ export class LinearRegression extends React.Component {
               <button type="submit"> Update </button>
             </form>
           </div>
-          <div>
+
+          <div id="subjectFilterDiv">
             <fieldset className="checkBoxesForDisplay">
               <label htmlFor="checkBox">
                 {displays.map((display, index) => (
@@ -225,32 +247,31 @@ export class LinearRegression extends React.Component {
                 ))}
               </label>
             </fieldset>
+          </div>
 
-            <label htmlFor="searchBox">
+          <div id="linearRegressionCountryFilterDiv">
+            <div id="countrySearchBox">
+              <label htmlFor="searchBox"></label>
               <input
                 type="text"
-                className="search"
-                id="search"
+                id="countryFilterSearchInput"
                 placeholder="Enter Country Name"
-                onChange={(event) => this.selectCountry2(event)}
+                onChange={(event) => this.searchCountry(event)}
               />
-            </label>
-            <div className="checkBoxes">
-              <fieldset>
-                <label htmlFor="checkBox">
-                  {names.map((country, index) => (
-                    <div key={index}>
-                      <input
-                        type="checkbox"
-                        name={country}
-                        checked={checked(country)}
-                        onChange={this.selectCountry}
-                      />
-                      {country}
-                    </div>
-                  ))}
-                </label>
-              </fieldset>
+            </div>
+
+            <div id="countryCheckbox">
+              {nameArr.map((country, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name={country}
+                    checked={checked(country)}
+                    onChange={this.selectCountry}
+                  />
+                  {country}
+                </div>
+              ))}
             </div>
           </div>
         </div>

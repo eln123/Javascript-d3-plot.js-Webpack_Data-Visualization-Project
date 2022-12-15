@@ -7,6 +7,7 @@ export const plotFuncDensity = (dataObj) => {
     width: 1400,
     height: 800,
     nice: true,
+
     y: {
       grid: true,
       type: "log",
@@ -14,6 +15,7 @@ export const plotFuncDensity = (dataObj) => {
     x: {
       tickFormat: (d) => d,
       type: "linear",
+      ticks: 2,
     },
 
     color: { legend: true },

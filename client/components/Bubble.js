@@ -108,28 +108,45 @@ export class Bubble extends React.Component {
         }
       };
       return (
-        <div className="confine">
+        <div id="graphContainer">
           <div className="bubble"></div>
-          <form onSubmit={this.changeYear}>
-            <label htmlFor="maxYear"> Current Year: {this.state.year} </label>
-            <input name="value" placeholder="Year" onChange={this.updateYear} />
-            <button type="submit"> Update </button>
-          </form>
-          <fieldset className="checkBoxes">
-            <label htmlFor="checkBox">
-              {regionArr.map((region, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    checked={checked(region)}
-                    name={region}
-                    onClick={this.selectRegion}
-                  />
-                  {region}
-                </div>
-              ))}
-            </label>
-          </fieldset>
+
+          <div
+            style={{ position: "absolute", top: "30%", left: "70%" }}
+            id="yearFilterDiv"
+          >
+            <form onSubmit={this.changeYear}>
+              <label htmlFor="maxYear"> Current Year: {this.state.year} </label>
+              <input
+                id="yearInput"
+                name="value"
+                placeholder="Year"
+                onChange={this.updateYear}
+              />
+              <button id="yearUpdateButton" type="submit">
+                {" "}
+                Update{" "}
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <div id="countryCheckBox">
+              <label htmlFor="checkBox">
+                {regionArr.map((region, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      checked={checked(region)}
+                      name={region}
+                      onClick={this.selectRegion}
+                    />
+                    {region}
+                  </div>
+                ))}
+              </label>
+            </div>
+          </div>
         </div>
       );
     } else {
