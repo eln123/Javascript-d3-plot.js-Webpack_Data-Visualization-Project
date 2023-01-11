@@ -27,23 +27,31 @@ export class PlotArrow extends React.Component {
   selectDisplay(evt) {
     if (evt.target.checked === true) {
       if (evt.target.name === "Life expectancy") {
+        this.state.display = "lifeExpectancy";
         this.setState({
           ...this.state,
           display: "lifeExpectancy",
         });
       }
       if (evt.target.name === "Child mortality") {
+        this.state.display = "Child mortality";
         this.setState({
           ...this.state,
           display: "Child mortality",
         });
       }
       if (evt.target.name === "Income per person") {
+        this.state.display = "Income per person";
         this.setState({
           ...this.state,
-          display: "Income per person",
+          display: "IncomePerPerson",
         });
       }
+    } else {
+      this.state.display = "";
+      this.setState({
+        ...this.state,
+      });
     }
   }
   updateMinYear(evt) {
@@ -80,7 +88,6 @@ export class PlotArrow extends React.Component {
     const childMortalityArr = this.props.data.childMortality;
     const incomeArr = this.props.data.incomePerPerson;
     const populationArr = this.props.data.population;
-    const countryRegionConverter = this.props.data.countryRegionConverter;
 
     // filters
     const years = this.state.years;
@@ -165,8 +172,7 @@ export class PlotArrow extends React.Component {
           nameArr.push(name);
         }
       }
-      console.log(nameArr);
-
+      console.log(combined);
       if (this.state.countryBeingSearched.length) {
         nameArr = nameArr.filter((country) =>
           country
@@ -187,11 +193,6 @@ export class PlotArrow extends React.Component {
         "Child mortality",
         "Income per person",
       ];
-      let checkForDisplay = (display) => {
-        if (this.state.display === display) {
-          return "checked";
-        }
-      };
 
       return (
         <div id="graphContainer">
@@ -229,7 +230,7 @@ export class PlotArrow extends React.Component {
                     <input
                       type="checkbox"
                       name={display}
-                      checked={checkForDisplay(display)}
+                      checked={checkForDisplay(display, this.state)}
                       onChange={this.selectDisplay}
                     />
                     {display}
@@ -287,6 +288,13 @@ const mapDispatch = (dispatch) => {
       dispatch(getDataFromGithub());
     },
   };
+};
+
+let checkForDisplay = (display, state) => {
+  console.log("display === ", display, "state display === ", state.display);
+  if (state.display === display) {
+    return true;
+  }
 };
 
 export default connect(mapState, mapDispatch)(PlotArrow);

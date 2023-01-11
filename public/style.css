@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(rgb(243, 209, 19), green, rgb(0, 191, 255), white 85%, yellow)
+  background-image: linear-gradient(green, blue)
 }
 
 button:hover {
@@ -27,11 +27,7 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-/* #191a1b color of homepage*/
-/* .svg2 {
-  background-color: #ffffff;
-  filter: invert(89%);
-} */
+
 .search {
   width: 240px;
 }
