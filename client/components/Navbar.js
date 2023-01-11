@@ -8,7 +8,7 @@ class Navbar extends React.Component {
         style={{
           fontSize: "30px",
           display: "flex",
-          backgroundColor: "white",
+          backgroundColor: "gold",
           color: "black",
           height: "100px",
           alignItems: "center",
@@ -20,12 +20,22 @@ class Navbar extends React.Component {
           Home
         </Link>
 
-        <Link style={{ color: "black" }} to="/importantFacts">
+        {/* <Link style={{ color: "black" }} to="/importantFacts">
           Important Facts
-        </Link>
+        </Link> */}
 
         <div className="dropdown">
-          <button style={{ fontSize: "27px" }}>Charts</button>
+          <button
+            style={{
+              fontSize: "27px",
+              backgroundColor: "gray",
+              color: "white",
+              width: "125px",
+              height: "75px",
+            }}
+          >
+            Charts
+          </button>
           <div className="dropdown-content">
             <a href="/arrow">Arrow</a>
             <a href="/linearRegression">Linear Regression</a>
