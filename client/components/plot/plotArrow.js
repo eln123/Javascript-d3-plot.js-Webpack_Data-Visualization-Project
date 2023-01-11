@@ -4,10 +4,13 @@ export const plotFuncArrow = (state) => {
   const width = 1200;
   const minYear = state.years[0];
   const maxYear = state.years[1];
-  const display = state.display;
+  let display = state.display;
+  if (display === "Life expectancy") {
+    display = "lifeExpectancy";
+  }
   const dataOne = state.data.filter((obj, index) => obj.time === minYear);
   const dataTwo = state.data.filter((obj, index) => obj.time === maxYear);
-
+  console.log(display, dataOne);
   let data = [];
   for (let i = 0; i < dataOne.length; i++) {
     let obj = dataOne[i];
