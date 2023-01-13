@@ -71,7 +71,7 @@ export class LinearRegression extends React.Component {
   }
 
   helper() {
-    if (this.state.display === "lifeExpectancy") {
+    if (this.state.display === "Life expectancy") {
       let data = this.props.data.lifeExpectancy;
       return {
         data: data,
@@ -160,7 +160,6 @@ export class LinearRegression extends React.Component {
     }
   }
   searchCountry(evt) {
-    console.log(evt.target.value);
     this.setState({ ...this.state, countryBeingSearched: evt.target.value });
   }
   render() {
@@ -169,7 +168,6 @@ export class LinearRegression extends React.Component {
       let nameArr = this.props.data.countryRegionConverter.map(
         (obj) => obj.name
       );
-      console.log(nameArr);
 
       if (this.state.countryBeingSearched.length) {
         nameArr = nameArr.filter((country) =>
