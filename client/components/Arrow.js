@@ -102,8 +102,6 @@ export class PlotArrow extends React.Component {
       }
     };
     let displayArr = filteredDisplay();
-    console.log(display);
-    console.log(displayArr);
 
     const filteredIPP = incomeArr.filter(
       (obj) => years.includes(obj.time) && countries.includes(obj.name)

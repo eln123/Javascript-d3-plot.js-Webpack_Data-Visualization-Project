@@ -28,7 +28,7 @@ class Navbar extends React.Component {
           <button
             style={{
               fontSize: "27px",
-              backgroundColor: "gray",
+              backgroundColor: "rgb(128, 120, 128)",
               color: "white",
               width: "125px",
               height: "75px",
