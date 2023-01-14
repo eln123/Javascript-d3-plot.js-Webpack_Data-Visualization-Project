@@ -109,7 +109,7 @@ export class LinearRegression extends React.Component {
       if (evt.target.name === "Life expectancy") {
         this.setState({
           ...this.state,
-          display: "lifeExpectancy",
+          display: "Life expectancy",
         });
       }
       if (evt.target.name === "Child mortality") {
@@ -190,6 +190,8 @@ export class LinearRegression extends React.Component {
       let checkForDisplay = (display) => {
         if (this.state.display === display) {
           return "checked";
+        } else {
+          return false;
         }
       };
       return (
