@@ -1,10 +1,15 @@
 import * as Plot from "@observablehq/plot";
 
 export const plotFuncLinearRegression = (state) => {
+  console.log(state);
   let minYear = state.years[0];
   let maxYear = state.years[1];
   let splitYear = state.half;
   let yVar = state.display;
+
+  if (yVar === "Life expectancy") {
+    yVar = "lifeExpectancy";
+  }
 
   let filteredName = state.data.filter((obj, index) => {
     return state.countries.includes(obj.name);
