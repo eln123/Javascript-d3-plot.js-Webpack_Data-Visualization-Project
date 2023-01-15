@@ -131,20 +131,19 @@ export class Bubble extends React.Component {
           </div>
 
           <div>
-            <div id="countryCheckBox">
-              <label htmlFor="checkBox">
-                {regionArr.map((region, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      checked={checked(region)}
-                      name={region}
-                      onClick={this.selectRegion}
-                    />
-                    {region}
-                  </div>
-                ))}
-              </label>
+            <div id="regionCheckBox">
+              <label htmlFor="checkBox">Regions</label>
+              {regionArr.map((region, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    checked={checked(region)}
+                    name={region}
+                    onClick={this.selectRegion}
+                  />
+                  {region}
+                </div>
+              ))}
             </div>
           </div>
         </div>

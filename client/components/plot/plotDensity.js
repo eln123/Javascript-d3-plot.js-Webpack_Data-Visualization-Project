@@ -3,6 +3,9 @@ import * as Plot from "@observablehq/plot";
 export const plotFuncDensity = (dataObj) => {
   let data = dataObj.data;
   let display = dataObj.display;
+  if (display === "Life expectancy") {
+    display = "lifeExpectancy";
+  }
   let chart = {
     width: 1400,
     height: 800,

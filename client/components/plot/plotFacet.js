@@ -2,6 +2,10 @@ import * as Plot from "@observablehq/plot";
 
 export const plotFuncFacet = (dataObj) => {
   let data = dataObj.data.filter((obj) => obj.region);
+  console.log(data);
+  if (dataObj.display === "Life expectancy") {
+    dataObj.display = "lifeExpectancy";
+  }
   return {
     y: {
       grid: true,

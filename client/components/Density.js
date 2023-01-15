@@ -10,7 +10,7 @@ export class PlotDensity extends React.Component {
       regions: ["americas", "europe", "asia"],
       minYear: "",
       maxYear: "",
-      display: "lifeExpectancy",
+      display: "Life expectancy",
       years: ["1950", "2020"],
     };
     this.selectRegion = this.selectRegion.bind(this);
@@ -59,7 +59,7 @@ export class PlotDensity extends React.Component {
     const minYear = this.state.years[0];
     const maxYear = this.state.years[1];
     const display = this.state.display;
-    if (display === "lifeExpectancy") {
+    if (display === "Life expectancy") {
       const filteredLE = lifeExpectancyArr.filter(
         (obj) =>
           regions.includes(obj.region) &&
@@ -117,7 +117,7 @@ export class PlotDensity extends React.Component {
       if (evt.target.name === "Life expectancy") {
         this.setState({
           ...this.state,
-          display: "lifeExpectancy",
+          display: "Life expectancy",
         });
       }
       if (evt.target.name === "Child mortality") {
@@ -159,6 +159,8 @@ export class PlotDensity extends React.Component {
       let checkForDisplay = (display) => {
         if (this.state.display === display) {
           return "checked";
+        } else {
+          return false;
         }
       };
 
