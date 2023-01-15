@@ -9,7 +9,7 @@ export class PlotFacet extends React.Component {
     this.state = this.state = {
       minYear: "",
       maxYear: "",
-      display: "lifeExpectancy",
+      display: "Life expectancy",
       regions: ["americas", "europe", "asia"],
       years: ["1900", "1930"],
     };
@@ -69,7 +69,7 @@ export class PlotFacet extends React.Component {
       if (evt.target.name === "Life expectancy") {
         this.setState({
           ...this.state,
-          display: "lifeExpectancy",
+          display: "Life expectancy",
         });
       }
       if (evt.target.name === "Child mortality") {
@@ -102,7 +102,7 @@ export class PlotFacet extends React.Component {
     const minYear = this.state.years[0];
     const maxYear = this.state.years[1];
     const display = this.state.display;
-    if (display === "lifeExpectancy") {
+    if (display === "Life expectancy") {
       const filteredLE = lifeExpectancyArr.filter(
         (obj) =>
           regions.includes(obj.region) &&
@@ -175,6 +175,8 @@ export class PlotFacet extends React.Component {
       let checkForDisplay = (display) => {
         if (this.state.display === display) {
           return "checked";
+        } else {
+          return false;
         }
       };
       return (
