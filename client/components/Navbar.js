@@ -8,7 +8,7 @@ class Navbar extends React.Component {
         style={{
           fontSize: "30px",
           display: "flex",
-          backgroundColor: "gold",
+
           color: "black",
           height: "100px",
           alignItems: "center",
@@ -24,11 +24,20 @@ class Navbar extends React.Component {
           Important Facts
         </Link> */}
 
-        <div className="dropdown">
+        <div
+          className="dropdown"
+          style={{
+            position: "absolute",
+            top: "2%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: "1",
+          }}
+        >
           <button
             style={{
               fontSize: "27px",
-              backgroundColor: "rgb(128, 120, 128)",
+              backgroundColor: "green",
               color: "white",
               width: "125px",
               height: "75px",
@@ -42,7 +51,7 @@ class Navbar extends React.Component {
 
             <a href="/density">Density</a>
 
-            <a href="/bubble">Bubble</a>
+            <a href="/bubble">Bubble (D3 graph)</a>
             <a href="/facet">Facet</a>
           </div>
         </div>
