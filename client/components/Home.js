@@ -3,9 +3,7 @@ import React from "react";
 class HomePage extends React.Component {
   render() {
     return (
-      <div
-        style={{ height: "100vh", width: "100vw", backgroundColor: "white" }}
-      >
+      <div style={{ height: "100vh", width: "100vw" }}>
         <h1 style={{ position: "absolute", top: "27%", left: "30%" }}>
           Browse charts to see visuals
         </h1>
@@ -46,6 +44,7 @@ class HomePage extends React.Component {
           style={{
             width: "30vw",
             height: "35vh",
+            backgroundColor: "white",
             position: "relative",
             top: "28%",
             left: "30%",
